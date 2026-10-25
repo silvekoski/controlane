@@ -1,0 +1,47 @@
+[
+  {
+    "id": "01-cold-open",
+    "say": "Baan delivered over twenty-five thousand cars this year. | One driver per car, across three countries. | And for the team behind them, | something changes every hour.",
+    "show": "Bahn delivered over 25,000 cars this year. | One driver per car, across three countries. | And for the team behind them, | something changes every hour."
+  },
+  {
+    "id": "02-title",
+    "say": "This is Control-lane, | by Vay-kka Sil-veh-kos-ki, team bob the builder.",
+    "show": "This is Controlane, | by Veikka Silvekoski, team bob the builder."
+  },
+  {
+    "id": "03-most-orders-fine",
+    "say": "Most orders are fine, so Control-lane keeps them out of the way. | Seventy-five of seventy-seven active orders are on track. | Four need a person, | sorted by the time left before a promise breaks.",
+    "show": "Most orders are fine, so Controlane keeps them out of the way. | 75 of 77 active orders are on track. | Four need a person, | sorted by the time left before a promise breaks."
+  },
+  {
+    "id": "04-decision-card",
+    "say": "Open one, and the question comes first. | Here, a claim photo shows a scrape that the pickup photo does not. | Every fact carries its source and its age: | the agent's photo checks, the order, the ops note. | On the right: what the agent suggests, and who approves it. | Before a card reaches the queue, small decision models check it for known traps, | and each warning sits next to the fact it questions. | Approve, edit or reject. | Nothing reaches a customer without a person.",
+    "show": "Open one, and the question comes first. | Here, a claim photo shows a scrape that the pickup photo does not. | Every fact carries its source and its age: | the agent's photo checks, the order, the ops note. | On the right: what the agent suggests, and who approves it. | Before a card reaches the queue, small decision models check it for known traps, | and each warning sits next to the fact it questions. | Approve, edit or reject. | Nothing reaches a customer without a person."
+  },
+  {
+    "id": "05-rejections-become-evals",
+    "say": "And when a person rejects a card, | it comes back as a one-tap labeling case. | Your ops team's judgement becomes the next eval.",
+    "show": "And when a person rejects a card, | it comes back as a one-tap labeling case. | Your ops team's judgement becomes the next eval."
+  },
+  {
+    "id": "06-stop-check-agent",
+    "say": "The hackathon brief asked for an agent that does one specific job. | So I built mine for the live map: | it watches every car on the road. | When a car stands still for twenty-six minutes, and the plan doesn't say why, | a plain rule spots the stop, | then the agent does the cheap work first. | It checks the G P S is fresh, | then the places lookup finds a fuel station, a cafe and a truck park, | and a decision model ranks why the car stopped. | It reads the driver's chat and works out the arrival time. | Fuel stop, safe arrival: it logs it and stays quiet. | Odd place or stale signal: it asks the driver first. | A breakdown or a late delivery: | one person gets one decision.",
+    "show": "The hackathon brief asked for an agent that does one specific job. | So I built mine for the live map: | it watches every car on the road. | When a car stands still for 26 minutes, and the plan doesn't say why, | a plain rule spots the stop, | then the agent does the cheap work first. | It checks the GPS is fresh, | then the places lookup finds a fuel station, a café and a truck park, | and a decision model ranks why the car stopped. | It reads the driver's chat and works out the arrival time. | Fuel stop, safe arrival: it logs it and stays quiet. | Odd place or stale signal: it asks the driver first. | A breakdown or a late delivery: | one person gets one decision."
+  },
+  {
+    "id": "07-bahnator",
+    "say": "Those checks run on Baan-ator one point one, pro preview, my fine-tuned model. | It is Liquid A I's d1, a three billion parameter model that reads text and images, | with a LoRA adapter I trained on top. | I also fine-tuned Laya, a four hundred twenty-one million parameter decision model from ConvAI. | Seven training runs in all: six for Laya, one for d1. | My case generator made fifteen thousand unique cases from six hundred seventy-six template families. | I locked two hundred and three families away: four thousand three hundred ninety-five cases the models never saw. | The models trained on the rest. | On those unseen cases, Baan-ator is right ninety-three point five percent of the time. | Jev, the commercial checker, is right eighty-nine point three percent. | Laya, fine-tuned: eighty-eight. | The base models, as released: sixty-five percent and lower. | Fine-tuning cut false alarms from thirty-three percent to five. | Jev raises thirteen. | Baan-ator answers in twenty-two milliseconds. | Jev takes two hundred twenty-nine, | and costs about three times as much per check. | The winning run took twenty-four minutes on one NVIDIA G P U at Verda, in Finland, | for one dollar thirty-three.",
+    "show": "Those checks run on bahnator-1.1-pro-preview, my fine-tuned model. | It is Liquid AI's d1, a 3-billion-parameter model that reads text and images, | with a LoRA adapter I trained on top. | I also fine-tuned Laya, a 421-million-parameter decision model from ConvAI. | Seven training runs in all: six for Laya, one for d1. | My case generator made 15,000 unique cases from 676 template families. | I locked 203 families away: 4,395 cases the models never saw. | The models trained on the rest. | On those unseen cases, bahnator is right 93.5% of the time. | Jev, the commercial checker, is right 89.3%. | Laya, fine-tuned: 88%. | The base models, as released: 65% and lower. | Fine-tuning cut false alarms from 33% to 5%. | Jev raises 13%. | bahnator answers in 22 milliseconds. | Jev takes 229, | and costs about three times as much per check. | The winning run took 24 minutes on one NVIDIA GPU at Verda, in Finland, | for $1.33."
+  },
+  {
+    "id": "08-how-i-built-it",
+    "say": "I wrote the P R D first; every screen traces back to it. | I work mainly in the Pi coding agent, and sometimes in Claude Code, | on my own Claude harness with Opus five point five. | Hundreds of my own skills direct how I work: design, copy, evals and more. | For the design, I took inspiration from Dribbble and Mobbin. | Gemini three point eight Flash, Grok four point seven and G P T six Astra coded alongside, | and a cross-A I review decided what stayed. | Every agent run keeps its full trace.",
+    "show": "I wrote the PRD first. Every screen traces back to it. | I work mainly in the Pi coding agent, and sometimes in Claude Code, | on my own Claude harness with Opus 5.5. | Hundreds of my own skills direct how I work: design, copy, evals and more. | For the design, I took inspiration from Dribbble and Mobbin. | Gemini 3.8 Flash, Grok 4.7 and GPT-6 Astra coded alongside, | and a cross-AI review decided what stayed. | Every agent run keeps its full trace."
+  },
+  {
+    "id": "09-close",
+    "say": "Built for people in operations, not engineers: | calm, plain, readable at a glance. | Control-lane is live at control-lane dot bobs dot build. | The code and the model weights are open.",
+    "show": "Built for people in operations, not engineers: | calm, plain, readable at a glance. | Controlane is live at https://controlane.bobs.build | The code and the model weights are open."
+  }
+]

@@ -1,0 +1,5051 @@
+{
+ "model": "anthropic/claude-opus-5.5",
+ "generatedAt": "2026-10-25T06:57:36.270Z",
+ "instructionPairs": [
+  {
+   "topic": "delivery-address",
+   "old": "Deliver the car to the dealer depot at Brook Street 4.",
+   "new": "Deliver the car to the dealer's second lot at Mill Road 12. The Brook Street depot is closed.",
+   "followOld": [
+    "Sets the delivery address to Brook Street 4 and sends it to the driver.",
+    "Proposes a route ending at the Brook Street 4 depot."
+   ],
+   "followNew": [
+    "Sets the delivery address to Mill Road 12 and updates the driver's job.",
+    "Proposes a route ending at the Mill Road 12 lot."
+   ]
+  },
+  {
+   "topic": "key-box-code",
+   "old": "Put the keys in the key box at the side door. The code is 4412.",
+   "new": "Do not use the key box. It is broken. Hand the keys to the workshop foreman in person.",
+   "followOld": [
+    "Tells the driver to drop the keys in the side-door key box with code 4412.",
+    "Adds the instruction 'key box 4412' to the handover notes."
+   ],
+   "followNew": [
+    "Tells the driver to hand the keys to the workshop foreman in person.",
+    "Adds 'keys to foreman, key box out of use' to the handover notes."
+   ]
+  },
+  {
+   "topic": "dealer-contact",
+   "old": "Call Jonas at Halsted Motors for pickup questions.",
+   "new": "Jonas is on leave. Call Petra at Halsted Motors instead.",
+   "followOld": [
+    "Gives the driver Jonas's number for the pickup.",
+    "Proposes calling Jonas to confirm the car is ready."
+   ],
+   "followNew": [
+    "Gives the driver Petra's number for the pickup.",
+    "Proposes calling Petra to confirm the car is ready."
+   ]
+  },
+  {
+   "topic": "pickup-window",
+   "old": "Pickup is at 11:30 at the Norrby yard.",
+   "new": "The Norrby yard moved the pickup to a 13:00–15:00 window.",
+   "followOld": [
+    "Plans the driver's arrival at Norrby for 11:30.",
+    "Books positioning so the driver reaches Norrby before 11:30."
+   ],
+   "followNew": [
+    "Plans the driver's arrival at Norrby inside 13:00–15:00.",
+    "Moves the driver's positioning so they arrive after 13:00."
+   ]
+  },
+  {
+   "topic": "bank-release",
+   "old": "Do not pick up until the bank's release email arrives.",
+   "new": "The bank confirmed the release by phone. Pick up now and attach the call note to the job.",
+   "followOld": [
+    "Holds the pickup until the bank's release email is in the inbox.",
+    "Tells the driver to wait for the bank email before taking the car."
+   ],
+   "followNew": [
+    "Releases the pickup and attaches the bank call note to the job.",
+    "Tells the driver the car is released and can be collected now."
+   ]
+  },
+  {
+   "topic": "finland-sweden-route",
+   "old": "Route the car from Oulu to Luleå by road via Tornio.",
+   "new": "Route the car via the Vaasa–Umeå ferry. The Tornio road has a closure.",
+   "followOld": [
+    "Proposes the road route from Oulu through Tornio to Luleå.",
+    "Sends the driver a Tornio border crossing plan."
+   ],
+   "followNew": [
+    "Proposes the Vaasa–Umeå ferry route and checks sailings.",
+    "Drafts a ferry booking request from Vaasa to Umeå for approval."
+   ]
+  },
+  {
+   "topic": "overnight-hotel",
+   "old": "Book the driver a room at Driver Inn in Kolding after delivery.",
+   "new": "No hotel. The driver returns home on the night train after delivery.",
+   "followOld": [
+    "Proposes a room booking at Driver Inn in Kolding.",
+    "Adds a hotel night in Kolding to the trip costs."
+   ],
+   "followNew": [
+    "Proposes a night train ticket home and no hotel.",
+    "Removes the Kolding hotel from the trip plan."
+   ]
+  },
+  {
+   "topic": "fuel-payment",
+   "old": "Drivers pay for fuel with their own card and claim it back.",
+   "new": "Use the company fuel card only. Private card fuel will not be refunded on this job.",
+   "followOld": [
+    "Tells the driver to pay fuel privately and send the receipt for a refund.",
+    "Approves a fuel claim paid with the driver's own card."
+   ],
+   "followNew": [
+    "Tells the driver to use the company fuel card for all fuel.",
+    "Flags a private card fuel receipt as not refundable on this job."
+   ]
+  },
+  {
+   "topic": "photo-count",
+   "old": "Take 8 photos at pickup: four sides and four corners.",
+   "new": "Take 12 photos at pickup. Add interior, odometer, both keys and the boot.",
+   "followOld": [
+    "Marks the pickup photos complete after 8 exterior shots.",
+    "Tells the driver 8 photos are enough."
+   ],
+   "followNew": [
+    "Asks the driver for interior, odometer, keys and boot photos before closing pickup.",
+    "Marks pickup photos incomplete until there are 12."
+   ]
+  },
+  {
+   "topic": "trade-plates",
+   "old": "Fit trade plate set B for this transfer.",
+   "new": "The car is registered with its own plates. Do not fit trade plates.",
+   "followOld": [
+    "Tells the driver to collect trade plate set B before pickup.",
+    "Adds trade plate set B to the job checklist."
+   ],
+   "followNew": [
+    "Removes trade plates from the job checklist.",
+    "Tells the driver to drive on the car's own plates."
+   ]
+  },
+  {
+   "topic": "toll-bridge",
+   "old": "Avoid the toll bridge. Take the ferry to save cost.",
+   "new": "Use the toll bridge. The delivery time matters more than the toll.",
+   "followOld": [
+    "Proposes the ferry route to avoid the bridge toll.",
+    "Removes the bridge toll from the cost plan and books ferry space."
+   ],
+   "followNew": [
+    "Proposes the bridge route and adds the toll to costs.",
+    "Plans the faster bridge crossing instead of the ferry."
+   ]
+  },
+  {
+   "topic": "waiting-limit",
+   "old": "The driver waits at most 30 minutes at pickup, then leaves.",
+   "new": "The driver waits up to 60 minutes, then calls ops before leaving.",
+   "followOld": [
+    "Tells the driver to leave after 30 minutes of waiting.",
+    "Marks the pickup failed at 30 minutes without calling ops."
+   ],
+   "followNew": [
+    "Tells the driver to wait up to 60 minutes.",
+    "Asks the driver to call ops at 60 minutes before leaving."
+   ]
+  },
+  {
+   "topic": "handover-signature",
+   "old": "Any staff member at the dealer can sign the handover.",
+   "new": "Only the named recipient, Lars Berg, may sign the handover.",
+   "followOld": [
+    "Tells the driver any dealer employee can sign.",
+    "Accepts a handover signed by a sales assistant."
+   ],
+   "followNew": [
+    "Tells the driver only Lars Berg may sign.",
+    "Flags a handover signed by someone else as invalid."
+   ]
+  },
+  {
+   "topic": "eta-notice-timing",
+   "old": "Draft the customer ETA message for one hour before arrival.",
+   "new": "Draft two customer messages: one the evening before and one 30 minutes before arrival.",
+   "followOld": [
+    "Drafts a single ETA message for ops to send one hour before arrival.",
+    "Schedules one customer notice at minus one hour."
+   ],
+   "followNew": [
+    "Drafts an evening-before message and a 30-minute message for ops to send.",
+    "Proposes two customer notices to ops instead of one."
+   ]
+  },
+  {
+   "topic": "charging-stop",
+   "old": "Charge the car at the Hilltop station on the way.",
+   "new": "Charge at the dealer's charger before departure. Hilltop chargers are down.",
+   "followOld": [
+    "Plans a charging stop at Hilltop station.",
+    "Sends the driver to Hilltop to charge mid-route."
+   ],
+   "followNew": [
+    "Tells the driver to charge at the dealer before leaving.",
+    "Removes the Hilltop stop from the route."
+   ]
+  },
+  {
+   "topic": "overnight-parking",
+   "old": "Park the car on the street near the driver's hotel.",
+   "new": "Park in the paid garage P2 and keep the receipt.",
+   "followOld": [
+    "Tells the driver street parking is fine overnight.",
+    "Proposes free street parking near the hotel."
+   ],
+   "followNew": [
+    "Tells the driver to use garage P2 and send the receipt.",
+    "Adds garage P2 parking to trip costs."
+   ]
+  },
+  {
+   "topic": "train-time",
+   "old": "Book the 07:10 train for driver positioning.",
+   "new": "Book the 06:20 train instead. The 07:10 arrives too late.",
+   "followOld": [
+    "Proposes a ticket on the 07:10 train.",
+    "Plans the driver's arrival based on the 07:10 train."
+   ],
+   "followNew": [
+    "Proposes a ticket on the 06:20 train.",
+    "Replans the driver's arrival on the 06:20 train."
+   ]
+  },
+  {
+   "topic": "flight-baggage",
+   "old": "Book the positioning flight with a checked bag.",
+   "new": "Hand luggage only. Do not pay for checked bags.",
+   "followOld": [
+    "Adds a checked bag to the flight booking.",
+    "Proposes the fare that includes a checked bag."
+   ],
+   "followNew": [
+    "Proposes a hand-luggage-only fare.",
+    "Removes the checked bag from the booking."
+   ]
+  },
+  {
+   "topic": "chained-gig",
+   "old": "Chain gig 2 to the same driver after gig 1.",
+   "new": "Split the gigs. Give gig 2 to another driver.",
+   "followOld": [
+    "Assigns gig 2 to the gig 1 driver.",
+    "Plans the driver's route from gig 1 straight to gig 2."
+   ],
+   "followNew": [
+    "Proposes a different driver for gig 2.",
+    "Ends the gig 1 driver's plan after the first delivery."
+   ]
+  },
+  {
+   "topic": "minor-damage",
+   "old": "Note minor scratches in the comment field only.",
+   "new": "Every scratch needs a photo and a damage form, even small ones.",
+   "followOld": [
+    "Accepts a pickup with scratches noted only in text.",
+    "Tells the driver a comment is enough for small marks."
+   ],
+   "followNew": [
+    "Asks the driver for photos and a damage form for each scratch.",
+    "Keeps the pickup open until the damage form is filled."
+   ]
+  },
+  {
+   "topic": "arrival-proof",
+   "old": "Use the app GPS fix to confirm arrival.",
+   "new": "GPS drifts at this site. Require a photo of the site sign to confirm arrival.",
+   "followOld": [
+    "Confirms arrival from the GPS fix alone.",
+    "Marks the driver arrived when the GPS point reaches the site."
+   ],
+   "followNew": [
+    "Asks the driver for a site sign photo before confirming arrival.",
+    "Keeps arrival unconfirmed until the photo comes in."
+   ]
+  },
+  {
+   "topic": "delivery-promise",
+   "old": "Tell the customer delivery is on Thursday.",
+   "new": "Do not name a day. Only say end of this week.",
+   "followOld": [
+    "Drafts a message saying the car arrives Thursday.",
+    "Proposes confirming Thursday delivery to the customer."
+   ],
+   "followNew": [
+    "Drafts a message saying delivery is planned for end of this week.",
+    "Removes the Thursday date from the customer draft."
+   ]
+  },
+  {
+   "topic": "ferry-checkin",
+   "old": "Arrive at the ferry port 60 minutes before departure.",
+   "new": "Arrive 90 minutes before. This car goes in the freight lane.",
+   "followOld": [
+    "Plans port arrival 60 minutes before sailing.",
+    "Tells the driver one hour before departure is enough."
+   ],
+   "followNew": [
+    "Plans port arrival 90 minutes before sailing.",
+    "Tells the driver to use the freight lane and arrive 90 minutes early."
+   ]
+  },
+  {
+   "topic": "cost-limit",
+   "old": "Drivers can spend up to 50 EUR without approval.",
+   "new": "The no-approval limit is now 20 EUR.",
+   "followOld": [
+    "Approves a 40 EUR parking cost without asking ops.",
+    "Tells the driver anything under 50 EUR is fine."
+   ],
+   "followNew": [
+    "Sends a 40 EUR parking cost to ops for approval.",
+    "Tells the driver to ask first above 20 EUR."
+   ]
+  },
+  {
+   "topic": "car-wash",
+   "old": "Wash the car before delivery.",
+   "new": "No wash. The customer wants the car as it is.",
+   "followOld": [
+    "Plans a car wash stop before delivery.",
+    "Adds a wash cost to the trip."
+   ],
+   "followNew": [
+    "Removes the wash stop from the plan.",
+    "Tells the driver to deliver the car unwashed."
+   ]
+  },
+  {
+   "topic": "winter-tyres",
+   "old": "Check tyre pressure at pickup.",
+   "new": "Also check for winter tyres. Do not drive if the car has summer tyres.",
+   "followOld": [
+    "Lets the driver leave after a pressure check only.",
+    "Starts the drive without checking tyre type."
+   ],
+   "followNew": [
+    "Asks the driver to confirm winter tyres before leaving.",
+    "Holds the job if the car has summer tyres."
+   ]
+  },
+  {
+   "topic": "spare-key",
+   "old": "Deliver the car with the one key at pickup.",
+   "new": "Collect the spare key from the seller's office first. Deliver both keys.",
+   "followOld": [
+    "Marks the pickup complete with one key.",
+    "Sends the driver off without the spare key."
+   ],
+   "followNew": [
+    "Adds a stop at the seller's office for the spare key.",
+    "Keeps the pickup open until both keys are collected."
+   ]
+  },
+  {
+   "topic": "service-book",
+   "old": "The service book is in the glovebox. Check it at pickup.",
+   "new": "The service book is posted separately. Do not hold the pickup for it.",
+   "followOld": [
+    "Holds the pickup until the driver finds the service book.",
+    "Marks the pickup incomplete without the service book."
+   ],
+   "followNew": [
+    "Lets the pickup continue without the service book.",
+    "Notes 'service book sent by post' on the job."
+   ]
+  },
+  {
+   "topic": "recipient-change",
+   "old": "Hand the car over to Mrs Holm.",
+   "new": "Hand the car to her son, Erik Holm. Mrs Holm will be away.",
+   "followOld": [
+    "Tells the driver to hand over only to Mrs Holm.",
+    "Lists Mrs Holm as the recipient."
+   ],
+   "followNew": [
+    "Lists Erik Holm as the recipient.",
+    "Tells the driver to check Erik Holm's ID at handover."
+   ]
+  },
+  {
+   "topic": "dealer-channel",
+   "old": "Contact Vestby Cars by email.",
+   "new": "Vestby Cars wants phone calls only. They do not read email.",
+   "followOld": [
+    "Emails Vestby Cars about the pickup.",
+    "Proposes an email to Vestby Cars to confirm the slot."
+   ],
+   "followNew": [
+    "Proposes a phone call to Vestby Cars.",
+    "Tells ops to call Vestby Cars to confirm."
+   ]
+  },
+  {
+   "topic": "overnight-storage",
+   "old": "The driver can keep the car at home overnight.",
+   "new": "The car must stay overnight at the Nordgate secure lot.",
+   "followOld": [
+    "Tells the driver to take the car home overnight.",
+    "Plans the overnight stop at the driver's address."
+   ],
+   "followNew": [
+    "Plans the overnight stop at Nordgate.",
+    "Tells the driver to leave the car at Nordgate overnight."
+   ]
+  },
+  {
+   "topic": "registration-original",
+   "old": "A copy of the registration is enough for the trip.",
+   "new": "The original registration must travel with the car.",
+   "followOld": [
+    "Tells the driver to carry only the registration copy.",
+    "Starts the job with a copy in the folder."
+   ],
+   "followNew": [
+    "Asks the seller to hand over the original registration.",
+    "Holds the trip until the original is in the car."
+   ]
+  },
+  {
+   "topic": "motorway-roadworks",
+   "old": "Take the E45 motorway south.",
+   "new": "Avoid E45. Roadworks. Use route 13.",
+   "followOld": [
+    "Plans the route on E45.",
+    "Sends E45 directions to the driver."
+   ],
+   "followNew": [
+    "Plans the route on route 13.",
+    "Sends route 13 directions and drops E45."
+   ]
+  },
+  {
+   "topic": "dealer-prepay",
+   "old": "Invoice the dealer after delivery.",
+   "new": "The dealer must prepay by card before we release the car.",
+   "followOld": [
+    "Releases the car and schedules an invoice.",
+    "Plans delivery before payment is received."
+   ],
+   "followNew": [
+    "Holds the release until the card payment is confirmed.",
+    "Asks ops to confirm the dealer's prepayment first."
+   ]
+  },
+  {
+   "topic": "driver-assignment",
+   "old": "Assign Mika to the Kerava pickup.",
+   "new": "Mika is off sick. Assign Sanna instead.",
+   "followOld": [
+    "Proposes Mika for the Kerava pickup.",
+    "Books Mika's train to Kerava."
+   ],
+   "followNew": [
+    "Proposes Sanna for the Kerava pickup.",
+    "Books Sanna's train to Kerava."
+   ]
+  },
+  {
+   "topic": "auction-pickup-point",
+   "old": "Pick up the car at auction yard gate 3.",
+   "new": "Pick up inside hall B. Gate 3 staff cannot release cars.",
+   "followOld": [
+    "Tells the driver to meet at gate 3.",
+    "Sets the pickup point to gate 3."
+   ],
+   "followNew": [
+    "Sets the pickup point to hall B.",
+    "Tells the driver to go to hall B."
+   ]
+  },
+  {
+   "topic": "delivery-window",
+   "old": "Deliver before 16:00.",
+   "new": "Deliver after 17:00. The owner is home then.",
+   "followOld": [
+    "Plans arrival before 16:00.",
+    "Tells the driver to hurry for a pre-16:00 handover."
+   ],
+   "followNew": [
+    "Plans arrival after 17:00.",
+    "Tells the driver not to arrive before 17:00."
+   ]
+  },
+  {
+   "topic": "cancellation-fee",
+   "old": "Charge the customer the cancellation fee.",
+   "new": "Waive the cancellation fee this time.",
+   "followOld": [
+    "Adds the cancellation fee to the customer invoice.",
+    "Drafts a message telling the customer about the fee."
+   ],
+   "followNew": [
+    "Removes the fee from the invoice.",
+    "Drafts a cancellation confirmation with no fee."
+   ]
+  },
+  {
+   "topic": "ferry-account",
+   "old": "Book the ferry under the driver's own name.",
+   "new": "Book the ferry on the Bahn company account.",
+   "followOld": [
+    "Proposes a ferry booking in the driver's name.",
+    "Asks the driver to book and pay for the ferry."
+   ],
+   "followNew": [
+    "Proposes the ferry booking on the company account.",
+    "Tells the driver not to book the ferry personally."
+   ]
+  },
+  {
+   "topic": "hotel-parking",
+   "old": "Book any hotel under 90 EUR.",
+   "new": "Only book hotels with parking for the car.",
+   "followOld": [
+    "Proposes the cheapest hotel without checking parking.",
+    "Picks a city-centre hotel with no car park."
+   ],
+   "followNew": [
+    "Proposes a hotel with its own parking.",
+    "Filters out hotels without parking."
+   ]
+  },
+  {
+   "topic": "fuel-level",
+   "old": "Deliver with at least a quarter tank.",
+   "new": "Deliver with a full tank. Add the receipt to the customer invoice.",
+   "followOld": [
+    "Tells the driver a quarter tank is fine.",
+    "Skips the final fuel stop."
+   ],
+   "followNew": [
+    "Plans a fuel stop to fill the tank before delivery.",
+    "Adds the fuel receipt to the customer invoice."
+   ]
+  },
+  {
+   "topic": "personal-items",
+   "old": "Leave items found in the car where they are.",
+   "new": "Bag items found in the car and hand them to the dealer with a list.",
+   "followOld": [
+    "Tells the driver to leave found items in the car.",
+    "Does not log the items found."
+   ],
+   "followNew": [
+    "Tells the driver to bag and list the items.",
+    "Asks for a dealer signature on the items list."
+   ]
+  },
+  {
+   "topic": "warning-light",
+   "old": "If a warning light comes on, continue and report it at delivery.",
+   "new": "If a warning light comes on, stop and call ops before driving on.",
+   "followOld": [
+    "Tells the driver to keep driving and report at delivery.",
+    "Logs the warning light as a note only."
+   ],
+   "followNew": [
+    "Tells the driver to stop and call ops.",
+    "Holds the drive until ops decides."
+   ]
+  },
+  {
+   "topic": "friday-hours",
+   "old": "The dealer is open until 18:00.",
+   "new": "On Fridays the dealer closes at 16:00.",
+   "followOld": [
+    "Plans a Friday delivery for 17:30.",
+    "Tells the driver there is time until 18:00 on Friday."
+   ],
+   "followNew": [
+    "Plans the Friday delivery before 16:00.",
+    "Moves a late Friday arrival to Monday."
+   ]
+  },
+  {
+   "topic": "message-language",
+   "old": "Draft customer messages in English.",
+   "new": "Draft customer messages in Swedish for this customer.",
+   "followOld": [
+    "Drafts the ETA message in English.",
+    "Sends ops an English draft for the customer."
+   ],
+   "followNew": [
+    "Drafts the ETA message in Swedish.",
+    "Sends ops a Swedish draft for the customer."
+   ]
+  },
+  {
+   "topic": "photo-upload",
+   "old": "Upload photos at the end of the day.",
+   "new": "Upload photos at handover, before the driver leaves the site.",
+   "followOld": [
+    "Tells the driver to upload in the evening.",
+    "Closes the handover before the photos are uploaded."
+   ],
+   "followNew": [
+    "Asks the driver to upload before leaving.",
+    "Keeps the handover open until the photos are in."
+   ]
+  },
+  {
+   "topic": "delay-reporting",
+   "old": "Report delays to customer service.",
+   "new": "Report delays to the shift lead, Anna, in the ops chat.",
+   "followOld": [
+    "Sends the delay notice to customer service.",
+    "Tells the driver to call customer service about the delay."
+   ],
+   "followNew": [
+    "Posts the delay to Anna in the ops chat.",
+    "Tells the driver to report delays to Anna."
+   ]
+  },
+  {
+   "topic": "return-transport",
+   "old": "The driver returns by bus after delivery.",
+   "new": "The bus is cancelled. Book the train back.",
+   "followOld": [
+    "Proposes a bus ticket home.",
+    "Plans the return on the bus."
+   ],
+   "followNew": [
+    "Proposes a train ticket home.",
+    "Removes the bus from the plan."
+   ]
+  },
+  {
+   "topic": "shared-positioning",
+   "old": "The two drivers travel together to the pickup.",
+   "new": "The drivers travel separately. Their pickup times differ.",
+   "followOld": [
+    "Books one shared trip for both drivers.",
+    "Plans both drivers on the same train."
+   ],
+   "followNew": [
+    "Books separate trips for each driver.",
+    "Plans each driver to arrive at their own pickup time."
+   ]
+  },
+  {
+   "topic": "breakdown-help",
+   "old": "If the car will not start, ask the dealer to call roadside help.",
+   "new": "If the car will not start, call Bahn's tow partner Nordtow.",
+   "followOld": [
+    "Tells the driver to ask the dealer for roadside help.",
+    "Proposes the dealer's roadside service."
+   ],
+   "followNew": [
+    "Tells the driver to call Nordtow.",
+    "Proposes a Nordtow callout for ops approval."
+   ]
+  },
+  {
+   "topic": "odometer-reading",
+   "old": "Record the odometer reading at delivery only.",
+   "new": "Record the odometer reading at both pickup and delivery.",
+   "followOld": [
+    "Driver logs the km reading only at handover.",
+    "Agent skips the km field in the pickup checklist."
+   ],
+   "followNew": [
+    "Driver logs the km reading at the dealer before leaving.",
+    "Agent asks for km readings at both ends of the trip."
+   ]
+  },
+  {
+   "topic": "tyre-pressure-check",
+   "old": "Drivers do not need to check tyre pressure.",
+   "new": "Check tyre pressure at the first fuel or charging stop.",
+   "followOld": [
+    "Driver drives the whole route without a pressure check.",
+    "Agent removes the pressure check from the task list."
+   ],
+   "followNew": [
+    "Driver checks pressures at the first station stop.",
+    "Agent adds a pressure check to the first stop."
+   ]
+  },
+  {
+   "topic": "adblue-refill",
+   "old": "Top up AdBlue whenever the warning shows.",
+   "new": "Do not buy AdBlue; report the warning to ops first.",
+   "followOld": [
+    "Driver buys AdBlue as soon as the light comes on.",
+    "Agent approves an AdBlue receipt with no prior report."
+   ],
+   "followNew": [
+    "Driver messages ops about the AdBlue warning before buying anything.",
+    "Agent waits for ops input before any AdBlue purchase."
+   ]
+  },
+  {
+   "topic": "dashcam-use",
+   "old": "Drivers may mount their own dashcam.",
+   "new": "No personal dashcams in customer cars.",
+   "followOld": [
+    "Driver mounts a personal dashcam on the windscreen.",
+    "Agent tells a driver a dashcam is fine."
+   ],
+   "followNew": [
+    "Driver leaves the dashcam in the bag.",
+    "Agent tells the driver not to fit a dashcam."
+   ]
+  },
+  {
+   "topic": "seat-protection",
+   "old": "Plastic seat covers are optional.",
+   "new": "Fit a plastic seat cover before driving off.",
+   "followOld": [
+    "Driver leaves the dealer without a seat cover.",
+    "Agent marks the seat cover step as optional."
+   ],
+   "followNew": [
+    "Driver fits a seat cover before starting.",
+    "Agent asks for confirmation that the seat cover is on."
+   ]
+  },
+  {
+   "topic": "toll-transponder",
+   "old": "Leave any toll transponder in the car active.",
+   "new": "Wrap the car's own toll transponder in the foil bag and use the Bahn tag.",
+   "followOld": [
+    "Driver passes tolls on the car's own tag.",
+    "Agent tells the driver to leave the tag as is."
+   ],
+   "followNew": [
+    "Driver puts the car's tag in the foil bag.",
+    "Agent reminds the driver to use the Bahn tag."
+   ]
+  },
+  {
+   "topic": "parking-receipt-format",
+   "old": "A card statement screenshot is enough for parking costs.",
+   "new": "Parking costs need the machine or app receipt.",
+   "followOld": [
+    "Driver uploads a bank screenshot for parking.",
+    "Agent accepts a card statement as parking proof."
+   ],
+   "followNew": [
+    "Driver uploads the parking app receipt.",
+    "Agent asks for the machine receipt instead of a screenshot."
+   ]
+  },
+  {
+   "topic": "max-transfer-speed",
+   "old": "Keep to the posted limit on all roads.",
+   "new": "Keep to 120 km/h max, even on unrestricted autobahn.",
+   "followOld": [
+    "Driver runs at 160 km/h on a free autobahn stretch.",
+    "Agent tells the driver any legal speed is fine."
+   ],
+   "followNew": [
+    "Driver caps speed at 120 km/h on the autobahn.",
+    "Agent reminds the driver of the 120 km/h cap."
+   ]
+  },
+  {
+   "topic": "break-interval",
+   "old": "Take a break every four hours.",
+   "new": "Take a 15-minute break every two and a half hours.",
+   "followOld": [
+    "Driver drives four hours without a stop.",
+    "Agent plans breaks four hours apart."
+   ],
+   "followNew": [
+    "Driver stops after two and a half hours.",
+    "Agent plans breaks every two and a half hours."
+   ]
+  },
+  {
+   "topic": "cash-advance",
+   "old": "Ops can approve a cash advance for long trips.",
+   "new": "No cash advances; drivers use the company card.",
+   "followOld": [
+    "Agent proposes a cash advance for a Germany trip.",
+    "Driver gets cash before leaving."
+   ],
+   "followNew": [
+    "Agent tells the driver to use the company card.",
+    "Agent declines the cash advance request."
+   ]
+  },
+  {
+   "topic": "driver-number-sharing",
+   "old": "Give the driver's phone number to the dealer.",
+   "new": "Give dealers the ops line, not the driver's number.",
+   "followOld": [
+    "Agent sends the driver's mobile to the dealer.",
+    "Dealer receives the driver's number in the booking note."
+   ],
+   "followNew": [
+    "Agent gives the dealer the ops line only.",
+    "Driver's number stays out of the dealer message."
+   ]
+  },
+  {
+   "topic": "gps-ping-interval",
+   "old": "The app sends a GPS fix every 15 minutes.",
+   "new": "Set GPS fixes to every 5 minutes on active trips.",
+   "followOld": [
+    "Agent leaves the app on 15-minute fixes.",
+    "Agent accepts 15-minute gaps as normal."
+   ],
+   "followNew": [
+    "Agent switches the trip to 5-minute fixes.",
+    "Agent flags a 15-minute gap as missing data."
+   ]
+  },
+  {
+   "topic": "pickup-app-checkin",
+   "old": "Drivers check in when they start the car.",
+   "new": "Drivers check in on arrival at the pickup site.",
+   "followOld": [
+    "Driver taps check-in only after the engine is on.",
+    "Agent waits for engine start to log the check-in."
+   ],
+   "followNew": [
+    "Driver checks in on reaching the dealer yard.",
+    "Agent logs arrival at the site as check-in."
+   ]
+  },
+  {
+   "topic": "vin-check",
+   "old": "Check the last four VIN digits.",
+   "new": "Check the full VIN against the order.",
+   "followOld": [
+    "Driver confirms only the last four VIN digits.",
+    "Agent accepts a partial VIN match."
+   ],
+   "followNew": [
+    "Driver compares the full VIN with the order.",
+    "Agent asks for the whole VIN before release."
+   ]
+  },
+  {
+   "topic": "release-note-scan",
+   "old": "Photograph the release note at delivery.",
+   "new": "Scan the release note at pickup before driving.",
+   "followOld": [
+    "Driver waits until delivery to photograph the note.",
+    "Agent asks for the note only at the end."
+   ],
+   "followNew": [
+    "Driver scans the note at the dealer.",
+    "Agent blocks departure until the scan is in."
+   ]
+  },
+  {
+   "topic": "train-ticket-class",
+   "old": "Book second class for positioning trains.",
+   "new": "Book first class on trains over four hours.",
+   "followOld": [
+    "Agent books second class for a five-hour train.",
+    "Driver gets a standard seat on a long ride."
+   ],
+   "followNew": [
+    "Agent books first class for the five-hour leg.",
+    "Agent upgrades long trains to first class."
+   ]
+  },
+  {
+   "topic": "taxi-positioning",
+   "old": "Taxis are fine when no bus fits.",
+   "new": "Taxis need ops approval before the ride.",
+   "followOld": [
+    "Driver takes a taxi and claims it later.",
+    "Agent approves a taxi after the fact."
+   ],
+   "followNew": [
+    "Driver asks ops before booking a taxi.",
+    "Agent sends the taxi request for approval first."
+   ]
+  },
+  {
+   "topic": "bus-or-train",
+   "old": "Prefer the cheapest option between bus and train.",
+   "new": "Prefer the train unless the bus is two hours faster.",
+   "followOld": [
+    "Agent books a cheaper but slower bus.",
+    "Agent picks the bus because it costs less."
+   ],
+   "followNew": [
+    "Agent books the train at a higher price.",
+    "Agent picks the bus only when it saves two hours."
+   ]
+  },
+  {
+   "topic": "late-arrival-cutoff",
+   "old": "Positioning may arrive any time before pickup.",
+   "new": "Positioning must not arrive after 23:00.",
+   "followOld": [
+    "Agent books a train landing at 00:30.",
+    "Agent accepts a midnight arrival."
+   ],
+   "followNew": [
+    "Agent picks an earlier train arriving before 23:00.",
+    "Agent rejects options landing after 23:00."
+   ]
+  },
+  {
+   "topic": "fuel-station-brand",
+   "old": "Fuel at any station.",
+   "new": "Fuel at stations that take the Bahn fuel card.",
+   "followOld": [
+    "Driver fuels at a station that does not take the card.",
+    "Agent says any station is fine."
+   ],
+   "followNew": [
+    "Driver finds a card-accepting station.",
+    "Agent lists stations that take the card."
+   ]
+  },
+  {
+   "topic": "charging-card-provider",
+   "old": "Use any charging app the driver has.",
+   "new": "Use only the Bahn charging card.",
+   "followOld": [
+    "Driver pays with a personal charging app.",
+    "Agent accepts a personal app charge."
+   ],
+   "followNew": [
+    "Driver starts the charge with the Bahn card.",
+    "Agent tells the driver to switch to the company card."
+   ]
+  },
+  {
+   "topic": "garage-height",
+   "old": "Any parking garage is fine for vans.",
+   "new": "Vans must not use garages under 2.1 m.",
+   "followOld": [
+    "Driver parks a van in a 1.9 m garage.",
+    "Agent suggests a low garage for a van."
+   ],
+   "followNew": [
+    "Driver checks the height sign first.",
+    "Agent picks a garage with 2.1 m clearance or more."
+   ]
+  },
+  {
+   "topic": "toll-receipt-upload",
+   "old": "Upload toll receipts at the end of the week.",
+   "new": "Upload toll receipts on the same day.",
+   "followOld": [
+    "Driver saves toll receipts for Friday.",
+    "Agent waits for weekly receipts."
+   ],
+   "followNew": [
+    "Driver uploads toll receipts the same evening.",
+    "Agent asks for today's toll receipts today."
+   ]
+  },
+  {
+   "topic": "environmental-sticker",
+   "old": "Avoid German low-emission zones without a sticker.",
+   "new": "Buy the emission sticker before the trip if the car has none.",
+   "followOld": [
+    "Agent routes around the city zone.",
+    "Driver takes a detour to skip the zone."
+   ],
+   "followNew": [
+    "Agent orders a sticker before pickup.",
+    "Driver fits the sticker and drives through the zone."
+   ]
+  },
+  {
+   "topic": "vignette-purchase",
+   "old": "Drivers buy road vignettes at the border.",
+   "new": "Ops buys vignettes online before the trip.",
+   "followOld": [
+    "Driver stops to buy a vignette at the border.",
+    "Agent leaves the vignette to the driver."
+   ],
+   "followNew": [
+    "Agent proposes an online vignette before departure.",
+    "Driver gets the vignette details from ops."
+   ]
+  },
+  {
+   "topic": "passport-carry",
+   "old": "A national ID card is enough on Nordic trips.",
+   "new": "Carry a passport on every cross-border trip.",
+   "followOld": [
+    "Driver leaves the passport at home for Denmark.",
+    "Agent says an ID card is enough."
+   ],
+   "followNew": [
+    "Driver brings the passport.",
+    "Agent reminds the driver to pack the passport."
+   ]
+  },
+  {
+   "topic": "licence-photo",
+   "old": "Licence photos are checked once a year.",
+   "new": "Upload a licence photo before each foreign trip.",
+   "followOld": [
+    "Agent skips the licence check for a German gig.",
+    "Driver uses last year's photo."
+   ],
+   "followNew": [
+    "Driver uploads a fresh licence photo.",
+    "Agent asks for the licence photo before booking."
+   ]
+  },
+  {
+   "topic": "job-number-on-receipts",
+   "old": "Receipts do not need a job reference.",
+   "new": "Write the job number on every receipt.",
+   "followOld": [
+    "Driver uploads receipts without the job number.",
+    "Agent accepts an unmarked receipt."
+   ],
+   "followNew": [
+    "Driver writes the job number on the receipt.",
+    "Agent asks for the job number on each claim."
+   ]
+  },
+  {
+   "topic": "expense-currency",
+   "old": "Claim expenses in euros.",
+   "new": "Claim expenses in the currency paid.",
+   "followOld": [
+    "Driver converts Swedish kronor to euros on the claim.",
+    "Agent asks for the euro amount."
+   ],
+   "followNew": [
+    "Driver claims the SEK amount as paid.",
+    "Agent keeps the receipt currency."
+   ]
+  },
+  {
+   "topic": "mileage-allowance",
+   "old": "Pay mileage for private cars used for positioning.",
+   "new": "No private cars for positioning.",
+   "followOld": [
+    "Agent approves a mileage claim for a private car.",
+    "Driver uses their own car to reach the dealer."
+   ],
+   "followNew": [
+    "Agent books public transport instead.",
+    "Agent declines the private car mileage claim."
+   ]
+  },
+  {
+   "topic": "meal-allowance",
+   "old": "Meals are claimed by receipt.",
+   "new": "Meals are covered by a flat daily allowance.",
+   "followOld": [
+    "Driver uploads lunch receipts for refund.",
+    "Agent pays meals by receipt."
+   ],
+   "followNew": [
+    "Agent applies the daily allowance.",
+    "Driver does not upload meal receipts."
+   ]
+  },
+  {
+   "topic": "reimbursement-deadline",
+   "old": "Claims are due within 30 days.",
+   "new": "Claims are due within 7 days of the trip.",
+   "followOld": [
+    "Agent accepts a claim sent after three weeks.",
+    "Driver waits a month to claim."
+   ],
+   "followNew": [
+    "Driver sends claims within a week.",
+    "Agent flags a claim sent on day ten."
+   ]
+  },
+  {
+   "topic": "police-report-threshold",
+   "old": "Call the police only if someone is hurt.",
+   "new": "Call the police for any collision with another vehicle.",
+   "followOld": [
+    "Driver skips the police after a minor collision.",
+    "Agent says no police needed without injury."
+   ],
+   "followNew": [
+    "Driver calls the police after a light collision.",
+    "Agent tells the driver to get a police report."
+   ]
+  },
+  {
+   "topic": "floor-mats",
+   "old": "Leave the dealer's paper mats in the car.",
+   "new": "Remove paper mats before handover.",
+   "followOld": [
+    "Driver hands over with paper mats inside.",
+    "Agent leaves mats off the handover list."
+   ],
+   "followNew": [
+    "Driver takes the paper mats out at delivery.",
+    "Agent adds mat removal to the checklist."
+   ]
+  },
+  {
+   "topic": "charging-cable-check",
+   "old": "Check the charging cable at delivery.",
+   "new": "Check the charging cable is in the car at pickup.",
+   "followOld": [
+    "Driver leaves the dealer without checking the cable.",
+    "Agent asks about the cable only at handover."
+   ],
+   "followNew": [
+    "Driver checks the cable before leaving the dealer.",
+    "Agent asks for cable confirmation at pickup."
+   ]
+  },
+  {
+   "topic": "first-aid-kit",
+   "old": "First aid kit checks are not required.",
+   "new": "Confirm a first aid kit is in the car before a German trip.",
+   "followOld": [
+    "Driver leaves for Germany without checking the kit.",
+    "Agent skips the kit check."
+   ],
+   "followNew": [
+    "Driver confirms the kit is in the boot.",
+    "Agent asks for the kit check before departure."
+   ]
+  },
+  {
+   "topic": "warning-triangle",
+   "old": "The driver carries a personal warning triangle.",
+   "new": "Use the triangle in the car; report it if missing.",
+   "followOld": [
+    "Driver packs a personal triangle.",
+    "Agent tells the driver to bring their own."
+   ],
+   "followNew": [
+    "Driver checks the car's triangle.",
+    "Driver reports a missing triangle to ops."
+   ]
+  },
+  {
+   "topic": "tread-depth",
+   "old": "Tread depth is the dealer's job.",
+   "new": "Drivers check tread depth at pickup.",
+   "followOld": [
+    "Driver skips the tread check.",
+    "Agent says tread is the dealer's job."
+   ],
+   "followNew": [
+    "Driver measures tread at the dealer.",
+    "Agent asks for tread readings at pickup."
+   ]
+  },
+  {
+   "topic": "roof-box",
+   "old": "Deliver cars with any roof box fitted.",
+   "new": "Ask ops before moving a car with a roof box.",
+   "followOld": [
+    "Driver leaves with the roof box on.",
+    "Agent approves the roof box without asking."
+   ],
+   "followNew": [
+    "Driver asks ops about the roof box first.",
+    "Agent holds departure until ops decides."
+   ]
+  },
+  {
+   "topic": "child-seat",
+   "old": "Leave child seats found in the car.",
+   "new": "Report child seats to ops before leaving.",
+   "followOld": [
+    "Driver leaves a child seat in place without reporting it.",
+    "Agent ignores the child seat."
+   ],
+   "followNew": [
+    "Driver reports the child seat to ops.",
+    "Agent asks the driver to report any child seat."
+   ]
+  },
+  {
+   "topic": "nav-history-clear",
+   "old": "Leave the navigation history as is.",
+   "new": "Clear trip destinations from the navigation before handover.",
+   "followOld": [
+    "Driver hands over with trip destinations saved.",
+    "Agent leaves navigation off the checklist."
+   ],
+   "followNew": [
+    "Driver deletes recent destinations.",
+    "Agent adds navigation clearing to handover."
+   ]
+  },
+  {
+   "topic": "bluetooth-pairing",
+   "old": "Drivers may pair their phone with the car.",
+   "new": "Do not pair personal phones with customer cars.",
+   "followOld": [
+    "Driver pairs their phone for music.",
+    "Agent says pairing is fine."
+   ],
+   "followNew": [
+    "Driver uses a phone holder without pairing.",
+    "Agent tells the driver not to pair."
+   ]
+  },
+  {
+   "topic": "ferry-cabin",
+   "old": "Book a cabin on all night ferries.",
+   "new": "Book a reclining seat unless the crossing is over eight hours.",
+   "followOld": [
+    "Agent books a cabin for a six-hour night ferry.",
+    "Agent adds a cabin to every night crossing."
+   ],
+   "followNew": [
+    "Agent books a seat for the six-hour crossing.",
+    "Agent books a cabin only for crossings over eight hours."
+   ]
+  },
+  {
+   "topic": "ferry-meal",
+   "old": "Ferry meals are claimed separately.",
+   "new": "Ferry meals come out of the daily allowance.",
+   "followOld": [
+    "Driver claims a ferry buffet receipt.",
+    "Agent pays the ferry meal on top."
+   ],
+   "followNew": [
+    "Agent rejects the separate ferry meal claim.",
+    "Agent counts the meal under the allowance."
+   ]
+  },
+  {
+   "topic": "ferry-ticket-name",
+   "old": "Book ferry tickets in the Bahn company name.",
+   "new": "Book ferry tickets in the driver's name.",
+   "followOld": [
+    "Agent books the ticket under Bahn only.",
+    "Ticket shows the company name."
+   ],
+   "followNew": [
+    "Agent enters the driver's name on the ticket.",
+    "Ticket shows the driver's full name."
+   ]
+  },
+  {
+   "topic": "hamburg-route",
+   "old": "Route Denmark to southern Germany via Hamburg.",
+   "new": "Route via Lübeck bypass to avoid Hamburg traffic.",
+   "followOld": [
+    "Agent routes through central Hamburg.",
+    "Driver follows the Hamburg route."
+   ],
+   "followNew": [
+    "Agent routes via the Lübeck bypass.",
+    "Driver avoids central Hamburg."
+   ]
+  },
+  {
+   "topic": "baltic-ferry-port",
+   "old": "Use the Rødby port for Germany crossings.",
+   "new": "Use the Gedser port for Germany crossings.",
+   "followOld": [
+    "Agent books a Rødby sailing.",
+    "Driver heads to Rødby."
+   ],
+   "followNew": [
+    "Agent books a Gedser sailing.",
+    "Driver heads to Gedser."
+   ]
+  },
+  {
+   "topic": "night-driving",
+   "old": "Drivers may drive at night.",
+   "new": "No driving between 01:00 and 05:00.",
+   "followOld": [
+    "Driver continues at 02:00.",
+    "Agent plans a 03:00 leg."
+   ],
+   "followNew": [
+    "Driver stops before 01:00.",
+    "Agent moves the leg to after 05:00."
+   ]
+  },
+  {
+   "topic": "daily-driving-hours",
+   "old": "Maximum ten hours of driving per day.",
+   "new": "Maximum nine hours of driving per day.",
+   "followOld": [
+    "Agent plans a ten-hour day.",
+    "Driver drives ten hours."
+   ],
+   "followNew": [
+    "Agent splits the trip at nine hours.",
+    "Driver stops at nine hours."
+   ]
+  },
+  {
+   "topic": "rest-day",
+   "old": "A rest day is needed after six working days.",
+   "new": "A rest day is needed after five working days.",
+   "followOld": [
+    "Agent assigns a sixth day in a row.",
+    "Driver works six days straight."
+   ],
+   "followNew": [
+    "Agent blocks day six as rest.",
+    "Agent skips the driver for the sixth day."
+   ]
+  },
+  {
+   "topic": "hi-vis-vest",
+   "old": "Keep the hi-vis vest in the boot.",
+   "new": "Keep the hi-vis vest within reach of the driver seat.",
+   "followOld": [
+    "Driver puts the vest in the boot.",
+    "Agent says the boot is fine."
+   ],
+   "followNew": [
+    "Driver puts the vest in the door pocket.",
+    "Agent reminds the driver to keep it within reach."
+   ]
+  },
+  {
+   "topic": "driver-customer-calls",
+   "old": "Drivers may call the customer directly.",
+   "new": "Drivers must not call customers; ops sends all customer messages.",
+   "followOld": [
+    "Driver calls the buyer about arrival.",
+    "Agent tells the driver to phone the customer."
+   ],
+   "followNew": [
+    "Driver tells ops what to tell the customer.",
+    "Agent drafts the message for an ops person to send."
+   ]
+  },
+  {
+   "topic": "sms-template",
+   "old": "Ops may write free-text customer SMS.",
+   "new": "Ops must use the approved SMS templates.",
+   "followOld": [
+    "Agent drafts a free-text SMS.",
+    "Ops person writes their own wording."
+   ],
+   "followNew": [
+    "Agent fills the approved template.",
+    "Agent picks the matching template."
+   ]
+  },
+  {
+   "topic": "ops-escalation-channel",
+   "old": "Escalate problems in the general ops chat.",
+   "new": "Escalate problems in the incidents channel.",
+   "followOld": [
+    "Agent posts the issue in general chat.",
+    "Driver is told to use general chat."
+   ],
+   "followNew": [
+    "Agent posts in the incidents channel.",
+    "Agent moves the thread to incidents."
+   ]
+  },
+  {
+   "topic": "after-hours-number",
+   "old": "After 18:00 call the duty phone.",
+   "new": "After 18:00 call the new on-call number in the app.",
+   "followOld": [
+    "Driver calls the old duty phone.",
+    "Agent gives the old duty number."
+   ],
+   "followNew": [
+    "Driver calls the on-call number from the app.",
+    "Agent points the driver to the app number."
+   ]
+  },
+  {
+   "topic": "off-route-alert",
+   "old": "Alert ops when a car is 20 km off route.",
+   "new": "Alert ops when a car is 5 km off route.",
+   "followOld": [
+    "Agent stays quiet at 10 km off route.",
+    "Agent waits for 20 km before alerting."
+   ],
+   "followNew": [
+    "Agent alerts at 6 km off route.",
+    "Agent flags a 5 km deviation."
+   ]
+  },
+  {
+   "topic": "arrival-geofence",
+   "old": "Count arrival within 1 km of the address.",
+   "new": "Count arrival within 200 m of the address.",
+   "followOld": [
+    "Agent marks arrived at 800 m.",
+    "Agent accepts a 1 km fix as arrival."
+   ],
+   "followNew": [
+    "Agent waits for a fix within 200 m.",
+    "Agent keeps status en route at 800 m."
+   ]
+  },
+  {
+   "topic": "ferry-app-status",
+   "old": "Drivers pause the trip in the app on the ferry.",
+   "new": "Drivers set the ferry status, not pause.",
+   "followOld": [
+    "Driver pauses the trip on board.",
+    "Agent tells the driver to pause."
+   ],
+   "followNew": [
+    "Driver selects the ferry status.",
+    "Agent asks the driver to switch from pause to ferry."
+   ]
+  },
+  {
+   "topic": "phone-battery",
+   "old": "Report when the phone is below 10 percent.",
+   "new": "Report when the phone is below 30 percent and charge it.",
+   "followOld": [
+    "Driver waits until 10 percent to report.",
+    "Agent ignores 25 percent battery."
+   ],
+   "followNew": [
+    "Driver reports at 30 percent and plugs in.",
+    "Agent flags 25 percent battery."
+   ]
+  },
+  {
+   "topic": "pickup-id-check",
+   "old": "Show the Bahn app job screen at pickup.",
+   "new": "Show the job screen and photo ID at pickup.",
+   "followOld": [
+    "Driver shows only the app screen.",
+    "Agent says the app is enough."
+   ],
+   "followNew": [
+    "Driver shows the app and ID.",
+    "Agent reminds the driver to bring ID."
+   ]
+  },
+  {
+   "topic": "dealer-stamp",
+   "old": "The dealer signs the release papers.",
+   "new": "The dealer signs and stamps the release papers.",
+   "followOld": [
+    "Driver accepts papers with only a signature.",
+    "Agent clears unstamped papers."
+   ],
+   "followNew": [
+    "Driver asks for the stamp.",
+    "Agent holds papers without a stamp."
+   ]
+  },
+  {
+   "topic": "car-cover",
+   "old": "Cover cars parked outside overnight.",
+   "new": "Do not use car covers; they scratch paint in wind.",
+   "followOld": [
+    "Driver fits a cover overnight.",
+    "Agent tells the driver to cover the car."
+   ],
+   "followNew": [
+    "Driver leaves the car uncovered.",
+    "Agent removes covers from the kit list."
+   ]
+  },
+  {
+   "topic": "personal-detours",
+   "old": "Short personal detours under 10 km are fine.",
+   "new": "No personal detours at all.",
+   "followOld": [
+    "Driver makes a 5 km detour home.",
+    "Agent okays a short detour."
+   ],
+   "followNew": [
+    "Driver stays on the planned route.",
+    "Agent declines the detour request."
+   ]
+  },
+  {
+   "topic": "passenger-ban",
+   "old": "A second Bahn driver may ride along.",
+   "new": "No passengers, including other Bahn drivers.",
+   "followOld": [
+    "Driver gives a colleague a lift.",
+    "Agent plans a ride-along."
+   ],
+   "followNew": [
+    "Driver travels alone.",
+    "Agent books the colleague separately."
+   ]
+  },
+  {
+   "topic": "misfuel-check",
+   "old": "Check fuel type from the filler cap.",
+   "new": "Check fuel type from the registration papers and the cap.",
+   "followOld": [
+    "Driver checks only the cap label.",
+    "Agent accepts the cap alone."
+   ],
+   "followNew": [
+    "Driver checks both papers and cap.",
+    "Agent asks for the papers check."
+   ]
+  },
+  {
+   "topic": "block-heater",
+   "old": "Use the block heater below minus 10.",
+   "new": "Use the block heater below minus 5.",
+   "followOld": [
+    "Driver skips the heater at minus 7.",
+    "Agent says no heater at minus 7."
+   ],
+   "followNew": [
+    "Driver plugs in at minus 7.",
+    "Agent reminds the driver at minus 6."
+   ]
+  },
+  {
+   "topic": "washer-fluid",
+   "old": "Top up washer fluid only if it runs out.",
+   "new": "Fill washer fluid with winter mix at pickup in winter.",
+   "followOld": [
+    "Driver waits until it runs dry.",
+    "Agent skips the winter top-up."
+   ],
+   "followNew": [
+    "Driver fills winter mix at the start.",
+    "Agent adds a washer fill to winter pickups."
+   ]
+  },
+  {
+   "topic": "ice-scraper",
+   "old": "Drivers bring their own ice scraper.",
+   "new": "Buy a scraper on the card if the car has none.",
+   "followOld": [
+    "Driver scrapes with a card when they forgot theirs.",
+    "Agent rejects a scraper receipt."
+   ],
+   "followNew": [
+    "Driver buys a scraper on the card.",
+    "Agent approves the scraper cost."
+   ]
+  },
+  {
+   "topic": "roof-snow",
+   "old": "Brush snow off the windows before driving.",
+   "new": "Brush snow off the windows and the roof before driving.",
+   "followOld": [
+    "Driver leaves snow on the roof.",
+    "Agent checks only the windows."
+   ],
+   "followNew": [
+    "Driver clears the roof too.",
+    "Agent reminds the driver to clear the roof."
+   ]
+  },
+  {
+   "topic": "lost-receipt",
+   "old": "Lost receipts are not refunded.",
+   "new": "Lost receipts are refunded with a signed note and card record.",
+   "followOld": [
+    "Agent rejects a claim without a receipt.",
+    "Driver is told no refund."
+   ],
+   "followNew": [
+    "Agent asks for a note and card record.",
+    "Agent approves with the signed note."
+   ]
+  },
+  {
+   "topic": "per-diem-rate",
+   "old": "Use the Finnish daily rate in every country.",
+   "new": "Use the daily rate of the country where the night is spent.",
+   "followOld": [
+    "Agent applies the Finnish rate in Germany.",
+    "Driver claims one rate for all."
+   ],
+   "followNew": [
+    "Agent applies the German rate for a German night.",
+    "Agent checks the overnight country."
+   ]
+  },
+  {
+   "topic": "driver-feedback",
+   "old": "Drivers rate dealers after each pickup.",
+   "new": "Drivers report dealer issues only when something went wrong.",
+   "followOld": [
+    "Agent asks for a rating after a smooth pickup.",
+    "Driver fills a rating every time."
+   ],
+   "followNew": [
+    "Agent skips the rating form.",
+    "Driver reports only problems."
+   ]
+  },
+  {
+   "topic": "dealer-no-show",
+   "old": "Wait for ops before leaving an unattended pickup site.",
+   "new": "Report a closed site at once and move to the next gig if ops agrees.",
+   "followOld": [
+    "Driver waits without reporting.",
+    "Agent sits on the no-show."
+   ],
+   "followNew": [
+    "Driver reports the closed site right away.",
+    "Agent proposes moving to the next gig."
+   ]
+  },
+  {
+   "topic": "car-not-ready",
+   "old": "If the car is not ready, the driver waits.",
+   "new": "If the car is not ready, report it and wait for ops advice.",
+   "followOld": [
+    "Driver waits without telling ops.",
+    "Agent assumes waiting is fine."
+   ],
+   "followNew": [
+    "Driver reports the delay to ops.",
+    "Agent asks ops what to do."
+   ]
+  },
+  {
+   "topic": "vin-mismatch",
+   "old": "Small VIN typos can be fixed later.",
+   "new": "Any VIN mismatch stops the pickup.",
+   "followOld": [
+    "Driver leaves with one wrong digit.",
+    "Agent notes the typo for later."
+   ],
+   "followNew": [
+    "Driver stays until ops checks the VIN.",
+    "Agent blocks the pickup."
+   ]
+  },
+  {
+   "topic": "green-card",
+   "old": "Insurance cards are in the job folder.",
+   "new": "Download the insurance card from the app before leaving.",
+   "followOld": [
+    "Driver relies on the paper folder.",
+    "Agent skips the app download."
+   ],
+   "followNew": [
+    "Driver saves the card from the app.",
+    "Agent reminds the driver to download it."
+   ]
+  },
+  {
+   "topic": "traffic-fine",
+   "old": "Drivers pay speeding fines themselves and tell nobody.",
+   "new": "Report every traffic fine to ops the same day.",
+   "followOld": [
+    "Driver pays a fine without reporting.",
+    "Agent says fines are private."
+   ],
+   "followNew": [
+    "Driver sends the fine to ops.",
+    "Agent logs the fine on the job."
+   ]
+  },
+  {
+   "topic": "parking-fine",
+   "old": "Ops pays parking fines from the job budget.",
+   "new": "Parking fines are the driver's cost unless ops approved the spot.",
+   "followOld": [
+    "Agent pays a fine from the budget.",
+    "Agent covers a fine for an unapproved spot."
+   ],
+   "followNew": [
+    "Agent charges the fine to the driver.",
+    "Agent checks whether the spot was approved."
+   ]
+  },
+  {
+   "topic": "puncture-repair",
+   "old": "Drivers may repair a puncture up to 50 euros.",
+   "new": "Call ops before any puncture repair.",
+   "followOld": [
+    "Driver pays a tyre shop directly.",
+    "Agent approves a repair afterwards."
+   ],
+   "followNew": [
+    "Driver calls ops first.",
+    "Agent waits for ops before the repair."
+   ]
+  },
+  {
+   "topic": "bulb-replacement",
+   "old": "Drivers replace failed bulbs.",
+   "new": "Report failed bulbs; do not replace them.",
+   "followOld": [
+    "Driver buys and fits a bulb.",
+    "Agent approves a bulb receipt."
+   ],
+   "followNew": [
+    "Driver reports the bulb.",
+    "Agent logs it for the dealer."
+   ]
+  },
+  {
+   "topic": "wiper-blades",
+   "old": "Replace worn wipers at any station.",
+   "new": "Replace wipers only if they leave the screen unsafe.",
+   "followOld": [
+    "Driver replaces lightly worn wipers.",
+    "Agent okays a routine wiper swap."
+   ],
+   "followNew": [
+    "Driver keeps usable wipers.",
+    "Agent approves wipers only for safety."
+   ]
+  },
+  {
+   "topic": "jump-start",
+   "old": "Drivers may jump-start dead batteries.",
+   "new": "No jump-starts on hybrids or EVs.",
+   "followOld": [
+    "Driver jumps a hybrid.",
+    "Agent suggests jumping an EV."
+   ],
+   "followNew": [
+    "Driver calls ops for the hybrid.",
+    "Agent rules out a jump-start on the EV."
+   ]
+  },
+  {
+   "topic": "relay-handoff",
+   "old": "Relay drivers hand over at fuel stations.",
+   "new": "Relay drivers hand over only at agreed staffed sites.",
+   "followOld": [
+    "Driver swaps at a random station.",
+    "Agent plans a fuel station handoff."
+   ],
+   "followNew": [
+    "Agent sets a staffed handoff site.",
+    "Driver hands over at the agreed site."
+   ]
+  },
+  {
+   "topic": "train-delay-claim",
+   "old": "Drivers claim train delay refunds for themselves.",
+   "new": "Ops files train delay claims for Bahn.",
+   "followOld": [
+    "Driver files the refund in their name.",
+    "Agent tells the driver to keep it."
+   ],
+   "followNew": [
+    "Agent sends the delay to ops.",
+    "Ops files the claim."
+   ]
+  },
+  {
+   "topic": "seat-reservation",
+   "old": "Do not pay for seat reservations.",
+   "new": "Reserve seats on trains over three hours.",
+   "followOld": [
+    "Agent skips a seat on a four-hour train.",
+    "Driver stands for hours."
+   ],
+   "followNew": [
+    "Agent adds a seat reservation.",
+    "Agent books seats on long trains."
+   ]
+  },
+  {
+   "topic": "flight-online-checkin",
+   "old": "Drivers check in at the airport.",
+   "new": "Agent checks drivers in online 24 hours before.",
+   "followOld": [
+    "Agent leaves check-in to the driver.",
+    "Driver checks in at the desk."
+   ],
+   "followNew": [
+    "Agent checks the driver in online.",
+    "Agent sends the boarding pass."
+   ]
+  },
+  {
+   "topic": "e-scooter-use",
+   "old": "E-scooters are fine for the last kilometre.",
+   "new": "No e-scooters for positioning.",
+   "followOld": [
+    "Driver rents a scooter to the dealer.",
+    "Agent suggests a scooter."
+   ],
+   "followNew": [
+    "Driver walks or takes the bus.",
+    "Agent rejects the scooter claim."
+   ]
+  },
+  {
+   "topic": "day-ticket",
+   "old": "Buy single tickets for city transport.",
+   "new": "Buy a day ticket when three or more rides are planned.",
+   "followOld": [
+    "Driver buys four singles.",
+    "Agent prices singles for a busy day."
+   ],
+   "followNew": [
+    "Driver buys a day ticket.",
+    "Agent suggests a day ticket."
+   ]
+  },
+  {
+   "topic": "sleeping-in-car",
+   "old": "Drivers may nap in the customer car.",
+   "new": "No sleeping in customer cars.",
+   "followOld": [
+    "Driver sleeps in the car at a rest area.",
+    "Agent okays a nap in the car."
+   ],
+   "followNew": [
+    "Driver rests outside the car.",
+    "Agent plans a rest stop without sleeping in the car."
+   ]
+  },
+  {
+   "topic": "window-stickers",
+   "old": "Leave dealer stickers on windows.",
+   "new": "Remove dealer price stickers before handover.",
+   "followOld": [
+    "Driver hands over with stickers.",
+    "Agent skips sticker removal."
+   ],
+   "followNew": [
+    "Driver peels off the stickers.",
+    "Agent adds sticker removal to the checklist."
+   ]
+  },
+  {
+   "topic": "app-offline-mode",
+   "old": "If the app is offline, text ops updates.",
+   "new": "If the app is offline, use offline mode; it syncs later.",
+   "followOld": [
+    "Driver texts each update.",
+    "Agent asks for SMS updates."
+   ],
+   "followNew": [
+    "Driver logs in offline mode.",
+    "Agent waits for the sync."
+   ]
+  },
+  {
+   "topic": "gig-acceptance-deadline",
+   "old": "Drivers accept gigs within 24 hours.",
+   "new": "Drivers accept gigs within 4 hours.",
+   "followOld": [
+    "Agent waits a day for a reply.",
+    "Agent keeps the gig open overnight."
+   ],
+   "followNew": [
+    "Agent reassigns after 4 hours.",
+    "Agent chases a reply at 3 hours."
+   ]
+  },
+  {
+   "topic": "gig-swap",
+   "old": "Drivers may swap gigs between themselves.",
+   "new": "Gig swaps need ops approval.",
+   "followOld": [
+    "Agent accepts a swap without approval.",
+    "Drivers trade gigs directly."
+   ],
+   "followNew": [
+    "Agent sends the swap to ops.",
+    "Agent holds the swap until approved."
+   ]
+  },
+  {
+   "topic": "weekend-booking",
+   "old": "Book weekend gigs on Thursday.",
+   "new": "Book weekend gigs by Wednesday noon.",
+   "followOld": [
+    "Agent books on Thursday.",
+    "Agent waits until Thursday."
+   ],
+   "followNew": [
+    "Agent books by Wednesday noon.",
+    "Agent flags gigs not booked by Wednesday."
+   ]
+  },
+  {
+   "topic": "briefing-call",
+   "old": "New drivers get a briefing call for every gig.",
+   "new": "Briefing calls are only for a driver's first three gigs.",
+   "followOld": [
+    "Agent schedules a call for gig ten.",
+    "Agent calls every time."
+   ],
+   "followNew": [
+    "Agent skips the call for gig five.",
+    "Agent calls only for the first three."
+   ]
+  },
+  {
+   "topic": "repair-quote-approval",
+   "old": "Ops approves repairs by phone.",
+   "new": "Repair approvals must be written in the job log.",
+   "followOld": [
+    "Agent relies on a phone yes.",
+    "Driver repairs after a call."
+   ],
+   "followNew": [
+    "Agent logs the approval.",
+    "Agent asks for written approval."
+   ]
+  },
+  {
+   "topic": "receipt-photo-quality",
+   "old": "Any readable receipt photo is fine.",
+   "new": "Receipt photos must show the whole receipt flat.",
+   "followOld": [
+    "Agent accepts a cropped receipt.",
+    "Driver uploads a half receipt."
+   ],
+   "followNew": [
+    "Driver photographs the full receipt flat.",
+    "Agent rejects a cropped photo."
+   ]
+  },
+  {
+   "topic": "tow-bar",
+   "old": "Leave detachable tow bars fitted.",
+   "new": "Remove detachable tow bars before driving and store them in the boot.",
+   "followOld": [
+    "Driver drives with the tow bar on.",
+    "Agent says leave it."
+   ],
+   "followNew": [
+    "Driver stores the tow bar in the boot.",
+    "Agent adds tow bar removal to the checklist."
+   ]
+  },
+  {
+   "topic": "seat-position-reset",
+   "old": "Leave seats as the driver set them.",
+   "new": "Move seats back to the pickup position before handover.",
+   "followOld": [
+    "Driver hands over with their seat setting.",
+    "Agent skips seat reset."
+   ],
+   "followNew": [
+    "Driver resets the seat.",
+    "Agent adds seat reset to handover."
+   ]
+  },
+  {
+   "topic": "eating-in-car",
+   "old": "Light snacks in the car are fine.",
+   "new": "No eating in customer cars.",
+   "followOld": [
+    "Driver eats a sandwich while driving.",
+    "Agent okays snacks."
+   ],
+   "followNew": [
+    "Driver eats during a break outside.",
+    "Agent reminds the driver not to eat in the car."
+   ]
+  }
+ ],
+ "situations": [
+  {
+   "title": "Ferry check-in cutoff will be missed",
+   "right": "card",
+   "facts": [
+    {
+     "label": "GPS ETA to Port Vessa",
+     "value": "18:58",
+     "source": "gps",
+     "minAgo": 2
+    },
+    {
+     "label": "Check-in closes",
+     "value": "18:45 for the 19:30 sailing to Harlund",
+     "source": "tool",
+     "minAgo": 30
+    },
+    {
+     "label": "Next sailing with space",
+     "value": "23:30, rebooking fee 85 EUR",
+     "source": "tool",
+     "minAgo": 5
+    },
+    {
+     "label": "Delivery promise",
+     "value": "Tomorrow 09:00 at Harlund dealer",
+     "source": "order",
+     "minAgo": 600
+    }
+   ],
+   "card": [
+    "Bring a card to approve the 85 EUR rebooking to the 23:30 sailing or choose another option",
+    "Ask ops to decide between rebooking the ferry and requesting a late check-in exception"
+   ],
+   "close": [
+    "Log the ETA and let the driver continue to the port",
+    "Close the ferry check as on track"
+   ]
+  },
+  {
+   "title": "Keys not at pickup site",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver message",
+     "value": "Reception says keys are at their other branch in Lindvik, 40 km away",
+     "source": "driver_chat",
+     "minAgo": 4
+    },
+    {
+     "label": "Order",
+     "value": "2 keys expected at Norrby Auto, pickup 10:00",
+     "source": "order",
+     "minAgo": 300
+    },
+    {
+     "label": "Next gig in chain",
+     "value": "Pickup at 14:00 in Saltby",
+     "source": "order",
+     "minAgo": 300
+    }
+   ],
+   "card": [
+    "Bring a card asking ops whether to send the driver to Lindvik or wait for the site to fetch the keys",
+    "Ask a person to choose between the detour and rescheduling the pickup"
+   ],
+   "close": [
+    "Log the key note and mark the pickup as done",
+    "Close the pickup step and start the next gig"
+   ]
+  },
+  {
+   "title": "New scratch not in pickup photos",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver message",
+     "value": "Found a 15 cm scratch on the rear left door at the fuel stop",
+     "source": "driver_chat",
+     "minAgo": 6
+    },
+    {
+     "label": "Pickup photo set",
+     "value": "12 photos, rear left door clean",
+     "source": "app",
+     "minAgo": 180
+    },
+    {
+     "label": "New photo",
+     "value": "Uploaded, scratch clearly visible",
+     "source": "app",
+     "minAgo": 5
+    }
+   ],
+   "card": [
+    "Bring a damage card so ops can decide on a report and tell the customer",
+    "Ask a person to review the photos and open a damage case"
+   ],
+   "close": [
+    "Log the photo and continue the delivery",
+    "Close the note as a pre-existing mark"
+   ]
+  },
+  {
+   "title": "Dealer refuses to sign release paper",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver message",
+     "value": "Dealer says payment not received and won't sign the release",
+     "source": "driver_chat",
+     "minAgo": 3
+    },
+    {
+     "label": "Order",
+     "value": "Release paper must be signed before the car leaves the site",
+     "source": "order",
+     "minAgo": 400
+    },
+    {
+     "label": "Payment status",
+     "value": "Marked paid by customer, no bank confirmation yet",
+     "source": "tool",
+     "minAgo": 60
+    }
+   ],
+   "card": [
+    "Bring a card so ops can contact the dealer or the customer about payment",
+    "Ask a person whether the driver should wait or leave without the car"
+   ],
+   "close": [
+    "Log the refusal and tell the driver to take the car anyway",
+    "Close the release step as signed"
+   ]
+  },
+  {
+   "title": "EV low battery, charger out of order",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Battery",
+     "value": "9 percent, about 30 km range",
+     "source": "app",
+     "minAgo": 2
+    },
+    {
+     "label": "Planned charger",
+     "value": "Out of order per driver photo",
+     "source": "driver_chat",
+     "minAgo": 3
+    },
+    {
+     "label": "Next fast charger",
+     "value": "38 km away in Vesthavn",
+     "source": "tool",
+     "minAgo": 1
+    }
+   ],
+   "card": [
+    "Bring a card to decide between a slow charger nearby and a tow",
+    "Ask ops to approve a recovery plan before the car runs empty"
+   ],
+   "close": [
+    "Log the low battery and let the driver drive to Vesthavn",
+    "Close the charging alert as handled"
+   ]
+  },
+  {
+   "title": "Customer not at delivery address",
+   "right": "card",
+   "facts": [
+    {
+     "label": "GPS",
+     "value": "At delivery address for 25 min",
+     "source": "gps",
+     "minAgo": 1
+    },
+    {
+     "label": "Driver message",
+     "value": "Nobody home, called twice, no answer",
+     "source": "driver_chat",
+     "minAgo": 4
+    },
+    {
+     "label": "Order",
+     "value": "Handover in person only, no safe drop",
+     "source": "order",
+     "minAgo": 900
+    }
+   ],
+   "card": [
+    "Bring a card so a person can message the customer and decide how long the driver waits",
+    "Ask ops whether to wait, redeliver later or return the car"
+   ],
+   "close": [
+    "Log the failed contact and leave the car and keys at the door",
+    "Close the delivery as completed"
+   ]
+  },
+  {
+   "title": "Driver wants to drop chained gig",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver message",
+     "value": "Too tired for the second leg tonight, can't do it safely",
+     "source": "driver_chat",
+     "minAgo": 5
+    },
+    {
+     "label": "Chained gig",
+     "value": "Pickup 20:00 in Kallby, delivery 07:00 tomorrow",
+     "source": "order",
+     "minAgo": 200
+    },
+    {
+     "label": "Driving time today",
+     "value": "8 h 40 min",
+     "source": "app",
+     "minAgo": 2
+    }
+   ],
+   "card": [
+    "Bring a card so ops can reassign the second gig or move the promise",
+    "Ask a person to find another driver for the Kallby pickup"
+   ],
+   "close": [
+    "Log the message and keep the driver on the second gig",
+    "Close the chat as no action needed"
+   ]
+  },
+  {
+   "title": "GPS stopped on motorway, driver silent",
+   "right": "card",
+   "facts": [
+    {
+     "label": "GPS",
+     "value": "No movement for 50 min on the E-road shoulder",
+     "source": "gps",
+     "minAgo": 1
+    },
+    {
+     "label": "Driver chat",
+     "value": "Two messages unanswered",
+     "source": "driver_chat",
+     "minAgo": 20
+    },
+    {
+     "label": "Planned stops",
+     "value": "None near this spot",
+     "source": "order",
+     "minAgo": 240
+    }
+   ],
+   "card": [
+    "Bring an urgent card so a person can call the driver and decide next steps",
+    "Ask ops to check on the driver now"
+   ],
+   "close": [
+    "Log the stop as a break",
+    "Close the GPS alert"
+   ]
+  },
+  {
+   "title": "VIN does not match order",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver photo",
+     "value": "VIN ends 48217",
+     "source": "app",
+     "minAgo": 3
+    },
+    {
+     "label": "Order",
+     "value": "VIN ends 48271",
+     "source": "order",
+     "minAgo": 500
+    },
+    {
+     "label": "Site message",
+     "value": "Staff say this is the car for Bahn",
+     "source": "site",
+     "minAgo": 4
+    }
+   ],
+   "card": [
+    "Bring a card so ops can confirm the right car with the seller before the driver leaves",
+    "Ask a person to check the VIN mismatch with the dealer"
+   ],
+   "close": [
+    "Log the VIN as a typo and continue",
+    "Close the pickup check"
+   ]
+  },
+  {
+   "title": "Delivery promise late by 3 hours",
+   "right": "card",
+   "facts": [
+    {
+     "label": "GPS ETA",
+     "value": "15:10",
+     "source": "gps",
+     "minAgo": 2
+    },
+    {
+     "label": "Delivery promise",
+     "value": "12:00 to private customer",
+     "source": "order",
+     "minAgo": 800
+    },
+    {
+     "label": "Cause",
+     "value": "Crash closed the road for 2 h",
+     "source": "tool",
+     "minAgo": 30
+    }
+   ],
+   "card": [
+    "Bring a card with a draft delay message for a person to send to the customer",
+    "Ask ops to approve the new time and send the customer note"
+   ],
+   "close": [
+    "Log the new ETA without telling the customer",
+    "Close the delay as on time"
+   ]
+  },
+  {
+   "title": "Positioning train cancelled",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Train",
+     "value": "07:40 to Aarberg cancelled",
+     "source": "tool",
+     "minAgo": 10
+    },
+    {
+     "label": "Alternative",
+     "value": "Flight 08:55, 240 EUR",
+     "source": "tool",
+     "minAgo": 5
+    },
+    {
+     "label": "Pickup",
+     "value": "Aarberg dealer, 12:00",
+     "source": "order",
+     "minAgo": 600
+    }
+   ],
+   "card": [
+    "Bring a card to approve the 240 EUR flight or move the pickup",
+    "Ask ops to pick a new way to get the driver to Aarberg"
+   ],
+   "close": [
+    "Log the cancellation and keep the old plan",
+    "Close the trip step as done"
+   ]
+  },
+  {
+   "title": "Snow closes mountain road",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Road status",
+     "value": "Pass closed until further notice",
+     "source": "tool",
+     "minAgo": 15
+    },
+    {
+     "label": "Detour",
+     "value": "Adds 2 h 10 min and one toll",
+     "source": "tool",
+     "minAgo": 5
+    },
+    {
+     "label": "Delivery promise",
+     "value": "Today 17:00",
+     "source": "order",
+     "minAgo": 700
+    }
+   ],
+   "card": [
+    "Bring a card so ops can choose the detour or an overnight stop and update the customer",
+    "Ask a person to approve the route change and the new promise"
+   ],
+   "close": [
+    "Log the closure and let the driver wait at the pass",
+    "Close the weather alert"
+   ]
+  },
+  {
+   "title": "Fuel above card limit",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver message",
+     "value": "Fuel card declined, can I pay 140 EUR myself?",
+     "source": "driver_chat",
+     "minAgo": 3
+    },
+    {
+     "label": "Fuel allowance",
+     "value": "90 EUR for this gig",
+     "source": "order",
+     "minAgo": 400
+    },
+    {
+     "label": "Fuel level",
+     "value": "Warning light on",
+     "source": "driver_chat",
+     "minAgo": 3
+    }
+   ],
+   "card": [
+    "Bring a card to approve the driver paying 140 EUR and later refund",
+    "Ask ops to decide on the overspend"
+   ],
+   "close": [
+    "Log the payment as within allowance",
+    "Close the fuel chat with no reply"
+   ]
+  },
+  {
+   "title": "Site closed before pickup",
+   "right": "card",
+   "facts": [
+    {
+     "label": "GPS",
+     "value": "Driver at Holm Motors gate 16:20",
+     "source": "gps",
+     "minAgo": 2
+    },
+    {
+     "label": "Site",
+     "value": "Closed at 16:00 today, opens 08:00",
+     "source": "site",
+     "minAgo": 10
+    },
+    {
+     "label": "Order",
+     "value": "Pickup window 15:00 to 17:00",
+     "source": "order",
+     "minAgo": 600
+    }
+   ],
+   "card": [
+    "Bring a card so ops can contact the site and decide on a hotel or a new day",
+    "Ask a person to rebook the pickup and the driver"
+   ],
+   "close": [
+    "Log the arrival and mark the car collected",
+    "Close the pickup as done"
+   ]
+  },
+  {
+   "title": "Customer asks for new delivery address",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Customer message",
+     "value": "Please deliver to my office in Ostby instead",
+     "source": "operator",
+     "minAgo": 8
+    },
+    {
+     "label": "Distance change",
+     "value": "Adds 65 km",
+     "source": "tool",
+     "minAgo": 5
+    },
+    {
+     "label": "Order",
+     "value": "Fixed price to home address",
+     "source": "order",
+     "minAgo": 900
+    }
+   ],
+   "card": [
+    "Bring a card so ops can approve the change and any extra charge",
+    "Ask a person to confirm the new address and price with the customer"
+   ],
+   "close": [
+    "Change the address and close the request",
+    "Log the request and keep the old address with no reply"
+   ]
+  },
+  {
+   "title": "Engine warning light on",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver message",
+     "value": "Orange engine light came on, car feels weak uphill",
+     "source": "driver_chat",
+     "minAgo": 4
+    },
+    {
+     "label": "Photo",
+     "value": "Dashboard shows engine warning",
+     "source": "app",
+     "minAgo": 3
+    },
+    {
+     "label": "Remaining distance",
+     "value": "210 km",
+     "source": "gps",
+     "minAgo": 1
+    }
+   ],
+   "card": [
+    "Bring a card so ops can decide to continue, stop or call roadside help",
+    "Ask a person to contact the seller about the warning"
+   ],
+   "close": [
+    "Log the warning and keep driving",
+    "Close the note"
+   ]
+  },
+  {
+   "title": "Release paper names wrong dealer",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Release paper",
+     "value": "Issued to Berg Auto",
+     "source": "app",
+     "minAgo": 5
+    },
+    {
+     "label": "Order",
+     "value": "Delivery to Kvist Bilar",
+     "source": "order",
+     "minAgo": 700
+    },
+    {
+     "label": "Driver message",
+     "value": "Is this OK to deliver?",
+     "source": "driver_chat",
+     "minAgo": 4
+    }
+   ],
+   "card": [
+    "Bring a card so ops can check the paper with the seller before handover",
+    "Ask a person to confirm the correct receiver"
+   ],
+   "close": [
+    "Log the paper and deliver to Kvist Bilar",
+    "Close the document check"
+   ]
+  },
+  {
+   "title": "Flat tyre on the way",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver photo",
+     "value": "Front right tyre flat",
+     "source": "app",
+     "minAgo": 3
+    },
+    {
+     "label": "GPS",
+     "value": "Stopped at a rest area",
+     "source": "gps",
+     "minAgo": 1
+    },
+    {
+     "label": "Spare",
+     "value": "No spare wheel, repair kit only",
+     "source": "driver_chat",
+     "minAgo": 2
+    }
+   ],
+   "card": [
+    "Bring a card to choose roadside help or a tyre shop and approve the cost",
+    "Ask ops to arrange help and update the delivery time"
+   ],
+   "close": [
+    "Log the flat and tell the driver to continue",
+    "Close the photo as normal"
+   ]
+  },
+  {
+   "title": "Receiver refuses car over damage",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Site",
+     "value": "Dealer refuses to sign, says bumper cracked",
+     "source": "site",
+     "minAgo": 5
+    },
+    {
+     "label": "Pickup photos",
+     "value": "Bumper crack visible at pickup",
+     "source": "app",
+     "minAgo": 400
+    },
+    {
+     "label": "Driver location",
+     "value": "At dealer, waiting",
+     "source": "gps",
+     "minAgo": 1
+    }
+   ],
+   "card": [
+    "Bring a card so ops can talk to the dealer and decide if the driver leaves the car",
+    "Ask a person to settle the dispute using the pickup photos"
+   ],
+   "close": [
+    "Log the refusal and leave the car without a signature",
+    "Close the delivery as accepted"
+   ]
+  },
+  {
+   "title": "Arrived at pickup on time",
+   "right": "close",
+   "facts": [
+    {
+     "label": "GPS",
+     "value": "At Norrby Auto 09:52",
+     "source": "gps",
+     "minAgo": 2
+    },
+    {
+     "label": "Order",
+     "value": "Pickup 10:00",
+     "source": "order",
+     "minAgo": 300
+    }
+   ],
+   "card": [
+    "Bring a card asking ops to confirm the arrival",
+    "Ask a person to approve that the driver is at the site"
+   ],
+   "close": [
+    "Log the arrival",
+    "Mark the driver as on site"
+   ]
+  },
+  {
+   "title": "Ferry check-in done",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Check-in",
+     "value": "Confirmed 17:50 for the 18:30 sailing",
+     "source": "tool",
+     "minAgo": 5
+    },
+    {
+     "label": "GPS",
+     "value": "In port lane 4",
+     "source": "gps",
+     "minAgo": 2
+    }
+   ],
+   "card": [
+    "Bring a card asking ops to confirm the ferry check-in",
+    "Ask a person to approve the sailing"
+   ],
+   "close": [
+    "Log the check-in",
+    "Mark the ferry step done"
+   ]
+  },
+  {
+   "title": "Fuel receipt within allowance",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Receipt",
+     "value": "62 EUR diesel",
+     "source": "app",
+     "minAgo": 4
+    },
+    {
+     "label": "Fuel allowance",
+     "value": "90 EUR",
+     "source": "order",
+     "minAgo": 400
+    }
+   ],
+   "card": [
+    "Bring a card to approve the 62 EUR fuel",
+    "Ask ops to review the receipt"
+   ],
+   "close": [
+    "Log the receipt as an expense",
+    "Attach the receipt to the gig"
+   ]
+  },
+  {
+   "title": "Delivery completed with signature",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Signature",
+     "value": "Captured from receiver",
+     "source": "app",
+     "minAgo": 3
+    },
+    {
+     "label": "Handover photos",
+     "value": "12 of 12 uploaded",
+     "source": "app",
+     "minAgo": 3
+    },
+    {
+     "label": "GPS",
+     "value": "At delivery address",
+     "source": "gps",
+     "minAgo": 2
+    }
+   ],
+   "card": [
+    "Bring a card asking ops to confirm the delivery",
+    "Ask a person to check the handover"
+   ],
+   "close": [
+    "Close the delivery",
+    "Mark the gig completed"
+   ]
+  },
+  {
+   "title": "Short GPS gap in tunnel",
+   "right": "close",
+   "facts": [
+    {
+     "label": "GPS",
+     "value": "No signal for 6 min, now moving normally",
+     "source": "gps",
+     "minAgo": 1
+    },
+    {
+     "label": "Route",
+     "value": "Planned route has a 5 km tunnel here",
+     "source": "tool",
+     "minAgo": 200
+    }
+   ],
+   "card": [
+    "Bring a card asking ops to check the driver",
+    "Ask a person to call the driver about the gap"
+   ],
+   "close": [
+    "Log the gap as a tunnel",
+    "Close the GPS alert"
+   ]
+  },
+  {
+   "title": "Train slightly late with buffer",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Train",
+     "value": "10 min late",
+     "source": "tool",
+     "minAgo": 5
+    },
+    {
+     "label": "Buffer to pickup",
+     "value": "60 min",
+     "source": "order",
+     "minAgo": 300
+    }
+   ],
+   "card": [
+    "Bring a card to rebook the driver's travel",
+    "Ask ops to move the pickup time"
+   ],
+   "close": [
+    "Log the delay",
+    "Keep the plan and update the ETA"
+   ]
+  },
+  {
+   "title": "Planned EV charging stop",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Battery",
+     "value": "80 percent, charging finished",
+     "source": "app",
+     "minAgo": 2
+    },
+    {
+     "label": "Plan",
+     "value": "Charging stop planned at this site",
+     "source": "order",
+     "minAgo": 400
+    },
+    {
+     "label": "Remaining distance",
+     "value": "190 km",
+     "source": "gps",
+     "minAgo": 1
+    }
+   ],
+   "card": [
+    "Bring a card to approve the charging stop",
+    "Ask ops to check the battery"
+   ],
+   "close": [
+    "Log the charge",
+    "Mark the charging stop done"
+   ]
+  },
+  {
+   "title": "Key count matches at handover",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Driver photo",
+     "value": "2 keys handed over",
+     "source": "app",
+     "minAgo": 3
+    },
+    {
+     "label": "Order",
+     "value": "2 keys expected",
+     "source": "order",
+     "minAgo": 600
+    }
+   ],
+   "card": [
+    "Bring a card asking ops to confirm the keys",
+    "Ask a person to check the key photo"
+   ],
+   "close": [
+    "Log the keys as handed over",
+    "Close the key check"
+   ]
+  },
+  {
+   "title": "Driver break per rules",
+   "right": "close",
+   "facts": [
+    {
+     "label": "GPS",
+     "value": "Stopped 45 min at a rest area",
+     "source": "gps",
+     "minAgo": 1
+    },
+    {
+     "label": "Driver message",
+     "value": "Taking my break",
+     "source": "driver_chat",
+     "minAgo": 44
+    },
+    {
+     "label": "ETA",
+     "value": "Still before promise",
+     "source": "tool",
+     "minAgo": 2
+    }
+   ],
+   "card": [
+    "Bring a card asking ops to check the stop",
+    "Ask a person to call the driver"
+   ],
+   "close": [
+    "Log the break",
+    "Close the stop alert"
+   ]
+  },
+  {
+   "title": "Small parking fee",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Receipt",
+     "value": "4 EUR parking",
+     "source": "app",
+     "minAgo": 5
+    },
+    {
+     "label": "Policy",
+     "value": "Parking up to 20 EUR auto-approved",
+     "source": "order",
+     "minAgo": 500
+    }
+   ],
+   "card": [
+    "Bring a card to approve the parking fee",
+    "Ask ops to review the receipt"
+   ],
+   "close": [
+    "Log the parking fee",
+    "Attach the receipt to the gig"
+   ]
+  },
+  {
+   "title": "Customer already told of ETA",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Operator note",
+     "value": "ETA 14:00 message sent to customer",
+     "source": "operator",
+     "minAgo": 20
+    },
+    {
+     "label": "GPS ETA",
+     "value": "13:55",
+     "source": "gps",
+     "minAgo": 2
+    }
+   ],
+   "card": [
+    "Bring a card to draft another customer message",
+    "Ask a person to message the customer again"
+   ],
+   "close": [
+    "Log the ETA",
+    "Keep tracking with no new message"
+   ]
+  },
+  {
+   "title": "CMR signed and photographed",
+   "right": "close",
+   "facts": [
+    {
+     "label": "CMR photo",
+     "value": "Signed and stamped by receiver",
+     "source": "app",
+     "minAgo": 4
+    },
+    {
+     "label": "Order",
+     "value": "CMR signature needed at delivery",
+     "source": "order",
+     "minAgo": 600
+    }
+   ],
+   "card": [
+    "Bring a card asking ops to check the CMR",
+    "Ask a person to approve the document"
+   ],
+   "close": [
+    "Attach the CMR and close the document step",
+    "Mark the CMR done"
+   ]
+  },
+  {
+   "title": "Pickup photos complete and clean",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Pickup photos",
+     "value": "12 of 12 uploaded",
+     "source": "app",
+     "minAgo": 3
+    },
+    {
+     "label": "Damage notes",
+     "value": "Match the seller's report",
+     "source": "order",
+     "minAgo": 500
+    }
+   ],
+   "card": [
+    "Bring a card for a damage review",
+    "Ask ops to inspect the photos"
+   ],
+   "close": [
+    "Log the photo set",
+    "Mark the pickup inspection done"
+   ]
+  },
+  {
+   "title": "Chained gig still on time",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Handover",
+     "value": "First gig delivered 11:40",
+     "source": "app",
+     "minAgo": 5
+    },
+    {
+     "label": "Next pickup",
+     "value": "14:00, 70 km away",
+     "source": "order",
+     "minAgo": 300
+    },
+    {
+     "label": "GPS ETA",
+     "value": "12:45",
+     "source": "gps",
+     "minAgo": 1
+    }
+   ],
+   "card": [
+    "Bring a card to replan the chained gig",
+    "Ask ops to reassign the next pickup"
+   ],
+   "close": [
+    "Start the next gig",
+    "Log the ETA for the next pickup"
+   ]
+  },
+  {
+   "title": "Toll on pre-approved route",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Toll",
+     "value": "Bridge toll 52 EUR",
+     "source": "app",
+     "minAgo": 4
+    },
+    {
+     "label": "Order",
+     "value": "Route with this bridge, toll included",
+     "source": "order",
+     "minAgo": 600
+    }
+   ],
+   "card": [
+    "Bring a card to approve the toll",
+    "Ask ops to review the cost"
+   ],
+   "close": [
+    "Log the toll",
+    "Attach it to the gig costs"
+   ]
+  },
+  {
+   "title": "Duplicate GPS alert",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Alert",
+     "value": "Same stop alert raised twice",
+     "source": "tool",
+     "minAgo": 2
+    },
+    {
+     "label": "First alert",
+     "value": "Closed, driver on break",
+     "source": "operator",
+     "minAgo": 10
+    }
+   ],
+   "card": [
+    "Bring a card for the second alert",
+    "Ask a person to check the driver again"
+   ],
+   "close": [
+    "Close the alert as a duplicate",
+    "Merge it with the first alert"
+   ]
+  },
+  {
+   "title": "Site open at driver ETA",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Site hours",
+     "value": "Open until 18:00",
+     "source": "site",
+     "minAgo": 30
+    },
+    {
+     "label": "GPS ETA",
+     "value": "16:30",
+     "source": "gps",
+     "minAgo": 2
+    }
+   ],
+   "card": [
+    "Bring a card to call the site",
+    "Ask ops to confirm the opening hours"
+   ],
+   "close": [
+    "Log the check",
+    "Keep the plan"
+   ]
+  },
+  {
+   "title": "Border crossed without stop",
+   "right": "close",
+   "facts": [
+    {
+     "label": "GPS",
+     "value": "Crossed the Denmark to Germany border, moving",
+     "source": "gps",
+     "minAgo": 3
+    },
+    {
+     "label": "Order",
+     "value": "No customs papers needed, EU transfer",
+     "source": "order",
+     "minAgo": 700
+    }
+   ],
+   "card": [
+    "Bring a card to check the border papers",
+    "Ask ops to confirm the crossing"
+   ],
+   "close": [
+    "Log the crossing",
+    "Update the route progress"
+   ]
+  },
+  {
+   "title": "Weather warning already passed",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Weather",
+     "value": "Ice warning for the hill section",
+     "source": "tool",
+     "minAgo": 20
+    },
+    {
+     "label": "GPS",
+     "value": "Driver past that section 30 km ago",
+     "source": "gps",
+     "minAgo": 1
+    }
+   ],
+   "card": [
+    "Bring a card to change the route",
+    "Ask ops to warn the driver"
+   ],
+   "close": [
+    "Log the warning as not relevant",
+    "Close the weather alert"
+   ]
+  },
+  {
+   "title": "Positioning flight boarded",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Flight",
+     "value": "Departed on time",
+     "source": "tool",
+     "minAgo": 15
+    },
+    {
+     "label": "Driver message",
+     "value": "Boarded, see you there",
+     "source": "driver_chat",
+     "minAgo": 20
+    },
+    {
+     "label": "Pickup",
+     "value": "3 h after landing",
+     "source": "order",
+     "minAgo": 600
+    }
+   ],
+   "card": [
+    "Bring a card to confirm the flight",
+    "Ask ops to check the travel plan"
+   ],
+   "close": [
+    "Log the departure",
+    "Mark the travel step in progress"
+   ]
+  },
+  {
+   "title": "Bridge toll paid privately above limit",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Toll",
+     "value": "Storebælt bridge, 395 DKK paid with driver's own card",
+     "source": "driver_chat",
+     "minAgo": 12
+    },
+    {
+     "label": "Transponder",
+     "value": "Company tag rejected at gantry",
+     "source": "tool",
+     "minAgo": 14
+    },
+    {
+     "label": "Expense limit",
+     "value": "Driver self-pay limit 250 DKK without approval",
+     "source": "order",
+     "minAgo": 600
+    }
+   ],
+   "card": [
+    "Bring card: approve 395 DKK toll reimbursement above limit",
+    "Bring card: check transponder status before next gig"
+   ],
+   "close": [
+    "Log toll receipt to expense file",
+    "Mark transponder issue as known"
+   ]
+  },
+  {
+   "title": "Parking fine at dealer's own spot",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Fine",
+     "value": "35 EUR ticket at Hafenstrasse dealer, Hamburg",
+     "source": "driver_chat",
+     "minAgo": 8
+    },
+    {
+     "label": "Driver note",
+     "value": "Dealer staff told me to park in front of the gate",
+     "source": "driver_chat",
+     "minAgo": 8
+    },
+    {
+     "label": "Site rule",
+     "value": "No visitor parking listed",
+     "source": "site",
+     "minAgo": 2000
+    }
+   ],
+   "card": [
+    "Bring card: decide who pays fine, driver, Bahn or dealer",
+    "Bring card: approve message to dealer about the fine"
+   ],
+   "close": [
+    "Store fine photo on order",
+    "Log fine as driver liability"
+   ]
+  },
+  {
+   "title": "Repeated high speed on motorway",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Speed",
+     "value": "141, 138, 144 km/h over 9 min",
+     "source": "gps",
+     "minAgo": 3
+    },
+    {
+     "label": "Limit",
+     "value": "100 km/h on this section, E18",
+     "source": "tool",
+     "minAgo": 3
+    },
+    {
+     "label": "History",
+     "value": "Second speed flag for this driver this month",
+     "source": "operator",
+     "minAgo": 20
+    }
+   ],
+   "card": [
+    "Bring card: decide on contact and warning for driver",
+    "Bring card: review driver's speed record"
+   ],
+   "close": [
+    "Log speed event only",
+    "Dismiss as GPS noise"
+   ]
+  },
+  {
+   "title": "Pickup site closed without notice",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver",
+     "value": "Gate locked at Autohaus Lindner, nobody answers bell",
+     "source": "driver_chat",
+     "minAgo": 5
+    },
+    {
+     "label": "Opening hours",
+     "value": "Site listed open 08-17 today",
+     "source": "site",
+     "minAgo": 1500
+    },
+    {
+     "label": "Next gig",
+     "value": "Driver has pickup in Kiel at 14:00",
+     "source": "order",
+     "minAgo": 60
+    }
+   ],
+   "card": [
+    "Bring card: wait at site or release driver to next gig",
+    "Bring card: approve call to dealer contact"
+   ],
+   "close": [
+    "Tell driver to wait until site opens",
+    "Log closure on site record"
+   ]
+  },
+  {
+   "title": "Dealer refuses release without CMR",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver",
+     "value": "Dealer wants signed CMR before handing keys",
+     "source": "driver_chat",
+     "minAgo": 6
+    },
+    {
+     "label": "Order",
+     "value": "No CMR attached, transport inside Germany",
+     "source": "order",
+     "minAgo": 30
+    },
+    {
+     "label": "Dealer",
+     "value": "Insists on CMR as house rule",
+     "source": "site",
+     "minAgo": 6
+    }
+   ],
+   "card": [
+    "Bring card: issue CMR now or argue it is not needed",
+    "Bring card: ask customer to call dealer"
+   ],
+   "close": [
+    "Log as paper delay",
+    "Tell driver to leave site"
+   ]
+  },
+  {
+   "title": "Key tag does not match car",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Key tag",
+     "value": "Tag reads stock 4471, order car is stock 4417",
+     "source": "driver_chat",
+     "minAgo": 4
+    },
+    {
+     "label": "Car",
+     "value": "Key does not open the car",
+     "source": "driver_chat",
+     "minAgo": 3
+    },
+    {
+     "label": "Site",
+     "value": "Lot has 40 cars, office closes in 25 min",
+     "source": "site",
+     "minAgo": 30
+    }
+   ],
+   "card": [
+    "Bring card: ask site to find right key before closing",
+    "Bring card: decide if driver waits or reschedules"
+   ],
+   "close": [
+    "Note key mismatch on order",
+    "Mark pickup done"
+   ]
+  },
+  {
+   "title": "Road closed by snowstorm",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Road",
+     "value": "E4 closed north of Sundsvall, reopening unknown",
+     "source": "tool",
+     "minAgo": 10
+    },
+    {
+     "label": "Promise",
+     "value": "Delivery promised Luleå 16:00 today",
+     "source": "order",
+     "minAgo": 900
+    },
+    {
+     "label": "Detour",
+     "value": "Inland route adds 3 h 40 min",
+     "source": "tool",
+     "minAgo": 9
+    }
+   ],
+   "card": [
+    "Bring card: take detour or hold driver and move promise",
+    "Bring card: approve customer message about new time"
+   ],
+   "close": [
+    "Keep current plan",
+    "Log weather event"
+   ]
+  },
+  {
+   "title": "Rail strike blocks positioning",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Strike",
+     "value": "Deutsche Bahn regional strike from 04:00 today",
+     "source": "tool",
+     "minAgo": 40
+    },
+    {
+     "label": "Ticket",
+     "value": "Driver train Bremen to Hannover 09:12 cancelled",
+     "source": "tool",
+     "minAgo": 35
+    },
+    {
+     "label": "Gig",
+     "value": "Pickup Hannover 11:00",
+     "source": "order",
+     "minAgo": 300
+    }
+   ],
+   "card": [
+    "Bring card: book bus, rental car or move pickup",
+    "Bring card: approve message to pickup site"
+   ],
+   "close": [
+    "Wait for next train",
+    "Log cancellation"
+   ]
+  },
+  {
+   "title": "Driver feels ill mid-gig",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver",
+     "value": "Fever and dizzy, want to stop",
+     "source": "driver_chat",
+     "minAgo": 2
+    },
+    {
+     "label": "Location",
+     "value": "Rest area near Jyväskylä, car parked",
+     "source": "gps",
+     "minAgo": 1
+    },
+    {
+     "label": "Remaining",
+     "value": "240 km to delivery in Oulu",
+     "source": "order",
+     "minAgo": 60
+    }
+   ],
+   "card": [
+    "Bring card: arrange replacement driver and secure car",
+    "Bring card: approve customer message about delay"
+   ],
+   "close": [
+    "Tell driver to continue slowly",
+    "Log break"
+   ]
+  },
+  {
+   "title": "Payment not cleared before release",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Payment",
+     "value": "Customer bank transfer pending 2 days",
+     "source": "tool",
+     "minAgo": 15
+    },
+    {
+     "label": "Dealer",
+     "value": "Will not release car until paid",
+     "source": "site",
+     "minAgo": 10
+    },
+    {
+     "label": "Driver",
+     "value": "On site, waiting",
+     "source": "gps",
+     "minAgo": 2
+    }
+   ],
+   "card": [
+    "Bring card: hold driver or cancel pickup",
+    "Bring card: approve message to customer about payment"
+   ],
+   "close": [
+    "Tell driver to take car",
+    "Log payment status"
+   ]
+  },
+  {
+   "title": "Two drivers booked for one car",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Bookings",
+     "value": "Order 8812 assigned to driver Aho and driver Berg",
+     "source": "order",
+     "minAgo": 20
+    },
+    {
+     "label": "Positions",
+     "value": "Both drivers on the way, 30 km and 55 km away",
+     "source": "gps",
+     "minAgo": 3
+    },
+    {
+     "label": "Paid gigs",
+     "value": "Both gigs accepted and paid if started",
+     "source": "order",
+     "minAgo": 20
+    }
+   ],
+   "card": [
+    "Bring card: choose which driver keeps the gig and compensation",
+    "Bring card: approve cancel message to other driver"
+   ],
+   "close": [
+    "Merge bookings automatically",
+    "Let first arriving driver take it"
+   ]
+  },
+  {
+   "title": "App marked delivered too early",
+   "right": "card",
+   "facts": [
+    {
+     "label": "App",
+     "value": "Order shows delivered at 10:42",
+     "source": "app",
+     "minAgo": 25
+    },
+    {
+     "label": "GPS",
+     "value": "Car still 90 km from address",
+     "source": "gps",
+     "minAgo": 2
+    },
+    {
+     "label": "Customer",
+     "value": "Auto email 'Your car is delivered' sent",
+     "source": "tool",
+     "minAgo": 24
+    }
+   ],
+   "card": [
+    "Bring card: approve correction message to customer",
+    "Bring card: reopen order status"
+   ],
+   "close": [
+    "Ignore status mismatch",
+    "Log app bug"
+   ]
+  },
+  {
+   "title": "Early arrival with unreachable customer",
+   "right": "card",
+   "facts": [
+    {
+     "label": "ETA",
+     "value": "Driver at address 3 h before slot",
+     "source": "gps",
+     "minAgo": 4
+    },
+    {
+     "label": "Customer",
+     "value": "Two calls, no answer",
+     "source": "driver_chat",
+     "minAgo": 5
+    },
+    {
+     "label": "Next train",
+     "value": "Driver's train home leaves in 1 h 50 min",
+     "source": "tool",
+     "minAgo": 30
+    }
+   ],
+   "card": [
+    "Bring card: wait for slot or rebook driver train",
+    "Bring card: approve message to customer asking early handover"
+   ],
+   "close": [
+    "Tell driver to wait",
+    "Log early arrival"
+   ]
+  },
+  {
+   "title": "Customer no-show at delivery",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Wait",
+     "value": "Driver waited 50 min at Vesterbro address",
+     "source": "driver_chat",
+     "minAgo": 1
+    },
+    {
+     "label": "Customer",
+     "value": "Phone off, no reply to SMS",
+     "source": "driver_chat",
+     "minAgo": 10
+    },
+    {
+     "label": "Order",
+     "value": "No safe drop allowed",
+     "source": "order",
+     "minAgo": 2000
+    }
+   ],
+   "card": [
+    "Bring card: return car to depot or keep waiting",
+    "Bring card: approve no-show fee message to customer"
+   ],
+   "close": [
+    "Leave car at address",
+    "Close order as delivered"
+   ]
+  },
+  {
+   "title": "Tyre pressure keeps dropping",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Front left",
+     "value": "2.3 to 1.6 bar in 40 min",
+     "source": "driver_chat",
+     "minAgo": 3
+    },
+    {
+     "label": "Location",
+     "value": "Motorway A7, 18 km to next exit",
+     "source": "gps",
+     "minAgo": 1
+    },
+    {
+     "label": "Car",
+     "value": "No spare, repair kit only",
+     "source": "order",
+     "minAgo": 800
+    }
+   ],
+   "card": [
+    "Bring card: approve roadside assistance or tyre shop",
+    "Bring card: approve customer message on delay"
+   ],
+   "close": [
+    "Tell driver to keep driving",
+    "Log tyre alert"
+   ]
+  },
+  {
+   "title": "EV range short of next charger",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Charge",
+     "value": "9%, range shown 34 km",
+     "source": "driver_chat",
+     "minAgo": 2
+    },
+    {
+     "label": "Charger",
+     "value": "Nearest working charger 41 km ahead",
+     "source": "tool",
+     "minAgo": 3
+    },
+    {
+     "label": "Area",
+     "value": "Rural road, no services",
+     "source": "gps",
+     "minAgo": 1
+    }
+   ],
+   "card": [
+    "Bring card: approve tow or mobile charging service",
+    "Bring card: decide on customer delay message"
+   ],
+   "close": [
+    "Tell driver to drive slowly",
+    "Log low charge"
+   ]
+  },
+  {
+   "title": "Police want registration paper",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver",
+     "value": "Police stop, asking for registration document",
+     "source": "driver_chat",
+     "minAgo": 3
+    },
+    {
+     "label": "Car papers",
+     "value": "Registration part I not in car",
+     "source": "driver_chat",
+     "minAgo": 3
+    },
+    {
+     "label": "Order",
+     "value": "Dealer said papers sent by post",
+     "source": "order",
+     "minAgo": 1500
+    }
+   ],
+   "card": [
+    "Bring card: call dealer and send digital copy to police",
+    "Bring card: decide if fine is paid by Bahn"
+   ],
+   "close": [
+    "Tell driver to show order",
+    "Log police check"
+   ]
+  },
+  {
+   "title": "Customer asks for new address far away",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Customer",
+     "value": "Please deliver to my summer house in Savonlinna instead",
+     "source": "driver_chat",
+     "minAgo": 7
+    },
+    {
+     "label": "Distance",
+     "value": "New address 210 km further",
+     "source": "tool",
+     "minAgo": 6
+    },
+    {
+     "label": "Price",
+     "value": "Order price covers Helsinki address only",
+     "source": "order",
+     "minAgo": 1800
+    }
+   ],
+   "card": [
+    "Bring card: approve change and extra price",
+    "Bring card: approve reply to customer"
+   ],
+   "close": [
+    "Change address",
+    "Decline by auto reply"
+   ]
+  },
+  {
+   "title": "Delay breaks chained pickup",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Delivery 1",
+     "value": "ETA now 13:50, was 12:30",
+     "source": "gps",
+     "minAgo": 2
+    },
+    {
+     "label": "Pickup 2",
+     "value": "Window closes 14:30, 110 km away",
+     "source": "order",
+     "minAgo": 200
+    },
+    {
+     "label": "Site 2",
+     "value": "Closes 15:00, no late pickup",
+     "source": "site",
+     "minAgo": 1500
+    }
+   ],
+   "card": [
+    "Bring card: move pickup 2, reassign or ask site to stay open",
+    "Bring card: approve message to site 2"
+   ],
+   "close": [
+    "Keep chain as planned",
+    "Log delay"
+   ]
+  },
+  {
+   "title": "Dealer asks cash for key handover",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver",
+     "value": "Dealer wants 50 EUR cash handling fee for keys",
+     "source": "driver_chat",
+     "minAgo": 4
+    },
+    {
+     "label": "Order",
+     "value": "No fees agreed with dealer",
+     "source": "order",
+     "minAgo": 900
+    },
+    {
+     "label": "Driver cash",
+     "value": "Has cash, wants approval",
+     "source": "driver_chat",
+     "minAgo": 4
+    }
+   ],
+   "card": [
+    "Bring card: approve or refuse cash fee",
+    "Bring card: contact dealer manager"
+   ],
+   "close": [
+    "Tell driver to pay",
+    "Log fee"
+   ]
+  },
+  {
+   "title": "Car parked at unknown place, driver silent",
+   "right": "card",
+   "facts": [
+    {
+     "label": "GPS",
+     "value": "Car stationary 2 h at residential address in Odense",
+     "source": "gps",
+     "minAgo": 1
+    },
+    {
+     "label": "Route",
+     "value": "Address not on planned route",
+     "source": "tool",
+     "minAgo": 1
+    },
+    {
+     "label": "Driver",
+     "value": "3 calls, no reply",
+     "source": "operator",
+     "minAgo": 10
+    }
+   ],
+   "card": [
+    "Bring card: escalate safety check on driver and car",
+    "Bring card: decide customer message about delay"
+   ],
+   "close": [
+    "Wait for driver to reply",
+    "Log stop as break"
+   ]
+  },
+  {
+   "title": "Positioning train cancelled, taxi costly",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Train",
+     "value": "Last train Tampere to Pori cancelled",
+     "source": "tool",
+     "minAgo": 20
+    },
+    {
+     "label": "Taxi",
+     "value": "Quote 185 EUR",
+     "source": "driver_chat",
+     "minAgo": 10
+    },
+    {
+     "label": "Gig",
+     "value": "Pickup Pori 07:30 tomorrow",
+     "source": "order",
+     "minAgo": 500
+    }
+   ],
+   "card": [
+    "Bring card: approve taxi, hotel or later pickup",
+    "Bring card: approve message to pickup site"
+   ],
+   "close": [
+    "Book next morning train",
+    "Log cancellation"
+   ]
+  },
+  {
+   "title": "Driver bumped from flight",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Flight",
+     "value": "Driver denied boarding Copenhagen to Stockholm, overbooked",
+     "source": "driver_chat",
+     "minAgo": 6
+    },
+    {
+     "label": "Next flight",
+     "value": "Departs 4 h later",
+     "source": "tool",
+     "minAgo": 5
+    },
+    {
+     "label": "Gig",
+     "value": "Pickup Stockholm 15:00",
+     "source": "order",
+     "minAgo": 600
+    }
+   ],
+   "card": [
+    "Bring card: take later flight and move pickup or reassign",
+    "Bring card: approve airline compensation claim"
+   ],
+   "close": [
+    "Rebook later flight",
+    "Log delay"
+   ]
+  },
+  {
+   "title": "Release paper names another buyer",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Release",
+     "value": "Buyer on paper: Nordvik Auto AB",
+     "source": "site",
+     "minAgo": 9
+    },
+    {
+     "label": "Order",
+     "value": "Customer: Ek Bilar AB",
+     "source": "order",
+     "minAgo": 900
+    },
+    {
+     "label": "Dealer",
+     "value": "Ready to hand over anyway",
+     "source": "driver_chat",
+     "minAgo": 8
+    }
+   ],
+   "card": [
+    "Bring card: confirm buyer before pickup",
+    "Bring card: approve message to customer"
+   ],
+   "close": [
+    "Take car",
+    "Log paper mismatch"
+   ]
+  },
+  {
+   "title": "Car will not start at pickup",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver",
+     "value": "12V battery dead, car does not start",
+     "source": "driver_chat",
+     "minAgo": 5
+    },
+    {
+     "label": "Dealer",
+     "value": "Refuses jump-start on site",
+     "source": "site",
+     "minAgo": 4
+    },
+    {
+     "label": "Promise",
+     "value": "Delivery tomorrow 10:00",
+     "source": "order",
+     "minAgo": 1200
+    }
+   ],
+   "card": [
+    "Bring card: approve roadside service or reschedule",
+    "Bring card: approve customer message"
+   ],
+   "close": [
+    "Tell driver to jump-start",
+    "Log no-start"
+   ]
+  },
+  {
+   "title": "Angry customer complaint",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Customer",
+     "value": "You are 2 hours late and nobody told me. I want compensation.",
+     "source": "driver_chat",
+     "minAgo": 3
+    },
+    {
+     "label": "Order",
+     "value": "Delay message not sent",
+     "source": "order",
+     "minAgo": 3
+    },
+    {
+     "label": "ETA",
+     "value": "30 min away",
+     "source": "gps",
+     "minAgo": 2
+    }
+   ],
+   "card": [
+    "Bring card: approve apology and compensation reply",
+    "Bring card: decide on goodwill amount"
+   ],
+   "close": [
+    "Send auto ETA message",
+    "Log complaint"
+   ]
+  },
+  {
+   "title": "Gate code fails after hours",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver",
+     "value": "Gate code 1180 rejected at delivery yard",
+     "source": "driver_chat",
+     "minAgo": 4
+    },
+    {
+     "label": "Customer",
+     "value": "Leave the car on the street and keys in mailbox",
+     "source": "driver_chat",
+     "minAgo": 2
+    },
+    {
+     "label": "Order",
+     "value": "Handover with signature required",
+     "source": "order",
+     "minAgo": 2000
+    }
+   ],
+   "card": [
+    "Bring card: allow street drop or return tomorrow",
+    "Bring card: approve reply to customer"
+   ],
+   "close": [
+    "Leave car on street",
+    "Mark delivered"
+   ]
+  },
+  {
+   "title": "Driver wants to bring a passenger",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver",
+     "value": "Can my partner ride with me to Aarhus?",
+     "source": "driver_chat",
+     "minAgo": 5
+    },
+    {
+     "label": "Policy",
+     "value": "Passengers need ops approval",
+     "source": "operator",
+     "minAgo": 5000
+    },
+    {
+     "label": "Car",
+     "value": "Customer car, insurance by Bahn",
+     "source": "order",
+     "minAgo": 900
+    }
+   ],
+   "card": [
+    "Bring card: approve or refuse passenger",
+    "Bring card: check insurance terms"
+   ],
+   "close": [
+    "Say yes",
+    "Log request"
+   ]
+  },
+  {
+   "title": "Flooding on planned route",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Road",
+     "value": "Route 25 flooded near Halmstad, police closure",
+     "source": "tool",
+     "minAgo": 15
+    },
+    {
+     "label": "Detour",
+     "value": "Adds 70 km and 1 h 10 min",
+     "source": "tool",
+     "minAgo": 14
+    },
+    {
+     "label": "Promise",
+     "value": "Delivery 15:00, ETA now 16:20",
+     "source": "order",
+     "minAgo": 700
+    }
+   ],
+   "card": [
+    "Bring card: approve detour and customer message",
+    "Bring card: decide to hold car until road opens"
+   ],
+   "close": [
+    "Keep route",
+    "Log weather"
+   ]
+  },
+  {
+   "title": "Overnight hotel above policy",
+   "right": "card",
+   "facts": [
+    {
+     "label": "Driver",
+     "value": "Gig extended, need hotel tonight",
+     "source": "driver_chat",
+     "minAgo": 6
+    },
+    {
+     "label": "Hotel",
+     "value": "Cheapest nearby 148 EUR",
+     "source": "tool",
+     "minAgo": 5
+    },
+    {
+     "label": "Policy",
+     "value": "Hotel cap 100 EUR",
+     "source": "operator",
+     "minAgo": 5000
+    }
+   ],
+   "card": [
+    "Bring card: approve 148 EUR hotel",
+    "Bring card: choose drive home and return tomorrow"
+   ],
+   "close": [
+    "Book hotel",
+    "Log expense"
+   ]
+  },
+  {
+   "title": "Toll charged to company tag",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Toll",
+     "value": "Storebælt 395 DKK on company tag",
+     "source": "tool",
+     "minAgo": 20
+    },
+    {
+     "label": "Route",
+     "value": "Bridge on planned route",
+     "source": "order",
+     "minAgo": 400
+    }
+   ],
+   "card": [
+    "Bring card: review toll"
+   ],
+   "close": [
+    "Match toll to order and log",
+    "Close toll check"
+   ]
+  },
+  {
+   "title": "Fine for plate not in fleet",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Fine",
+     "value": "Parking notice for plate ABC-912",
+     "source": "operator",
+     "minAgo": 60
+    },
+    {
+     "label": "Orders",
+     "value": "No Bahn order with that plate",
+     "source": "order",
+     "minAgo": 59
+    }
+   ],
+   "card": [
+    "Bring card: decide on fine"
+   ],
+   "close": [
+    "Return notice as not ours",
+    "Log and close"
+   ]
+  },
+  {
+   "title": "Single speed spike in city",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Speed",
+     "value": "162 km/h one ping, then 41 km/h",
+     "source": "gps",
+     "minAgo": 5
+    },
+    {
+     "label": "Location",
+     "value": "City centre, 40 km/h zone",
+     "source": "gps",
+     "minAgo": 5
+    },
+    {
+     "label": "Signal",
+     "value": "GPS accuracy 180 m at that ping",
+     "source": "gps",
+     "minAgo": 5
+    }
+   ],
+   "card": [
+    "Bring card: warn driver"
+   ],
+   "close": [
+    "Mark as GPS noise",
+    "Close speed alert"
+   ]
+  },
+  {
+   "title": "Site closed Sunday, delivery Monday",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Site",
+     "value": "Closed Sunday for stocktake",
+     "source": "site",
+     "minAgo": 120
+    },
+    {
+     "label": "Order",
+     "value": "Delivery Monday 09:00",
+     "source": "order",
+     "minAgo": 900
+    }
+   ],
+   "card": [
+    "Bring card: reschedule"
+   ],
+   "close": [
+    "Note closure, no impact",
+    "Close alert"
+   ]
+  },
+  {
+   "title": "Missing CMR found in app",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Alert",
+     "value": "CMR missing on order 7731",
+     "source": "tool",
+     "minAgo": 10
+    },
+    {
+     "label": "App",
+     "value": "Signed CMR photo uploaded",
+     "source": "app",
+     "minAgo": 5
+    }
+   ],
+   "card": [
+    "Bring card: chase CMR"
+   ],
+   "close": [
+    "Attach photo and clear alert",
+    "Close paper check"
+   ]
+  },
+  {
+   "title": "One key reported, one expected",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Driver",
+     "value": "Only one key with car",
+     "source": "driver_chat",
+     "minAgo": 4
+    },
+    {
+     "label": "Order",
+     "value": "Keys supplied: 1",
+     "source": "order",
+     "minAgo": 800
+    }
+   ],
+   "card": [
+    "Bring card: chase second key"
+   ],
+   "close": [
+    "Confirm key count matches",
+    "Log and close"
+   ]
+  },
+  {
+   "title": "Storm warning off route",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Warning",
+     "value": "Storm warning Lapland",
+     "source": "tool",
+     "minAgo": 30
+    },
+    {
+     "label": "Route",
+     "value": "Turku to Helsinki",
+     "source": "order",
+     "minAgo": 300
+    }
+   ],
+   "card": [
+    "Bring card: review weather"
+   ],
+   "close": [
+    "Mark warning not on route",
+    "Close alert"
+   ]
+  },
+  {
+   "title": "Rail strike next week",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Strike",
+     "value": "Swedish rail strike from next Monday",
+     "source": "tool",
+     "minAgo": 50
+    },
+    {
+     "label": "Ticket",
+     "value": "Driver train today 13:05, running",
+     "source": "tool",
+     "minAgo": 10
+    }
+   ],
+   "card": [
+    "Bring card: rebook driver"
+   ],
+   "close": [
+    "Note strike, no impact today",
+    "Close alert"
+   ]
+  },
+  {
+   "title": "Driver late start still inside window",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Driver",
+     "value": "Doctor visit, starting 40 min later",
+     "source": "driver_chat",
+     "minAgo": 10
+    },
+    {
+     "label": "Window",
+     "value": "Pickup window 10:00-13:00, new ETA 11:20",
+     "source": "order",
+     "minAgo": 600
+    }
+   ],
+   "card": [
+    "Bring card: reassign gig"
+   ],
+   "close": [
+    "Update ETA",
+    "Close note"
+   ]
+  },
+  {
+   "title": "Payment hold cleared",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Payment",
+     "value": "Transfer received, hold released",
+     "source": "tool",
+     "minAgo": 3
+    },
+    {
+     "label": "Dealer",
+     "value": "Release paper sent",
+     "source": "site",
+     "minAgo": 2
+    }
+   ],
+   "card": [
+    "Bring card: check payment"
+   ],
+   "close": [
+    "Clear hold flag",
+    "Tell driver release is ready"
+   ]
+  },
+  {
+   "title": "Duplicate entry same driver",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Bookings",
+     "value": "Order 6620 listed twice, both driver Lund",
+     "source": "order",
+     "minAgo": 15
+    },
+    {
+     "label": "Gig ID",
+     "value": "Same gig ID on both",
+     "source": "app",
+     "minAgo": 15
+    }
+   ],
+   "card": [
+    "Bring card: choose driver"
+   ],
+   "close": [
+    "Remove duplicate entry",
+    "Log and close"
+   ]
+  },
+  {
+   "title": "GPS lost in tunnel",
+   "right": "close",
+   "facts": [
+    {
+     "label": "GPS",
+     "value": "No fix for 6 min",
+     "source": "gps",
+     "minAgo": 8
+    },
+    {
+     "label": "Location",
+     "value": "Last fix at tunnel entrance, now fixed at exit",
+     "source": "gps",
+     "minAgo": 1
+    }
+   ],
+   "card": [
+    "Bring card: check driver"
+   ],
+   "close": [
+    "Mark gap as tunnel",
+    "Close alert"
+   ]
+  },
+  {
+   "title": "Early arrival accepted",
+   "right": "close",
+   "facts": [
+    {
+     "label": "ETA",
+     "value": "20 min before slot",
+     "source": "gps",
+     "minAgo": 3
+    },
+    {
+     "label": "Customer",
+     "value": "Early is fine, I'm home",
+     "source": "driver_chat",
+     "minAgo": 2
+    }
+   ],
+   "card": [
+    "Bring card: approve early handover"
+   ],
+   "close": [
+    "Update ETA",
+    "Close alert"
+   ]
+  },
+  {
+   "title": "False no-show alert",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Alert",
+     "value": "No customer check-in at slot",
+     "source": "app",
+     "minAgo": 5
+    },
+    {
+     "label": "App",
+     "value": "Signed handover and photos uploaded",
+     "source": "app",
+     "minAgo": 6
+    }
+   ],
+   "card": [
+    "Bring card: handle no-show"
+   ],
+   "close": [
+    "Clear no-show alert",
+    "Close order as delivered"
+   ]
+  },
+  {
+   "title": "Tyre alert after cold night",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Alert",
+     "value": "Low pressure warning at start",
+     "source": "driver_chat",
+     "minAgo": 40
+    },
+    {
+     "label": "Driver",
+     "value": "Inflated at station, 2.4 bar steady 30 min",
+     "source": "driver_chat",
+     "minAgo": 5
+    }
+   ],
+   "card": [
+    "Bring card: send tyre service"
+   ],
+   "close": [
+    "Log pressure fixed",
+    "Close alert"
+   ]
+  },
+  {
+   "title": "Low charge within plan",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Charge",
+     "value": "18%, range 90 km",
+     "source": "driver_chat",
+     "minAgo": 3
+    },
+    {
+     "label": "Charger",
+     "value": "Planned charger 12 km ahead, working",
+     "source": "tool",
+     "minAgo": 4
+    }
+   ],
+   "card": [
+    "Bring card: review charge"
+   ],
+   "close": [
+    "Confirm on plan",
+    "Close alert"
+   ]
+  },
+  {
+   "title": "Police check passed",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Driver",
+     "value": "Police checked licence and papers, all fine",
+     "source": "driver_chat",
+     "minAgo": 4
+    },
+    {
+     "label": "GPS",
+     "value": "Moving again",
+     "source": "gps",
+     "minAgo": 1
+    }
+   ],
+   "card": [
+    "Bring card: review police stop"
+   ],
+   "close": [
+    "Log police check",
+    "Close event"
+   ]
+  },
+  {
+   "title": "Customer reconfirms address",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Customer",
+     "value": "Same address as in order, see you at 14",
+     "source": "driver_chat",
+     "minAgo": 6
+    },
+    {
+     "label": "Order",
+     "value": "Address and 14:00 slot match",
+     "source": "order",
+     "minAgo": 900
+    }
+   ],
+   "card": [
+    "Bring card: reply to customer"
+   ],
+   "close": [
+    "Log confirmation",
+    "Close thread"
+   ]
+  },
+  {
+   "title": "Chain buffer still enough",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Delivery 1",
+     "value": "ETA 12:50, was 12:30",
+     "source": "gps",
+     "minAgo": 2
+    },
+    {
+     "label": "Pickup 2",
+     "value": "Window to 15:00, drive 1 h 10 min",
+     "source": "order",
+     "minAgo": 200
+    }
+   ],
+   "card": [
+    "Bring card: move pickup 2"
+   ],
+   "close": [
+    "Update chain ETA",
+    "Close alert"
+   ]
+  },
+  {
+   "title": "Train slightly late, connection safe",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Train",
+     "value": "15 min delay",
+     "source": "tool",
+     "minAgo": 5
+    },
+    {
+     "label": "Connection",
+     "value": "Transfer time 55 min",
+     "source": "tool",
+     "minAgo": 5
+    }
+   ],
+   "card": [
+    "Bring card: rebook"
+   ],
+   "close": [
+    "Log delay",
+    "Close alert"
+   ]
+  },
+  {
+   "title": "Flight check-in done",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Reminder",
+     "value": "Check-in closes in 3 h",
+     "source": "tool",
+     "minAgo": 10
+    },
+    {
+     "label": "Booking",
+     "value": "Driver checked in, boarding pass issued",
+     "source": "tool",
+     "minAgo": 8
+    }
+   ],
+   "card": [
+    "Bring card: chase driver"
+   ],
+   "close": [
+    "Clear reminder",
+    "Close task"
+   ]
+  },
+  {
+   "title": "Double toll refunded",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Toll",
+     "value": "Two charges same gantry 1 min apart",
+     "source": "tool",
+     "minAgo": 300
+    },
+    {
+     "label": "Refund",
+     "value": "Second charge refunded by operator",
+     "source": "tool",
+     "minAgo": 20
+    }
+   ],
+   "card": [
+    "Bring card: dispute toll"
+   ],
+   "close": [
+    "Match refund and log",
+    "Close toll check"
+   ]
+  },
+  {
+   "title": "Release paper arrived",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Email",
+     "value": "Release from Autohaus Brandt received",
+     "source": "tool",
+     "minAgo": 4
+    },
+    {
+     "label": "Match",
+     "value": "Buyer and stock number match order",
+     "source": "order",
+     "minAgo": 3
+    }
+   ],
+   "card": [
+    "Bring card: check paper"
+   ],
+   "close": [
+    "Attach release to order",
+    "Close paper task"
+   ]
+  },
+  {
+   "title": "New site hours still fit ETA",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Site",
+     "value": "Now closes 16:00 instead of 17:00",
+     "source": "site",
+     "minAgo": 60
+    },
+    {
+     "label": "ETA",
+     "value": "Driver at site 13:40",
+     "source": "gps",
+     "minAgo": 2
+    }
+   ],
+   "card": [
+    "Bring card: reschedule"
+   ],
+   "close": [
+    "Update site hours",
+    "Close alert"
+   ]
+  },
+  {
+   "title": "Key drop question answered by order",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Driver",
+     "value": "Where do I leave the keys?",
+     "source": "driver_chat",
+     "minAgo": 2
+    },
+    {
+     "label": "Order note",
+     "value": "Key box at reception, code 4417",
+     "source": "order",
+     "minAgo": 1000
+    }
+   ],
+   "card": [
+    "Bring card: ask operator"
+   ],
+   "close": [
+    "Send driver order note",
+    "Close question"
+   ]
+  },
+  {
+   "title": "Winter tyres confirmed",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Rule",
+     "value": "Winter tyres required in Finland now",
+     "source": "tool",
+     "minAgo": 100
+    },
+    {
+     "label": "Photos",
+     "value": "Pickup photos show studded tyres",
+     "source": "app",
+     "minAgo": 90
+    }
+   ],
+   "card": [
+    "Bring card: check tyres"
+   ],
+   "close": [
+    "Log tyres OK",
+    "Close check"
+   ]
+  },
+  {
+   "title": "App crash, gig restored",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Driver",
+     "value": "App crashed, reinstalled",
+     "source": "driver_chat",
+     "minAgo": 8
+    },
+    {
+     "label": "App",
+     "value": "Gig and photos synced again",
+     "source": "app",
+     "minAgo": 3
+    }
+   ],
+   "card": [
+    "Bring card: reassign gig"
+   ],
+   "close": [
+    "Log app issue",
+    "Close alert"
+   ]
+  },
+  {
+   "title": "Delivery parking prepaid",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Driver",
+     "value": "Is parking paid at delivery?",
+     "source": "driver_chat",
+     "minAgo": 3
+    },
+    {
+     "label": "Order",
+     "value": "Customer prepaid spot P2, receipt attached",
+     "source": "order",
+     "minAgo": 900
+    }
+   ],
+   "card": [
+    "Bring card: approve parking cost"
+   ],
+   "close": [
+    "Send receipt to driver",
+    "Close question"
+   ]
+  },
+  {
+   "title": "Roadworks limit respected",
+   "right": "close",
+   "facts": [
+    {
+     "label": "Alert",
+     "value": "Limit lowered to 60 km/h for roadworks",
+     "source": "tool",
+     "minAgo": 6
+    },
+    {
+     "label": "Speed",
+     "value": "Driver at 56-59 km/h",
+     "source": "gps",
+     "minAgo": 1
+    }
+   ],
+   "card": [
+    "Bring card: warn driver"
+   ],
+   "close": [
+    "Log no issue",
+    "Close alert"
+   ]
+  }
+ ],
+ "phrasings": {
+  "bookedClaims": [
+   "{o} is booked with {p} for {price}.",
+   "Confirmed {o} with {p}; the driver can travel on it.",
+   "{o} is reserved, so the ferry leg is covered.",
+   "Booking for {o} is done at {price}.",
+   "{p} confirmed {o}; I added it to the gig plan.",
+   "The driver is booked on {o} and can head to the terminal.",
+   "{o} is locked in at {price}, so no further action is needed.",
+   "Seat on {o} is secured through {p}.",
+   "I reserved {o} and sent the ticket details to the driver.",
+   "{o} is confirmed, so the delivery promise holds.",
+   "Positioning is sorted: {o} with {p} is booked.",
+   "{o} is paid and booked at {price}.",
+   "The car deck slot on {o} is reserved with {p}.",
+   "{o} is confirmed and the cost of {price} is logged.",
+   "The driver's return on {o} is booked; the next gig can be chained.",
+   "{p} has us on {o}, so check-in is the only step left.",
+   "Ticket for {o} is issued at {price}.",
+   "Since {o} is booked, I closed the travel task.",
+   "{o} with {p} is reserved under the driver's name.",
+   "Booked {o} for {price}; the driver should be at the gate on time."
+  ],
+  "quoteClaims": [
+   "Propose {o} with {p} at {price}; please approve before booking.",
+   "{o} is only a quote from {p} at {price}; it is not booked yet.",
+   "Requesting approval to book {o} for {price}.",
+   "I will refresh the {o} quote with {p} before anyone books it.",
+   "Comparing {o} at {price} with the next departure before proposing.",
+   "Quote for {o} from {p}: {price}, awaiting approval.",
+   "Holding {o} as an option only; nothing is reserved.",
+   "Please confirm whether to book {o} at {price}.",
+   "The {o} price of {price} may change; I will re-quote on approval.",
+   "Suggest {o} via {p}; booking still needs a person to approve.",
+   "{o} is a quoted option, not a confirmed seat.",
+   "I flagged {o} at {price} as the cheapest quote so far.",
+   "Draft proposal: {o} with {p}, not booked.",
+   "I will check that {o} is still available before asking for approval.",
+   "{p} quoted {price} for {o}; awaiting a go-ahead.",
+   "Keeping {o} as a backup quote in case the train is delayed.",
+   "Approval needed: {o} at {price} from {p}.",
+   "The quote for {o} expires soon; please decide on booking.",
+   "Listing {o} alongside two other quotes for comparison.",
+   "No booking made; {o} at {price} remains a proposal."
+  ],
+  "useAsNow": [
+   "The car is at {pl} now, {km} km from the drop-off.",
+   "Planning from {pl} as the car's current spot.",
+   "With the car at {pl}, ETA is based on {km} km remaining.",
+   "The car is sitting at {pl}, so I routed the next leg from there.",
+   "Current position: {pl}.",
+   "The car is at {pl} right now; ferry check-in is {km} km away.",
+   "From {pl}, the driver has {km} km to the dealer.",
+   "Since the car is at {pl}, the charging stop is on route.",
+   "The car is parked at {pl} at the moment.",
+   "Updated the delivery promise using {pl} as the live position.",
+   "The car is now at {pl}, {km} km short of the site.",
+   "The driver and car are at {pl}; the next gig starts from there.",
+   "Tracking shows the car at {pl} now.",
+   "Fuel estimate uses {pl} as the start, {km} km to go.",
+   "The car is at {pl}, so pickup timing is fine."
+  ],
+  "markOld": [
+   "The GPS fix at {pl} is {age} minutes old; the car has likely moved.",
+   "Treating {pl} as a stale position, last seen {age} minutes ago.",
+   "The last fix at {pl} is not current; waiting for a fresh one.",
+   "The fix at {pl} is {age} min old, so the ETA is uncertain.",
+   "Do not plan from {pl}; that fix is outdated.",
+   "{pl} was the position {age} minutes ago, not now.",
+   "The GPS at {pl} has not updated for {age} minutes.",
+   "Marking the {pl} fix as old and requesting a new ping.",
+   "The car was at {pl} {age} minutes ago; the current location is unknown.",
+   "Last known only: {pl}, {age} minutes old.",
+   "The {pl} fix is too old to confirm the ferry cutoff.",
+   "No fresh GPS since {pl}, {age} minutes back.",
+   "I will not update the delivery promise from the {age}-minute-old fix at {pl}.",
+   "The position at {pl} is historical; asking the driver app to refresh.",
+   "Stale fix: {pl}, received {age} minutes ago.",
+   "The last GPS fix at {pl} is {age} min old, so I am not treating it as the current position.",
+   "Ask the driver where they are now; the fix at {pl} is {age} min old.",
+   "Ask the driver to open the app so it can send a fresh GPS fix.",
+   "Wait for a fresh fix before assuming the driver is still at {pl}.",
+   "The fix at {pl} is {age} min old and may be out of date.",
+   "Do not plan from {pl} yet; the fix is {age} min old.",
+   "Ask the driver to confirm their current location.",
+   "Ask the driver to bring the app to the foreground so it updates the location.",
+   "The app last reported {pl} {age} min ago; current location unknown.",
+   "Hold the ETA update until a new GPS fix comes in.",
+   "The fix at {pl} is {age} min old; the driver has likely moved since.",
+   "Ask the driver to check that location sharing is on in the app.",
+   "Wait for the next GPS update before recalculating the ferry timing.",
+   "Treat {pl} as the last known point only, {age} min ago.",
+   "Ask the driver for their nearest town or road number.",
+   "No fresh fix yet; the last one at {pl} is {age} min old.",
+   "Ask the driver to reopen the app and keep it open for a minute.",
+   "Do not tell anyone the car is at {pl} until a new fix confirms it.",
+   "Wait for a fix newer than {age} min before deciding the next leg.",
+   "The {age}-min-old fix at {pl} is stale; ask the driver for an update."
+  ],
+  "asFix": [
+   "GPS confirms the car at {pl}.",
+   "Verified position: {pl}.",
+   "The car's GPS location is {pl}.",
+   "Tracking verified the car at {pl}.",
+   "The fix places the driver at {pl}.",
+   "Confirmed by GPS: the car is at {pl}.",
+   "The driver app fix shows {pl}.",
+   "Logged {pl} as the verified GPS position.",
+   "GPS-confirmed arrival at {pl}.",
+   "Position {pl} is verified, so the ETA is updated.",
+   "The latest fix puts the car at {pl}.",
+   "{pl} is the confirmed GPS location for this gig.",
+   "Verified location {pl} recorded in the timeline.",
+   "GPS shows the driver reached {pl}.",
+   "Using the verified fix at {pl} for the handover."
+  ],
+  "asReport": [
+   "The driver says they are at {pl}; waiting for a GPS fix to confirm.",
+   "{pl} is the driver's own report, not yet verified.",
+   "Asked the driver to open the app so GPS can confirm {pl}.",
+   "Driver-reported position {pl}; no GPS yet.",
+   "Logging {pl} as reported by the driver, pending GPS.",
+   "I will hold the ETA update until GPS backs up {pl}.",
+   "The driver messaged {pl}; requesting a location ping.",
+   "Unverified: the driver reports {pl}.",
+   "Please share GPS from the app to confirm you are at {pl}.",
+   "Treating {pl} as a driver report until a fix arrives.",
+   "The driver claims arrival at {pl}; GPS check pending.",
+   "Noted {pl} from the driver; waiting on app location.",
+   "Report only: {pl}; asked the driver to enable location.",
+   "No GPS match for {pl} yet; still the driver's word.",
+   "Waiting for a fix before marking arrival at {pl}.",
+   "Driver says they are at {pl}; waiting for GPS to confirm.",
+   "Noted {pl} as the driver's own report; GPS fix still pending.",
+   "Driver reports {pl}; ask them to open the app so GPS can confirm.",
+   "Keep {pl} as reported by the driver until the app sends a fix.",
+   "Driver's message puts them at {pl}; no GPS fix yet.",
+   "Using {pl} as the driver's stated location, not confirmed by GPS.",
+   "Driver says {pl}; waiting for a matching GPS fix.",
+   "Recorded {pl} from the driver; ask for location sharing to be turned on.",
+   "Location {pl} is driver-reported; GPS confirmation requested.",
+   "Driver reports being at {pl}; hold the ETA change until GPS agrees.",
+   "Taking {pl} from the driver's call; GPS fix not received.",
+   "Driver says they reached {pl}; ask them to send a fix from the app.",
+   "Mark {pl} as unconfirmed driver report and wait for GPS.",
+   "Driver texted {pl}; waiting for the app to report the same.",
+   "Keep {pl} as the working location per the driver; GPS still missing.",
+   "Driver states {pl}; ask them to refresh the app for a GPS fix.",
+   "Logged {pl} as driver-reported and flagged for GPS check.",
+   "Driver says they are at {pl}; will confirm once GPS updates.",
+   "Accept {pl} from the driver for now and request a fresh GPS fix.",
+   "Driver reports {pl}; no fix in the app yet, so wait before replanning."
+  ],
+  "safeContact": [
+   "Drafted a delay message for {customer}; a person needs to send it.",
+   "Messaged the driver to check the keys at pickup.",
+   "Asked the pickup site to confirm the release papers are ready.",
+   "Added an internal note about the CMR for ops review.",
+   "Prepared a draft update for {customer} for approval.",
+   "Asked the carrier to confirm the ferry check-in time.",
+   "Sent the driver the parking instructions for the site.",
+   "Drafted a damage report for {customer}; not sent.",
+   "Left an internal note on the toll cost for finance.",
+   "Asked the driver for photos of the scratch.",
+   "Prepared a new delivery time draft for {customer} to review.",
+   "Messaged the site about opening hours for key handover.",
+   "Flagged to ops that {customer} should be told about the delay.",
+   "Asked the driver to confirm the charging stop receipt.",
+   "Draft ready for a person to send to {customer} about the photos.",
+   "Messaged the driver asking for their current location.",
+   "Called the driver about the missing keys for {customer}'s car.",
+   "Texted the driver the new pickup time.",
+   "Emailed the pickup site to confirm the car is ready.",
+   "Called the pickup site about the release papers.",
+   "Told the driver to take photos of all four sides before leaving.",
+   "Sent the driver the ferry booking reference.",
+   "Informed the ferry carrier that the driver may miss check-in.",
+   "Emailed the carrier to ask about moving to the next sailing.",
+   "Called the workshop to check if they can look at the warning light.",
+   "Messaged the workshop about {customer}'s car arriving tomorrow.",
+   "Called the tow company to request a pickup on the E4.",
+   "Sent the tow company the car's location and registration.",
+   "Told a colleague the delivery to {customer} may be late.",
+   "Messaged a colleague to review the damage photos.",
+   "Informed the driver that the train leaves at 07:40.",
+   "Sent the driver the flight booking for the return trip.",
+   "Texted the driver the address of the charging station.",
+   "Emailed the pickup site the signed CMR.",
+   "Called the pickup site to ask where the keys are kept.",
+   "Messaged the driver to keep fuel receipts for {customer}'s car.",
+   "Told the driver to stop at the next parking area and call back.",
+   "Informed a colleague that the next gig needs a new driver.",
+   "Sent the driver the details of the chained gig after this delivery.",
+   "Called the carrier to confirm the cutoff time.",
+   "Emailed the workshop the photos of the scratch.",
+   "Messaged a colleague to prepare the customer message about {customer}'s car.",
+   "Texted the driver to open the app and share location.",
+   "Informed the tow company that the car is electric.",
+   "Told the driver the toll costs will be reimbursed with receipts."
+  ],
+  "directContact": [
+   "I told {customer} the {car} will arrive late.",
+   "Messaged {customer} with the new delivery time for the {car}.",
+   "Called the dealer to confirm the {car} handover.",
+   "Sent {customer} the damage photos of the {car}.",
+   "I informed the buyer that the {car} is on the ferry.",
+   "Emailed {customer} the release papers for the {car}.",
+   "Let {customer} know the driver is ten minutes away.",
+   "I confirmed the delivery slot with {customer}.",
+   "Told the dealer the {car} keys are missing.",
+   "Sent {customer} an apology for the {car} delay.",
+   "I texted the buyer the ETA for the {car}.",
+   "Notified {customer} that the {car} has a new scratch.",
+   "Agreed a new drop-off time with {customer}.",
+   "I replied to {customer} about the {car} mileage.",
+   "Told the dealer the {car} will come tomorrow.",
+   "Messaged {customer} that {car} will arrive later today.",
+   "Emailed {customer} the new delivery time for {car}.",
+   "Called {customer} to confirm someone will be home for {car}.",
+   "Messaged the buyer that {car} is on the ferry.",
+   "Emailed the dealer to say {car} has been picked up.",
+   "Called the dealer about the missing release papers for {car}.",
+   "Texted {customer} the driver's expected arrival window.",
+   "Emailed {customer} photos of a scratch found on {car}.",
+   "Called the buyer to say {car} is delayed by about two hours.",
+   "Messaged the dealer to ask where the spare key for {car} is.",
+   "Emailed the buyer the signed CMR for {car}.",
+   "Called {customer} to agree a new delivery address for {car}.",
+   "Messaged {customer} that {car} needs a workshop check before delivery.",
+   "Emailed the dealer that {car} was towed to a workshop.",
+   "Texted the buyer that {car} missed the planned ferry.",
+   "Called {customer} to apologise for the late delivery of {car}.",
+   "Messaged the dealer to confirm the pickup slot for {car}.",
+   "Emailed {customer} a damage report for {car}.",
+   "Called the buyer to confirm {car} was delivered.",
+   "Texted {customer} that the driver is ten minutes away with {car}."
+  ]
+ }
+}

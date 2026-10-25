@@ -1,0 +1,422 @@
+{
+  "set": "synthetic",
+  "ranAt": "2026-10-25T09:37:03.584Z",
+  "rows": [
+    {
+      "model": "code",
+      "label": "Plain code rules",
+      "status": "measured",
+      "perQuestion": {
+        "quote_as_booking": {
+          "n": 320,
+          "correct": 153,
+          "caught": 0,
+          "traps": 159,
+          "falseAlarms": 8,
+          "negatives": 161
+        },
+        "stale_position": {
+          "n": 320,
+          "correct": 223,
+          "caught": 162,
+          "traps": 162,
+          "falseAlarms": 97,
+          "negatives": 158
+        },
+        "customer_contact": {
+          "n": 317,
+          "correct": 202,
+          "caught": 47,
+          "traps": 159,
+          "falseAlarms": 3,
+          "negatives": 158
+        }
+      },
+      "catchRate": 0.4354166666666667,
+      "falseAlarmRate": 0.22641509433962265,
+      "calibrationError": 0.1843782654127422,
+      "msPerCheck": 0.010543146290491587,
+      "costPer1000": 0,
+      "ranAt": "2026-10-25T09:35:32.499Z"
+    },
+    {
+      "model": "jev",
+      "label": "Jev (typesafe/jev-1.14)",
+      "status": "measured",
+      "perQuestion": {
+        "quote_as_booking": {
+          "n": 320,
+          "correct": 318,
+          "caught": 158,
+          "traps": 159,
+          "falseAlarms": 1,
+          "negatives": 161
+        },
+        "stale_position": {
+          "n": 320,
+          "correct": 319,
+          "caught": 161,
+          "traps": 162,
+          "falseAlarms": 0,
+          "negatives": 158
+        },
+        "driver_report_as_fix": {
+          "n": 317,
+          "correct": 294,
+          "caught": 158,
+          "traps": 158,
+          "falseAlarms": 23,
+          "negatives": 159
+        },
+        "replaced_instruction": {
+          "n": 955,
+          "correct": 872,
+          "caught": 448,
+          "traps": 474,
+          "falseAlarms": 57,
+          "negatives": 481
+        },
+        "escalation_level": {
+          "n": 958,
+          "correct": 665,
+          "caught": 362,
+          "traps": 489,
+          "falseAlarms": 154,
+          "negatives": 469
+        },
+        "customer_contact": {
+          "n": 317,
+          "correct": 311,
+          "caught": 159,
+          "traps": 159,
+          "falseAlarms": 6,
+          "negatives": 158
+        }
+      },
+      "catchRate": 0.9031855090568395,
+      "falseAlarmRate": 0.15195460277427492,
+      "calibrationError": 0.0526670850329371,
+      "msPerCheck": 228.2676633812362,
+      "costPer1000": 0.024933569501098284,
+      "ranAt": "2026-10-25T09:37:03.523Z"
+    },
+    {
+      "model": "laya",
+      "label": "Laya, as released",
+      "status": "measured",
+      "perQuestion": {
+        "quote_as_booking": {
+          "n": 320,
+          "correct": 175,
+          "caught": 157,
+          "traps": 159,
+          "falseAlarms": 143,
+          "negatives": 161
+        },
+        "stale_position": {
+          "n": 320,
+          "correct": 158,
+          "caught": 149,
+          "traps": 162,
+          "falseAlarms": 149,
+          "negatives": 158
+        },
+        "driver_report_as_fix": {
+          "n": 317,
+          "correct": 169,
+          "caught": 152,
+          "traps": 158,
+          "falseAlarms": 142,
+          "negatives": 159
+        },
+        "replaced_instruction": {
+          "n": 955,
+          "correct": 543,
+          "caught": 116,
+          "traps": 474,
+          "falseAlarms": 54,
+          "negatives": 481
+        },
+        "escalation_level": {
+          "n": 958,
+          "correct": 347,
+          "caught": 290,
+          "traps": 489,
+          "falseAlarms": 234,
+          "negatives": 469
+        },
+        "customer_contact": {
+          "n": 317,
+          "correct": 170,
+          "caught": 142,
+          "traps": 159,
+          "falseAlarms": 130,
+          "negatives": 158
+        }
+      },
+      "catchRate": 0.6283572767020612,
+      "falseAlarmRate": 0.5372005044136192,
+      "calibrationError": 0.11947003451521825,
+      "msPerCheck": 9.808418575462854,
+      "costPer1000": 0.0038824990194540015,
+      "ranAt": "2026-10-25T09:37:03.533Z",
+      "note": "Run on 1× RTX 6000 Ada (Verda). Cost is GPU time at $1.425/h."
+    },
+    {
+      "model": "laya_ft",
+      "label": "Laya, fine-tuned (synthetic train split)",
+      "status": "measured",
+      "perQuestion": {
+        "quote_as_booking": {
+          "n": 320,
+          "correct": 320,
+          "caught": 159,
+          "traps": 159,
+          "falseAlarms": 0,
+          "negatives": 161
+        },
+        "stale_position": {
+          "n": 320,
+          "correct": 320,
+          "caught": 162,
+          "traps": 162,
+          "falseAlarms": 0,
+          "negatives": 158
+        },
+        "driver_report_as_fix": {
+          "n": 317,
+          "correct": 317,
+          "caught": 158,
+          "traps": 158,
+          "falseAlarms": 0,
+          "negatives": 159
+        },
+        "replaced_instruction": {
+          "n": 955,
+          "correct": 954,
+          "caught": 473,
+          "traps": 474,
+          "falseAlarms": 0,
+          "negatives": 481
+        },
+        "escalation_level": {
+          "n": 958,
+          "correct": 958,
+          "caught": 489,
+          "traps": 489,
+          "falseAlarms": 0,
+          "negatives": 469
+        },
+        "customer_contact": {
+          "n": 317,
+          "correct": 317,
+          "caught": 159,
+          "traps": 159,
+          "falseAlarms": 0,
+          "negatives": 158
+        }
+      },
+      "catchRate": 0.9993753903810119,
+      "falseAlarmRate": 0,
+      "calibrationError": 0.0692590210229248,
+      "msPerCheck": 9.863956699090034,
+      "costPer1000": 0.0039044828600564435,
+      "ranAt": "2026-10-25T09:37:03.544Z",
+      "note": "Run on 1× RTX 6000 Ada (Verda). Cost is GPU time at $1.425/h."
+    },
+    {
+      "model": "d1",
+      "label": "Liquid d1-3B, as released",
+      "status": "measured",
+      "perQuestion": {
+        "quote_as_booking": {
+          "n": 320,
+          "correct": 210,
+          "caught": 49,
+          "traps": 159,
+          "falseAlarms": 0,
+          "negatives": 161
+        },
+        "stale_position": {
+          "n": 320,
+          "correct": 225,
+          "caught": 150,
+          "traps": 162,
+          "falseAlarms": 83,
+          "negatives": 158
+        },
+        "driver_report_as_fix": {
+          "n": 317,
+          "correct": 206,
+          "caught": 47,
+          "traps": 158,
+          "falseAlarms": 0,
+          "negatives": 159
+        },
+        "replaced_instruction": {
+          "n": 955,
+          "correct": 718,
+          "caught": 344,
+          "traps": 474,
+          "falseAlarms": 107,
+          "negatives": 481
+        },
+        "escalation_level": {
+          "n": 958,
+          "correct": 405,
+          "caught": 274,
+          "traps": 489,
+          "falseAlarms": 267,
+          "negatives": 469
+        },
+        "customer_contact": {
+          "n": 317,
+          "correct": 267,
+          "caught": 147,
+          "traps": 159,
+          "falseAlarms": 38,
+          "negatives": 158
+        }
+      },
+      "catchRate": 0.6314803247970019,
+      "falseAlarmRate": 0.3121059268600252,
+      "calibrationError": 0.08872240351427493,
+      "msPerCheck": 22.867474113586443,
+      "costPer1000": 0.009051708503294627,
+      "ranAt": "2026-10-25T09:37:03.561Z",
+      "note": "Run on 1× RTX 6000 Ada (Verda). Cost is GPU time at $1.425/h."
+    },
+    {
+      "model": "d1_omni",
+      "label": "Liquid d1-omni-600M, as released",
+      "status": "measured",
+      "perQuestion": {
+        "quote_as_booking": {
+          "n": 320,
+          "correct": 180,
+          "caught": 23,
+          "traps": 159,
+          "falseAlarms": 4,
+          "negatives": 161
+        },
+        "stale_position": {
+          "n": 320,
+          "correct": 160,
+          "caught": 6,
+          "traps": 162,
+          "falseAlarms": 4,
+          "negatives": 158
+        },
+        "driver_report_as_fix": {
+          "n": 317,
+          "correct": 193,
+          "caught": 51,
+          "traps": 158,
+          "falseAlarms": 17,
+          "negatives": 159
+        },
+        "replaced_instruction": {
+          "n": 955,
+          "correct": 477,
+          "caught": 336,
+          "traps": 474,
+          "falseAlarms": 340,
+          "negatives": 481
+        },
+        "escalation_level": {
+          "n": 958,
+          "correct": 416,
+          "caught": 78,
+          "traps": 489,
+          "falseAlarms": 83,
+          "negatives": 469
+        },
+        "customer_contact": {
+          "n": 317,
+          "correct": 172,
+          "caught": 130,
+          "traps": 159,
+          "falseAlarms": 116,
+          "negatives": 158
+        }
+      },
+      "catchRate": 0.38975640224859465,
+      "falseAlarmRate": 0.35561160151324084,
+      "calibrationError": 0.23005026670850293,
+      "msPerCheck": 16.23585189833697,
+      "costPer1000": 0.006426691376425009,
+      "ranAt": "2026-10-25T09:37:03.572Z",
+      "note": "Run on 1× RTX 6000 Ada (Verda). Cost is GPU time at $1.425/h."
+    },
+    {
+      "model": "d1_ft",
+      "label": "Liquid d1-3B, fine-tuned (LoRA, synthetic train split)",
+      "status": "measured",
+      "perQuestion": {
+        "quote_as_booking": {
+          "n": 320,
+          "correct": 320,
+          "caught": 159,
+          "traps": 159,
+          "falseAlarms": 0,
+          "negatives": 161
+        },
+        "stale_position": {
+          "n": 320,
+          "correct": 320,
+          "caught": 162,
+          "traps": 162,
+          "falseAlarms": 0,
+          "negatives": 158
+        },
+        "driver_report_as_fix": {
+          "n": 317,
+          "correct": 317,
+          "caught": 158,
+          "traps": 158,
+          "falseAlarms": 0,
+          "negatives": 159
+        },
+        "replaced_instruction": {
+          "n": 955,
+          "correct": 955,
+          "caught": 474,
+          "traps": 474,
+          "falseAlarms": 0,
+          "negatives": 481
+        },
+        "escalation_level": {
+          "n": 958,
+          "correct": 958,
+          "caught": 489,
+          "traps": 489,
+          "falseAlarms": 0,
+          "negatives": 469
+        },
+        "customer_contact": {
+          "n": 317,
+          "correct": 317,
+          "caught": 159,
+          "traps": 159,
+          "falseAlarms": 0,
+          "negatives": 158
+        }
+      },
+      "catchRate": 1,
+      "falseAlarmRate": 0,
+      "calibrationError": 0.06540210229053722,
+      "msPerCheck": 22.393677439598356,
+      "costPer1000": 0.008864163986507747,
+      "ranAt": "2026-10-25T09:37:03.584Z",
+      "note": "Run on 1× RTX 6000 Ada (Verda). Cost is GPU time at $1.425/h."
+    },
+    {
+      "model": "llm_judge",
+      "label": "Large LLM judge",
+      "status": "not_configured",
+      "note": "Set ANTHROPIC_API_KEY",
+      "perQuestion": {}
+    }
+  ],
+  "testCases": 3187
+}

@@ -8,7 +8,8 @@ import { buildBoardCard } from "./board"
 import { type Bundle, bool, num, rows, str, strings } from "./bundle"
 import { label, labelIn, LANE_ORDER } from "./labels"
 import { loadBoardBundles } from "./load"
-import type { BoardCard, EntityKind, EntityList, EntityView, Fact } from "./types"
+import { deriveAttention } from "./attention"
+import type { BoardCard, CustomerList, CustomerRow, DriverList, DriverRow, EntityKind, EntityList, EntityView, Fact } from "./types"
 
 const KIND_LABEL: Record<EntityKind, string> = { driver: "Driver", customer: "Customer", site: "Managed site" }
 
@@ -172,6 +173,111 @@ export async function listEntities(kind: EntityKind): Promise<EntityList> {
     id: site.id, title: site.name, subtitle: `${label(site.kind)} · ${site.city}, ${site.country}`, count: counts.get(site.id) ?? 0, href: `/sites/${site.id}`,
   })).sort((a, b) => b.count - a.count || a.title.localeCompare(b.title))
   return { kind, kindLabel: "Places", items }
+}
+
+const CLOSED = new Set(["delivered", "cancelled"])
+
+/** The driver fee for one order: the accepted offer, else the newest one, split across the orders it covers. */
+function orderFeeCents(bundle: Bundle): number | null {
+  const offers = rows(bundle, "market_offers").filter((row) => num(row.details.fee_cents) != null)
+  const chosen = offers.find((row) => str(row.details.status) === "ACCEPTED")
+    ?? [...offers].sort((a, b) => (str(b.details.published_at) ?? "").localeCompare(str(a.details.published_at) ?? ""))[0]
+  if (!chosen) return null
+  const members = Math.max(1, strings(chosen.details.order_ids).length)
+  return Math.round((num(chosen.details.fee_cents) ?? 0) / members)
+}
+
+/** Every customer with order counts, driver fees and the last order, plus daily totals for the trend lines. */
+export async function listCustomers(): Promise<CustomerList> {
+  const { bundles, snapshotAt } = await loadBoardBundles()
+  const all = await db.select().from(customers)
+  const byId = new Map<string, CustomerRow>(all.map((customer) => [customer.id, {
+    id: customer.id, name: customer.name, tier: customer.accountTier, tierLabel: label(customer.accountTier), country: customer.country, importBuyer: customer.importBuyer,
+    orders: 0, open: 0, delivered: 0, cancelled: 0, needPerson: 0, feeCents: 0, pricedOrders: 0, lastOrderAt: null, href: `/customers/${customer.id}`,
+  }]))
+  const end = snapshotAt ? Date.parse(snapshotAt) : Date.now()
+  const day = 24 * 60 * 60 * 1000
+  const ordersPerDay = Array.from({ length: 14 }, () => 0)
+  const feesPerDay = Array.from({ length: 14 }, () => 0)
+  for (const bundle of bundles) {
+    const row = byId.get(bundle.customer.id)
+    if (!row) continue
+    const lane = bundle.order.lane
+    row.orders += 1
+    if (lane === "delivered") row.delivered += 1
+    else if (lane === "cancelled") row.cancelled += 1
+    if (!CLOSED.has(lane)) row.open += 1
+    if (deriveAttention(bundle).length > 0) row.needPerson += 1
+    const fee = orderFeeCents(bundle)
+    if (fee != null) { row.feeCents += fee; row.pricedOrders += 1 }
+    if (!row.lastOrderAt || bundle.order.createdAt > row.lastOrderAt) row.lastOrderAt = bundle.order.createdAt
+    const age = Math.floor((end - Date.parse(bundle.order.createdAt)) / day)
+    if (age >= 0 && age < 14) {
+      ordersPerDay[13 - age] += 1
+      if (fee != null) feesPerDay[13 - age] += fee
+    }
+  }
+  const rowsOut = [...byId.values()].sort((a, b) => b.orders - a.orders || a.name.localeCompare(b.name))
+  return { snapshotAt, currency: "EUR", rows: rowsOut, ordersPerDay, feesPerDay }
+}
+
+/** Where an in-progress assignment stands, from its steps: the car in hand, or the driver on the way without it. */
+function assignmentPhase(bundle: Bundle, assignmentId: string): { state: "driving" | "traveling"; doing: string } {
+  const steps = rows(bundle, "assignment_steps").filter((step) => step.details.assignment_id === assignmentId)
+    .sort((a, b) => (num(a.details.sequence) ?? 0) - (num(b.details.sequence) ?? 0))
+  const done = (kind: string) => steps.some((step) => step.details.kind === kind && step.details.status === "COMPLETED")
+  const card = buildBoardCard(bundle)
+  if (done("VEHICLE_DELIVERY")) return { state: "traveling", doing: `Car delivered in ${card.to.city}. On the way back.` }
+  if (done("VEHICLE_PICKUP")) {
+    const ferry = steps.find((step) => step.details.kind === "VEHICLE_FERRY" && step.details.status !== "COMPLETED")
+    return { state: "driving", doing: ferry ? `Car collected. Ferry ahead to ${str(ferry.details.to_city) ?? card.to.city}.` : `Car collected. On the way to ${card.to.city}.` }
+  }
+  return { state: "traveling", doing: `On the way to the pickup in ${card.from.city}.` }
+}
+
+/** Every driver with a state from the work assignments and their steps: driving, traveling or off duty. */
+export async function listDrivers(): Promise<DriverList> {
+  const { bundles, snapshotAt } = await loadBoardBundles()
+  const all = await db.select().from(drivers)
+  const byId = new Map<string, DriverRow & { orderIds: Set<string>; rank: number }>(all.map((driver) => [driver.id, {
+    id: driver.id, name: driver.displayName, homeCity: driver.homeCity, homeCountry: driver.homeCountry, href: `/drivers/${driver.id}`,
+    state: "off", doing: null, current: null, orders: 0, completed: 0, feeCents: 0, needPerson: 0, orderIds: new Set<string>(), rank: 0,
+  }]))
+  const RANK: Record<string, number> = { IN_PROGRESS: 2, ASSIGNED: 1 }
+  for (const bundle of bundles) {
+    const waiting = deriveAttention(bundle).length > 0
+    for (const assignment of rows(bundle, "work_assignments")) {
+      const d = assignment.details
+      const row = byId.get(str(d.driver_id) ?? "")
+      if (!row) continue
+      const status = str(d.status) ?? ""
+      if (!row.orderIds.has(bundle.order.id)) {
+        row.orderIds.add(bundle.order.id)
+        row.orders += 1
+        if (waiting) row.needPerson += 1
+      }
+      if (status === "COMPLETED") row.completed += 1
+      if (status !== "CANCELLED") row.feeCents += num(d.fee_cents) ?? 0
+      const rank = RANK[status] ?? 0
+      if (rank > row.rank) {
+        const card = buildBoardCard(bundle)
+        row.rank = rank
+        row.current = { orderId: bundle.order.id, reference: bundle.order.reference, vehicle: card.vehicle, from: card.from.city, to: card.to.city, startedAt: str(d.started_at) ?? str(d.accepted_at), next: rank === 1 }
+        if (rank === 2) {
+          const phase = assignmentPhase(bundle, assignment.id)
+          row.state = phase.state
+          row.doing = phase.doing
+        } else {
+          row.state = "off"
+          row.doing = `Next job: ${card.from.city} to ${card.to.city}.`
+        }
+      }
+    }
+  }
+  const order: Record<string, number> = { driving: 0, traveling: 1, off: 2 }
+  const rowsOut = [...byId.values()].map(({ orderIds: _ids, rank: _rank, ...row }) => row)
+    .sort((a, b) => order[a.state] - order[b.state] || Number(!!b.current) - Number(!!a.current) || b.needPerson - a.needPerson || b.orders - a.orders || a.name.localeCompare(b.name))
+  return { snapshotAt, currency: "EUR", rows: rowsOut }
 }
 
 export { strings }

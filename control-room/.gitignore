@@ -1,0 +1,13 @@
+node_modules/
+.next/
+.data/
+.env
+next-env.d.ts
+*.tsbuildinfo
+laya/.venv/
+laya/out/
+d1/.venv/
+d1/data/images/
+.vercel
+d1/out/
+serve/.venv/

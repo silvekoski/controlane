@@ -1,0 +1,105 @@
+transformers 5.20.2 torch 2.14.1+cu130 cuda True
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] A new version of the following files was downloaded from https://huggingface.co/LiquidAI/d1-3B:
+- hybrid.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+[transformers] A new version of the following files was downloaded from https://huggingface.co/LiquidAI/d1-3B:
+- lfm2_vl.py
+- hybrid.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+[transformers] A new version of the following files was downloaded from https://huggingface.co/LiquidAI/d1-3B:
+- prompt.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+[transformers] A new version of the following files was downloaded from https://huggingface.co/LiquidAI/d1-3B:
+- api.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+[transformers] A new version of the following files was downloaded from https://huggingface.co/LiquidAI/d1-3B:
+- runner.py
+- prompt.py
+- api.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+[transformers] A new version of the following files was downloaded from https://huggingface.co/LiquidAI/d1-3B:
+- modeling_d1.py
+- lfm2_vl.py
+- runner.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  70%|██████▉   | 492/707 [00:00<00:00, 4901.76it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 5548.66it/s]
+10605 rows: 10305 train, 300 held out. Tokens p50 307, max 461
+LoRA on 166 linears, 24.5M trainable parameters
+held-out before training: 54.3% {'customer_contact': '20/30', 'driver_report_as_fix': '15/24', 'escalation_level': '24/90', 'quote_as_booking': '21/29', 'replaced_instruction': '54/86', 'stale_position': '29/41'}
+  epoch 1/3 step 100 loss 0.7111 (37s)
+  epoch 1/3 step 200 loss 0.6060 (74s)
+  epoch 1/3 step 300 loss 0.5319 (111s)
+  epoch 1/3 step 400 loss 0.4884 (148s)
+  epoch 1/3 step 500 loss 0.4525 (185s)
+  epoch 1/3 step 600 loss 0.4289 (222s)
+  epoch 1/3 step 700 loss 0.4107 (259s)
+  epoch 1/3 step 800 loss 0.3973 (296s)
+  epoch 1/3 step 900 loss 0.3852 (332s)
+  epoch 1/3 step 1000 loss 0.3751 (370s)
+  epoch 1/3 step 1100 loss 0.3662 (406s)
+  epoch 1/3 step 1200 loss 0.3585 (443s)
+=== epoch 1/3 done in 481s, avg loss 0.3530, held-out 99.3% {'customer_contact': '30/30', 'driver_report_as_fix': '24/24', 'escalation_level': '90/90', 'quote_as_booking': '29/29', 'replaced_instruction': '84/86', 'stale_position': '41/41'}
+  epoch 2/3 step 100 loss 0.2691 (518s)
+  epoch 2/3 step 200 loss 0.2652 (554s)
+  epoch 2/3 step 300 loss 0.2666 (591s)
+  epoch 2/3 step 400 loss 0.2693 (628s)
+  epoch 2/3 step 500 loss 0.2709 (665s)
+  epoch 2/3 step 600 loss 0.2695 (702s)
+  epoch 2/3 step 700 loss 0.2682 (738s)
+  epoch 2/3 step 800 loss 0.2681 (775s)
+  epoch 2/3 step 900 loss 0.2673 (812s)
+  epoch 2/3 step 1000 loss 0.2671 (849s)
+  epoch 2/3 step 1100 loss 0.2667 (886s)
+  epoch 2/3 step 1200 loss 0.2664 (923s)
+=== epoch 2/3 done in 961s, avg loss 0.2664, held-out 99.7% {'customer_contact': '30/30', 'driver_report_as_fix': '24/24', 'escalation_level': '90/90', 'quote_as_booking': '29/29', 'replaced_instruction': '85/86', 'stale_position': '41/41'}
+  epoch 3/3 step 100 loss 0.2607 (998s)
+  epoch 3/3 step 200 loss 0.2607 (1035s)
+  epoch 3/3 step 300 loss 0.2600 (1072s)
+  epoch 3/3 step 400 loss 0.2587 (1109s)
+  epoch 3/3 step 500 loss 0.2594 (1146s)
+  epoch 3/3 step 600 loss 0.2591 (1182s)
+  epoch 3/3 step 700 loss 0.2586 (1219s)
+  epoch 3/3 step 800 loss 0.2585 (1256s)
+  epoch 3/3 step 900 loss 0.2583 (1293s)
+  epoch 3/3 step 1000 loss 0.2583 (1330s)
+  epoch 3/3 step 1100 loss 0.2581 (1367s)
+  epoch 3/3 step 1200 loss 0.2580 (1404s)
+=== epoch 3/3 done in 1442s, avg loss 0.2581, held-out 99.3% {'customer_contact': '30/30', 'driver_report_as_fix': '24/24', 'escalation_level': '90/90', 'quote_as_booking': '29/29', 'replaced_instruction': '84/86', 'stale_position': '41/41'}
+Saved adapters to out/d1-ft/lora.pt after 1442s
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  71%|███████   | 500/707 [00:00<00:00, 4994.25it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 5854.35it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+d1 hand: 34 predictions
+d1 synthetic: 3187 predictions
+d1 synthetic_ood: 4395 predictions
+d1 vision: 220 predictions
+[transformers] A new version of the following files was downloaded from https://huggingface.co/LiquidAI/d1-omni-600M:
+- prompt.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+[transformers] A new version of the following files was downloaded from https://huggingface.co/LiquidAI/d1-omni-600M:
+- encoder.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+[transformers] A new version of the following files was downloaded from https://huggingface.co/LiquidAI/d1-omni-600M:
+- vision.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+[transformers] A new version of the following files was downloaded from https://huggingface.co/LiquidAI/d1-omni-600M:
+- audio.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+[transformers] A new version of the following files was downloaded from https://huggingface.co/LiquidAI/d1-omni-600M:
+- modeling_d1.py
+- prompt.py
+- encoder.py
+- vision.py
+- audio.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+Loading weights:   0%|          | 0/1084 [00:00<?, ?it/s]Loading weights:  43%|████▎     | 469/1084 [00:00<00:00, 4687.39it/s]Loading weights:  87%|████████▋ | 938/1084 [00:00<00:00, 3697.57it/s]Loading weights: 100%|██████████| 1084/1084 [00:00<00:00, 3864.72it/s]
+d1_omni hand: 34 predictions
+d1_omni synthetic: 3187 predictions
+d1_omni synthetic_ood: 4395 predictions
+d1_omni vision: 220 predictions
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  83%|████████▎ | 588/707 [00:00<00:00, 5872.74it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 6362.19it/s]
+d1_ft hand: 34 predictions
+d1_ft synthetic: 3187 predictions
+d1_ft synthetic_ood: 4395 predictions
+d1_ft vision: 220 predictions
+DONE

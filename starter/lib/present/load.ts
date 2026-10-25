@@ -18,7 +18,7 @@ type ItemRow = { item: typeof orderItems.$inferSelect; vehicle: typeof vehicles.
 const iso = (value: Date | string | null | undefined): string => value instanceof Date ? value.toISOString() : value ? String(value) : ""
 
 export const BOARD_COLLECTIONS = [
-  "time_windows", "tracking_observations", "work_assignments", "market_offers", "work_items", "agent_proposals",
+  "time_windows", "tracking_observations", "work_assignments", "assignment_steps", "market_offers", "work_items", "agent_proposals",
   "order_endpoint_details", "transport_points", "transport_segments", "incidents", "endpoint_claims", "custody_assets",
   "market_offer_exposures", "custody_reports",
 ]

@@ -1,11 +1,16 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useState, type ReactNode } from "react"
+import { CarIcon, CheckIcon, ChevronRightIcon, TriangleAlertIcon } from "@/components/icons"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible"
 import type { AttentionItem, JourneyGroup, JourneyLeg, JourneyStep, ProposalView, RecordView, ThreadView } from "@/lib/present/types"
 import { fmtClock, fmtDateTime, fmtDay, relativeTo } from "@/lib/present/time"
-import { Icon } from "../icons"
-import { ActorName, Chip, Empty, OrderLink, OrderLinks, Range, SectionHead, When } from "../ui"
+import { cn } from "@/lib/utils"
+import { ActorName, Chip, Empty, OrderLink, OrderLinks, Range, SectionHead, TONE_TEXT, When } from "../ui"
+import { KindIcon, Row, Rows, RowSub, RowText, RowTitle, SubHead } from "./bits"
 import { OrderFiles } from "./files"
 
 const ATTENTION_ICON: Record<AttentionItem["kind"], string> = {
@@ -13,29 +18,51 @@ const ATTENTION_ICON: Record<AttentionItem["kind"], string> = {
   proposal: "proposal", claim: "alert", custody: "key", check: "note", inbox: "inbox",
 }
 
+const nameLink = "underline decoration-border underline-offset-4 hover:decoration-foreground"
+
 function capitalise(text: string): string {
   return text.charAt(0).toUpperCase() + text.slice(1)
+}
+
+function Section({ id, children, className }: { id: string; children: ReactNode; className?: string }) {
+  return <section id={id} className={cn("flex scroll-mt-16 flex-col", className)}>{children}</section>
+}
+
+function stepIcon(step: JourneyStep): string {
+  if (step.recorded) return "check"
+  return step.role === "PICKUP" ? "pin" : step.role === "DELIVERY" ? "flag" : "yard"
 }
 
 /* ── Needs a person ─────────────────────────────────────────────────────── */
 
 export function AttentionPanel({ view }: { view: RecordView }) {
   const items = view.attention
-  if (items.length === 0) return <div className="panel quiet" id="attention">
-    <Icon name="note" />
-    <span>Nothing in the records is waiting on a person. <small>Checked: alerts, incidents, work items, conversations, agent proposals, claims, custody and a moving car's position. Not checked: proofs, documents and endpoint details beyond a booked car's pickup contact and access.</small></span>
+  if (items.length === 0) return <div id="attention" className="flex scroll-mt-16 items-start gap-2.5 rounded-xl border bg-card p-4 text-[13px]">
+    <CheckIcon className="mt-0.5 size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+    <p className="flex flex-col gap-0.5">
+      <span>Nothing in the records is waiting on a person.</span>
+      <small className="text-xs text-muted-foreground">Checked: alerts, incidents, work items, conversations, agent proposals, claims, custody and a moving car&apos;s position. Not checked: proofs, documents and endpoint details beyond a booked car&apos;s pickup contact and access.</small>
+    </p>
   </div>
-  return <div className="panel" id="attention">
-    <div className="panel-head">Needs a person <span className="num">{items.length}</span></div>
-    <ol className="panel-rows">{items.map((item) => <li className="panel-row" key={`${item.kind}-${item.recordId}`}>
-      <Icon name={ATTENTION_ICON[item.kind]} className={`tone-${item.tone}`} />
-      <div>
-        <div className={`panel-row-title tone-${item.tone}`}>{item.title}</div>
-        {item.detail && <div className="panel-row-detail">{item.detail}</div>}
+  return <section id="attention" className="scroll-mt-16 overflow-hidden rounded-xl border border-warning/35 bg-card" aria-labelledby="attention-title">
+    <header className="flex items-center gap-2 border-b bg-warning/5 px-4 py-2.5">
+      <TriangleAlertIcon className="size-4 text-warning" aria-hidden="true" />
+      <h2 id="attention-title" className="text-[13px] font-medium">Needs a person</h2><Badge variant="outline" className="border-warning/40 font-mono text-warning">{items.length}</Badge>
+    </header>
+    <ol className="flex flex-col divide-y">{items.map((item) => <li className="flex min-w-0 flex-col gap-1 px-4 py-2.5 sm:flex-row sm:gap-4" key={`${item.kind}-${item.recordId}`}>
+      <div className="flex min-w-0 flex-1 gap-2.5">
+        <KindIcon name={ATTENTION_ICON[item.kind]} className={cn("mt-0.5 size-4", TONE_TEXT[item.tone])} />
+        <div className="flex min-w-0 flex-col gap-0.5">
+          <div className={cn("text-[13px] font-medium", TONE_TEXT[item.tone])}>{item.title}</div>
+          {item.detail && <div className="text-[13px] text-muted-foreground">{item.detail}</div>}
+        </div>
       </div>
-      <div className="panel-row-side">{item.owner ?? "No owner"}{item.at && item.atLabel ? <><br />{capitalise(item.atLabel)} <When at={item.at} snapshotAt={view.snapshotAt} relative withZone={false} /></> : null}</div>
+      <div className="shrink-0 pl-6.5 text-xs text-muted-foreground sm:pl-0 sm:text-right">
+        <div>{item.owner ?? "No owner"}</div>
+        {item.at && item.atLabel ? <div>{capitalise(item.atLabel)} <When at={item.at} snapshotAt={view.snapshotAt} relative withZone={false} /></div> : null}
+      </div>
     </li>)}</ol>
-  </div>
+  </section>
 }
 
 /* ── Route strip ────────────────────────────────────────────────────────── */
@@ -43,17 +70,17 @@ export function AttentionPanel({ view }: { view: RecordView }) {
 export function RouteStrip({ view }: { view: RecordView }) {
   const groups = view.journey.groups
   if (!groups.length) return null
-  return <section className="sec" id="journey">
+  return <Section id="journey">
     <SectionHead title="Route" note={view.journey.plan && !view.journey.plan.active ? "Draft plan, not activated" : undefined} />
-    {groups.map((group) => <RouteGroup key={group.itemId} group={group} view={view} labelled={groups.length > 1} />)}
-  </section>
+    <div className="flex flex-col gap-4">{groups.map((group) => <RouteGroup key={group.itemId} group={group} view={view} labelled={groups.length > 1} />)}</div>
+  </Section>
 }
 
 function RouteGroup({ group, view, labelled }: { group: JourneyGroup; view: RecordView; labelled: boolean }) {
   const legsFrom = new Map(group.legs.map((leg) => [leg.fromStepId, leg]))
-  return <div className="route-group">
-    {labelled && <p className="route-group-label">{group.roleLabel}: {group.vehicle}</p>}
-    <div className="route">
+  return <div className="flex flex-col gap-2">
+    {labelled && <p className="text-xs text-muted-foreground">{group.roleLabel}: {group.vehicle}</p>}
+    <div className="flex flex-col lg:flex-row lg:items-stretch">
       {group.steps.map((step) => {
         const leg = legsFrom.get(step.id)
         return <RouteStop key={step.id} step={step} leg={leg ?? null} view={view} />
@@ -63,24 +90,25 @@ function RouteGroup({ group, view, labelled }: { group: JourneyGroup; view: Reco
 }
 
 function RouteStop({ step, leg, view }: { step: JourneyStep; leg: JourneyLeg | null; view: RecordView }) {
-  const icon = step.role === "PICKUP" ? "pin" : step.role === "DELIVERY" ? "flag" : "yard"
   const slot = step.windows.find((window) => window.selected && (window.purpose === "SELECTED_PICKUP_SLOT" || window.purpose === "CUSTOMER_DELIVERY_PROMISE" || window.purpose === "SELECTED_DELIVERY_SLOT"))
     ?? step.windows.find((window) => window.purpose.startsWith("REQUESTED_")) ?? null
-  const name = step.site ? <Link className="name-link" href={`/sites/${step.site.id}`}>{step.place.name}</Link> : step.place.name
+  const name = step.site ? <Link className={nameLink} href={`/sites/${step.site.id}`}>{step.place.name}</Link> : step.place.name
+  const openClaim = step.claims.some((claim) => claim.status === "OPEN")
+  const states = (!step.recorded && (step.contact || step.access)) || openClaim
   return <>
-    <div className={`route-stop${step.recorded ? " done" : ""}`}>
-      <div className="route-role"><Icon name={step.recorded ? "check" : icon} size={13} />{step.roleLabel}</div>
-      <div className="route-name">{name}</div>
-      <div className="route-city">{step.place.city}{step.place.country ? `, ${step.place.country}` : ""}{step.site ? "" : " · no site profile"}</div>
+    <div className={cn("flex min-w-0 flex-1 flex-col gap-1 rounded-xl border bg-card p-3.5", step.recorded && "bg-muted/30")}>
+      <div className="flex items-center gap-1.5 text-xs text-muted-foreground"><KindIcon name={stepIcon(step)} className="size-3.5" />{step.roleLabel}</div>
+      <div className="text-[13px] font-medium">{name}</div>
+      <div className="text-xs text-muted-foreground">{step.place.city}{step.place.country ? `, ${step.place.country}` : ""}{step.site ? "" : " · no site profile"}</div>
       {step.recorded
-        ? <div className="route-when tone-ok">{step.recorded.label} <When at={step.recorded.at} /></div>
-        : slot ? <div className="route-when"><span className="route-when-label">{slot.label}</span> <Range start={slot.start} end={slot.end} zone={slot.zone} /></div>
-        : <div className="route-when muted">No slot selected</div>}
-      {(step.contact || step.access) && !step.recorded && <div className="route-state">
-        {step.contact && <Chip tone={step.contact.tone}>Contact {step.contact.statusLabel.toLowerCase()}</Chip>}
-        {step.access && <Chip tone={step.access.tone}>Access {step.access.statusLabel.toLowerCase()}</Chip>}
+        ? <div className="mt-1 text-xs text-muted-foreground"><span className="text-foreground">{step.recorded.label}</span> <When at={step.recorded.at} /></div>
+        : slot ? <div className="mt-1 text-xs"><span className="text-muted-foreground">{slot.label}</span> <Range start={slot.start} end={slot.end} zone={slot.zone} /></div>
+        : <div className="mt-1 text-xs text-muted-foreground">No slot selected</div>}
+      {states && <div className="mt-1 flex flex-wrap gap-1">
+        {step.contact && !step.recorded && <Chip tone={step.contact.tone}>Contact {step.contact.statusLabel.toLowerCase()}</Chip>}
+        {step.access && !step.recorded && <Chip tone={step.access.tone}>Access {step.access.statusLabel.toLowerCase()}</Chip>}
+        {openClaim && <Chip tone="warn">Open claim</Chip>}
       </div>}
-      {step.claims.some((claim) => claim.status === "OPEN") && <div className="route-state"><Chip tone="warn">Open claim</Chip></div>}
     </div>
     {leg && <RouteLeg leg={leg} view={view} />}
   </>
@@ -89,11 +117,18 @@ function RouteStop({ step, leg, view }: { step: JourneyStep; leg: JourneyLeg | n
 function RouteLeg({ leg, view }: { leg: JourneyLeg; view: RecordView }) {
   const assignment = leg.assignment
   const age = leg.tracking?.receivedAt ? relativeTo(leg.tracking.receivedAt, view.snapshotAt) : null
-  return <div className={`route-leg tone-${leg.tone}`}>
-    <span className="route-leg-line"><Icon name="car" size={16} /></span>
-    {leg.distanceKm != null && <b>{leg.distanceKm} km</b>}
+  return <div className="ml-4 flex min-w-0 flex-col gap-1 border-l border-dashed py-2.5 pl-4 text-xs text-muted-foreground lg:ml-0 lg:w-40 lg:shrink-0 lg:items-center lg:justify-center lg:border-l-0 lg:px-2 lg:py-0 lg:text-center">
+    <div className="flex items-center gap-1.5 lg:w-full">
+      <span className="hidden h-px flex-1 bg-border lg:block" aria-hidden="true" />
+      <CarIcon className={cn("size-4 shrink-0", TONE_TEXT[leg.tone])} aria-hidden="true" />
+      <span className="hidden h-px flex-1 bg-border lg:block" aria-hidden="true" />
+      {leg.distanceKm != null && <b className="font-mono font-medium text-foreground tabular-nums lg:hidden">{leg.distanceKm} km</b>}
+      <Chip tone={leg.tone} className="lg:hidden">{leg.statusLabel}</Chip>
+    </div>
+    {leg.distanceKm != null && <b className="hidden font-mono font-medium text-foreground tabular-nums lg:block">{leg.distanceKm} km</b>}
+    <Chip tone={leg.tone} className="hidden lg:inline-flex">{leg.statusLabel}</Chip>
     {assignment ? <span><ActorName actor={assignment.driver} /> · {assignment.statusLabel.toLowerCase()}</span> : <span>No driver yet</span>}
-    {leg.tracking?.eta && <span className="route-leg-eta">ETA {fmtDateTime(leg.tracking.eta, view.header.keyDates.find((date) => date.key === "promise")?.zone ?? null)}{age ? `, ${age.text}` : ""}</span>}
+    {leg.tracking?.eta && <span className={TONE_TEXT[leg.tone]}>ETA {fmtDateTime(leg.tracking.eta, view.header.keyDates.find((date) => date.key === "promise")?.zone ?? null)}{age ? `, ${age.text}` : ""}</span>}
   </div>
 }
 
@@ -101,56 +136,62 @@ function RouteLeg({ leg, view }: { leg: JourneyLeg; view: RecordView }) {
 
 export function ConversationsSection({ view }: { view: RecordView }) {
   const { threads, notes } = view
-  return <section className="sec" id="conversations">
+  return <Section id="conversations">
     <SectionHead title="Conversations" count={threads.length} />
     {threads.length === 0 && notes.length === 0 && <Empty>No conversation is linked to this order.</Empty>}
-    <div className="rows">
-      {threads.map((thread) => <ThreadRow key={thread.id} thread={thread} view={view} />)}
-      {notes.map((note) => <div className="row" key={note.id}>
-        <div className="row-main">
-          <div className="row-title">Note from <ActorName actor={note.author} /></div>
-          <div className="row-preview">{note.body}</div>
-        </div>
-        <div className="row-side"><When at={note.at} withZone={false} /></div>
-      </div>)}
-    </div>
-  </section>
+    {threads.length + notes.length > 0 && <Rows>
+      {threads.map((thread) => <ThreadRow key={thread.id} thread={thread} />)}
+      {notes.map((note) => <Row key={note.id} side={<When at={note.at} withZone={false} />}>
+        <RowTitle>Note from <ActorName actor={note.author} /></RowTitle>
+        <RowText>{note.body}</RowText>
+      </Row>)}
+    </Rows>}
+  </Section>
 }
 
-function ThreadRow({ thread, view }: { thread: ThreadView; view: RecordView }) {
+function ThreadRow({ thread }: { thread: ThreadView }) {
   const [open, setOpen] = useState(false)
   const last = thread.messages[thread.messages.length - 1]
   const count = thread.messages.length
-  return <article className="row">
-    <div className="row-main">
-      <div className="row-title">{thread.categoryLabel} <Chip tone={thread.tone}>{thread.statusLabel}</Chip></div>
-      <div className="row-sub">
+  return <Collapsible open={open} onOpenChange={setOpen} asChild><article>
+    <Row side={<When at={thread.updatedAt} withZone={false} />}>
+      <RowTitle><KindIcon name="message" className="text-muted-foreground" />{thread.categoryLabel} <Chip tone={thread.tone}>{thread.statusLabel}</Chip></RowTitle>
+      <RowSub>
         {thread.channelLabel}{thread.counterparty ? <> with <ActorName actor={thread.counterparty} /></> : ""} · {count} {count === 1 ? "message" : "messages"}
         {thread.waitingOn && ` · waiting on ${thread.waitingOn}`}{thread.owner && ` · ${thread.owner}`}
         {thread.relatedOrders.length > 0 && <> · also <OrderLinks orders={thread.relatedOrders} /></>}
-      </div>
-      {last && !open && <div className="row-preview"><b>{last.author.name}:</b> {last.body}</div>}
-      {open && <ThreadMessages thread={thread} />}
-      {count > 0 && <button type="button" className="show-more" onClick={() => setOpen((value) => !value)}>{open ? "Hide messages" : `Read ${count === 1 ? "the message" : `all ${count} messages`}`}</button>}
-    </div>
-    <div className="row-side"><When at={thread.updatedAt} withZone={false} /></div>
-  </article>
+      </RowSub>
+      {last && !open && <RowText className="line-clamp-2"><b>{last.author.name}:</b> {last.body}</RowText>}
+      <CollapsibleContent className="pt-1"><ThreadMessages thread={thread} /></CollapsibleContent>
+      {count > 0 && <div><Button type="button" variant="ghost" size="xs" className="-ml-2 text-muted-foreground" onClick={() => setOpen((value) => !value)} aria-expanded={open}>
+        <ChevronRightIcon className={cn("transition-transform", open && "rotate-90")} aria-hidden="true" />
+        {open ? "Hide messages" : `Read ${count === 1 ? "the message" : `all ${count} messages`}`}
+      </Button></div>}
+    </Row>
+  </article></Collapsible>
+}
+
+function Tag({ children, internal = false }: { children: ReactNode; internal?: boolean }) {
+  return <Badge variant="outline" className={cn("h-4.5 px-1.5 text-[0.7rem] font-normal", internal ? "border-dashed border-warning/50 text-warning" : "text-muted-foreground")}>{children}</Badge>
 }
 
 export function ThreadMessages({ thread }: { thread: ThreadView }) {
-  return <div className="messages">{thread.messages.map((message) => <div className={`msg${message.internal ? " internal" : message.author.kind === "operator" || message.author.kind === "agent" ? " from-operator" : ""}`} key={message.id}>
-    <div className="msg-meta">
-      <b><ActorName actor={message.author} /></b>
-      <span className="role">{message.author.role}</span>
-      <span>to {message.recipient.name}</span>
-      <span>· {message.channelLabel}</span>
-      {message.internal && <span className="msg-tag internal">Internal</span>}
-      {message.author.kind === "agent" && <span className="msg-tag">Agent</span>}
-      {message.otherOrder && <span className="msg-tag">Filed on <OrderLink order={message.otherOrder} /></span>}
-      <time dateTime={message.at}>{fmtDateTime(message.at)}</time>
+  return <div className="flex flex-col gap-2">{thread.messages.map((message) => {
+    const fromUs = message.author.kind === "operator" || message.author.kind === "agent"
+    return <div className={cn("flex flex-col gap-1 rounded-md border px-3 py-2", message.internal ? "border-dashed" : fromUs ? "bg-muted/40" : "bg-card")} key={message.id}>
+      <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs text-muted-foreground">
+        <b className="font-medium text-foreground"><ActorName actor={message.author} /></b>
+        <span>{message.author.role}</span>
+        <span>to {message.recipient.name}</span>
+        <span>· {message.channelLabel}</span>
+        {message.internal && <Tag internal>Internal</Tag>}
+        {message.author.kind === "agent" && <Tag>Agent</Tag>}
+        {message.otherOrder && <Tag>Filed on <OrderLink order={message.otherOrder} /></Tag>}
+        <time className="ml-auto font-mono tabular-nums" dateTime={message.at}>{fmtDateTime(message.at)}</time>
+      </div>
+      <p className="text-[13px] whitespace-pre-line">{message.body}</p>
     </div>
-    <p className="msg-body">{message.body}</p>
-  </div>)}</div>
+  })}</div>
 }
 
 /* ── Evidence ───────────────────────────────────────────────────────────── */
@@ -158,146 +199,162 @@ export function ThreadMessages({ thread }: { thread: ThreadView }) {
 export function EvidenceSection({ view }: { view: RecordView }) {
   const { proofs, documents, custody } = view
   const total = proofs.length + documents.length + custody.assets.length
-  return <section className="sec" id="evidence">
+  return <Section id="evidence">
     <SectionHead title="Evidence" count={total} />
+    <div className="flex flex-col gap-3">
     {total === 0 && <Empty>No proof or document record yet.</Empty>}
-    {total > 0 && <div className="chips">
+    {total > 0 && <div className="flex flex-wrap gap-1.5">
       {proofs.map((proof) => <Chip key={proof.id} tone={proof.tone} dot>{proof.kindLabel} · {proof.statusLabel.toLowerCase()}{proof.fileCount ? ` · ${proof.fileCount} files` : ""}</Chip>)}
       {documents.map((document) => <Chip key={document.id} tone={document.tone} dot>{document.kindLabel}{document.medium ? ` (${document.medium})` : ""} · {document.statusLabel.toLowerCase()}</Chip>)}
       {custody.assets.map((asset) => <Chip key={asset.id} tone={asset.nextAction ? "warn" : "neutral"} dot>{asset.kindLabel} · holder {asset.holder}</Chip>)}
     </div>}
     <OrderFiles orderId={view.header.id} />
-  </section>
+    </div>
+  </Section>
 }
 
-/* ── Prior agent work ───────────────────────────────────────────────────── */
+/* ── Earlier agent work ─────────────────────────────────────────────────── */
 
 export function DecisionsSection({ view }: { view: RecordView }) {
   const { proposals } = view
-  return <section className="sec" id="decisions">
-    <SectionHead title="Prior agent work" count={proposals.length} />
-    {proposals.length === 0 && <Empty>No agent has proposed anything on this order yet. Your agent's proposals and the human decision on them belong here.</Empty>}
-    <div className="rows">{proposals.map((proposal) => <ProposalRow key={proposal.id} proposal={proposal} />)}</div>
-  </section>
+  return <Section id="decisions">
+    <SectionHead title="Earlier agent work" count={proposals.length} />
+    {proposals.length === 0 && <Empty>No agent has proposed anything on this order yet. Your agent&apos;s proposals and the human decision on them belong here.</Empty>}
+    {proposals.length > 0 && <Rows>{proposals.map((proposal) => <ProposalRow key={proposal.id} proposal={proposal} />)}</Rows>}
+  </Section>
 }
 
 function ProposalRow({ proposal }: { proposal: ProposalView }) {
-  return <article className="row">
-    <div className="row-main">
-      <div className="row-title">{proposal.summary} <Chip tone={proposal.tone} dot>{proposal.statusLabel}</Chip></div>
-      <div className="row-sub">
-        {proposal.agent.name} · {proposal.commandLabel.toLowerCase()}
-        {proposal.review && <> · {proposal.review.decisionLabel.toLowerCase()} by {proposal.review.reviewer.name}</>}
-        {proposal.execution && <> · execution {proposal.execution.statusLabel.toLowerCase()}{proposal.execution.effects ? `, ${proposal.execution.effects} event${proposal.execution.effects === 1 ? "" : "s"} committed` : ", nothing committed"}</>}
-      </div>
-    </div>
-    <div className="row-side"><When at={proposal.createdAt} withZone={false} /></div>
-  </article>
+  return <Row side={<When at={proposal.createdAt} withZone={false} />}>
+    <RowTitle><KindIcon name="proposal" className="text-muted-foreground" />{proposal.summary} <Chip tone={proposal.tone} dot>{proposal.statusLabel}</Chip></RowTitle>
+    <RowSub>
+      {proposal.agent.name} · {proposal.commandLabel.toLowerCase()}
+      {proposal.review && <> · {proposal.review.decisionLabel.toLowerCase()} by {proposal.review.reviewer.name}</>}
+      {proposal.execution && <> · execution {proposal.execution.statusLabel.toLowerCase()}{proposal.execution.effects ? `, ${proposal.execution.effects} event${proposal.execution.effects === 1 ? "" : "s"} committed` : ", nothing committed"}</>}
+    </RowSub>
+  </Row>
+}
+
+function Pairs({ children }: { children: ReactNode }) {
+  return <dl className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-1 rounded-md bg-muted/40 px-3 py-2 text-[13px] [&_dt]:text-xs [&_dt]:leading-5 [&_dt]:text-muted-foreground">{children}</dl>
 }
 
 export function ProposalCards({ view }: { view: RecordView }) {
   const { proposals, notifications } = view
-  return <div>
-    {proposals.map((proposal) => <article className="proposal" key={proposal.id}>
-      <div className="proposal-head"><Chip tone={proposal.tone} dot>{proposal.statusLabel}</Chip><span>{proposal.agent.name} · {proposal.commandLabel.toLowerCase()} · <When at={proposal.createdAt} /></span></div>
-      <p className="proposal-summary">{proposal.summary}</p>
-      {proposal.rationale && <p className="proposal-text">{proposal.rationale}</p>}
-      {proposal.review && <dl className="proposal-block">
+  return <div className="flex flex-col gap-3">
+    {proposals.length === 0 && notifications.length === 0 && <Empty>Nothing recorded.</Empty>}
+    {proposals.map((proposal) => <article className="flex flex-col gap-2 rounded-xl border bg-card p-3.5" key={proposal.id}>
+      <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"><Chip tone={proposal.tone} dot>{proposal.statusLabel}</Chip><span>{proposal.agent.name} · {proposal.commandLabel.toLowerCase()} · <When at={proposal.createdAt} /></span></div>
+      <p className="text-[13px] font-medium">{proposal.summary}</p>
+      {proposal.rationale && <p className="text-[13px] text-muted-foreground">{proposal.rationale}</p>}
+      {proposal.review && <Pairs>
         <dt>Recorded review</dt><dd>{proposal.review.decisionLabel} by {proposal.review.reviewer.name}, {fmtDateTime(proposal.review.at)}</dd>
         {proposal.review.note && <><dt>Note</dt><dd>{proposal.review.note}</dd></>}
-      </dl>}
-      {proposal.execution && <dl className="proposal-block">
+      </Pairs>}
+      {proposal.execution && <Pairs>
         <dt>Execution</dt><dd>{proposal.execution.statusLabel}{proposal.execution.at ? `, attempted ${fmtDateTime(proposal.execution.at)}` : ""} · {proposal.execution.effects ? `${proposal.execution.effects} committed event${proposal.execution.effects === 1 ? "" : "s"} linked` : "no committed event linked"}</dd>
-        {proposal.execution.error && <><dt>Error</dt><dd className="tone-danger">{proposal.execution.error}</dd></>}
-      </dl>}
-      <p className="proposal-foot">{proposal.evidenceCount} evidence link{proposal.evidenceCount === 1 ? "" : "s"}{proposal.dependency ? ` · ${proposal.dependency}` : ""}{proposal.superseded ? ` · ${proposal.superseded}` : ""}. Proposal text is never proof that anything changed.</p>
+        {proposal.execution.error && <><dt>Error</dt><dd className="text-danger">{proposal.execution.error}</dd></>}
+      </Pairs>}
+      <p className="text-xs text-muted-foreground">{proposal.evidenceCount} evidence link{proposal.evidenceCount === 1 ? "" : "s"}{proposal.dependency ? ` · ${proposal.dependency}` : ""}{proposal.superseded ? ` · ${proposal.superseded}` : ""}. Proposal text is never proof that anything changed.</p>
     </article>)}
-    {notifications.length > 0 && <>
-      <p className="sub">Internal room activity</p>
-      <div className="rows">{notifications.map((note) => <div className="row" key={note.id}>
-        <div className="row-main"><div className="row-title">{note.activityLabel} <span className="row-sub-inline">in {note.destination} by {note.actor.name}</span></div><div className="row-preview">{note.preview}</div></div>
-        <div className="row-side"><When at={note.at} withZone={false} /> · {note.deliveryLabel}</div>
-      </div>)}</div>
-    </>}
+    {notifications.length > 0 && <div>
+      <SubHead>Internal room activity</SubHead>
+      <Rows>{notifications.map((note) => <Row key={note.id} side={<><When at={note.at} withZone={false} /> · {note.deliveryLabel}</>}>
+        <RowTitle>{note.activityLabel} <span className="text-xs font-normal text-muted-foreground">in {note.destination} by {note.actor.name}</span></RowTitle>
+        <RowText>{note.preview}</RowText>
+      </Row>)}</Rows>
+    </div>}
   </div>
 }
 
 /* ── Activity ───────────────────────────────────────────────────────────── */
 
+function EventLine({ event, time, detail }: { event: RecordView["history"][number]["events"][number]; time: ReactNode; detail: boolean }) {
+  return <li className="grid grid-cols-[6.5rem_minmax(0,1fr)] gap-3 px-3 py-2 text-[13px] sm:grid-cols-[8rem_minmax(0,1fr)]">
+    <time className="pt-px font-mono text-xs text-muted-foreground tabular-nums" dateTime={event.at} title={fmtDateTime(event.at)}>{time}</time>
+    <div className="min-w-0">
+      <span>{event.text}</span>
+      {event.actor && <span className="text-muted-foreground"> · {event.actor}</span>}
+      {event.shared && <span className="text-muted-foreground"> · shared bundle</span>}
+      {detail && event.detail && <small className="block text-xs text-muted-foreground">{event.detail}</small>}
+    </div>
+  </li>
+}
+
 export function ActivitySection({ view }: { view: RecordView }) {
   const [all, setAll] = useState(false)
   const events = view.history.flatMap((day) => day.events)
   const shown = all ? events : events.slice(0, 6)
-  return <section className="sec" id="history">
+  return <Section id="history">
     <SectionHead title="Activity" count={view.historyTotal} />
     {events.length === 0 && <Empty>No events recorded.</Empty>}
-    <div className="events">{shown.map((event) => <div className="event" key={event.id}>
-      <time dateTime={event.at} title={fmtDateTime(event.at)}>{fmtDay(event.at)} {fmtClock(event.at)}</time>
-      <div className="event-text"><b>{event.text}</b>{event.actor && <span className="actor"> · {event.actor}</span>}{event.shared && <span className="actor"> · shared bundle</span>}{all && event.detail && <small>{event.detail}</small>}</div>
-    </div>)}</div>
-    {events.length > 6 && <button type="button" className="show-more" onClick={() => setAll((value) => !value)}>{all ? "Show the latest only" : `Show all ${events.length} events`}</button>}
-  </section>
+    {events.length > 0 && <ol className="flex flex-col divide-y rounded-xl border bg-card">{shown.map((event) => <EventLine key={event.id} event={event} time={<>{fmtDay(event.at)} {fmtClock(event.at)}</>} detail={all} />)}</ol>}
+    {events.length > 6 && <div className="mt-1"><Button type="button" variant="ghost" size="xs" className="-ml-2 text-muted-foreground" onClick={() => setAll((value) => !value)}>{all ? "Show the latest only" : `Show all ${events.length} events`}</Button></div>}
+  </Section>
 }
 
 /* ── Detailed route, for the records panel ──────────────────────────────── */
 
 export function RouteDetails({ view }: { view: RecordView }) {
   const { journey } = view
-  return <div>
-    {journey.plan && <p className="rec-note">{journey.plan.statusLabel} plan{journey.plan.version ? ` v${journey.plan.version}` : ""}{journey.plan.active ? "" : ", not activated"}{journey.plan.activatedAt ? `, activated ${fmtDateTime(journey.plan.activatedAt)}` : ""}{journey.otherPlans.length ? ` · ${journey.otherPlans.length} other ${journey.otherPlans.length === 1 ? "plan" : "plans"} kept in the API` : ""}</p>}
+  return <div className="flex flex-col gap-4">
+    {journey.plan && <p className="text-xs text-muted-foreground">{journey.plan.statusLabel} plan{journey.plan.version ? ` v${journey.plan.version}` : ""}{journey.plan.active ? "" : ", not activated"}{journey.plan.activatedAt ? `, activated ${fmtDateTime(journey.plan.activatedAt)}` : ""}{journey.otherPlans.length ? ` · ${journey.otherPlans.length} other ${journey.otherPlans.length === 1 ? "plan" : "plans"} kept in the API` : ""}</p>}
     {journey.groups.map((group) => {
       const legsFrom = new Map(group.legs.map((leg) => [leg.fromStepId, leg]))
-      return <div className="journey-group" key={group.itemId}>
-        {journey.groups.length > 1 && <p className="journey-group-head">{group.roleLabel}: {group.vehicle}</p>}
-        <div className="journey">{group.steps.map((step, index) => {
+      return <div key={group.itemId}>
+        {journey.groups.length > 1 && <SubHead>{group.roleLabel}: {group.vehicle}</SubHead>}
+        <ol className="flex flex-col">{group.steps.map((step, index) => {
           const leg = legsFrom.get(step.id)
-          return <div key={step.id}>
+          return <li key={step.id}>
             <StepView step={step} live={leg?.status === "IN_PROGRESS"} last={index === group.steps.length - 1 && !leg} />
             {leg && <LegView leg={leg} view={view} />}
-          </div>
-        })}</div>
+          </li>
+        })}</ol>
       </div>
     })}
   </div>
 }
 
+function Marker({ children, className }: { children: ReactNode; className?: string }) {
+  return <span className={cn("absolute top-0 left-0 grid size-6 place-items-center rounded-full border bg-background text-muted-foreground", className)}>{children}</span>
+}
+
+function StepFact({ label, children, hint, tone }: { label: string; children: ReactNode; hint?: ReactNode; tone?: string }) {
+  return <div className="flex min-w-0 flex-col gap-0.5">
+    <dt className="text-xs text-muted-foreground">{label}</dt>
+    <dd className={cn("text-[13px]", tone)}>{children}{hint && <small className="block text-xs text-muted-foreground">{hint}</small>}</dd>
+  </div>
+}
+
 function StepView({ step, live, last }: { step: JourneyStep; live: boolean; last: boolean }) {
-  const icon = step.role === "PICKUP" ? "pin" : step.role === "DELIVERY" ? "flag" : "yard"
-  return <div className={`step${step.recorded ? " done" : ""}${live ? " live" : ""}${last ? " last" : ""}`}>
-    <span className="step-marker"><Icon name={step.recorded ? "check" : icon} size={13} /></span>
-    <div>
-      <div className="step-head">
-        <span className="step-role">{step.roleLabel}</span>
-        <span className="step-name">{step.site ? <Link className="name-link" href={`/sites/${step.site.id}`}>{step.place.name}</Link> : step.place.name}</span>
-        <span className="step-kind">{step.place.kindLabel}{step.site ? "" : " · no managed site profile"}</span>
-      </div>
-      <p className="step-addr">{step.place.addressLine ?? <span className="tone-warn">Street not supplied</span>}{step.place.city ? `, ${step.place.city}` : ""}{step.place.country ? `, ${step.place.country}` : ""}</p>
-      <dl className="step-facts">
-        {step.windows.map((window) => <div className="fact" key={window.purpose + window.start}>
-          <dt>{window.label}</dt>
-          <dd><Range start={window.start} end={window.end} zone={window.zone} /><small>{window.sourceLabel}{window.deadline ? ` · outer limit ${fmtDateTime(window.deadline, window.zone)}` : ""}</small></dd>
-        </div>)}
-        {step.recorded && <div className="fact tone-ok"><dt>{step.recorded.label}</dt><dd><When at={step.recorded.at} /><small>{step.recorded.actor ? `reported by ${step.recorded.actor}` : "recorded event"}</small></dd></div>}
-        {step.contact && <div className={`fact tone-${step.contact.tone}`}>
-          <dt>Contact</dt>
-          <dd>{step.contact.name ?? "Not supplied"}{step.contact.role ? ` (${step.contact.role})` : ""} · {step.contact.statusLabel.toLowerCase()}
-            <small>{step.contact.handle ?? "no handle recorded"}{step.contact.confirmedAt ? ` · confirmed ${fmtDateTime(step.contact.confirmedAt)}${step.contact.sourceLabel ? ` via ${step.contact.sourceLabel}` : ""}` : " · no confirmation recorded for this order"}</small>
-          </dd>
-        </div>}
-        {step.access && <div className={`fact tone-${step.access.tone}`}>
-          <dt>Access</dt>
-          <dd>{step.access.statusLabel}<small>{step.access.statedByLabel ? `stated by ${step.access.statedByLabel}` : ""}{step.access.confirmedAt ? ` · confirmed ${fmtDateTime(step.access.confirmedAt)}${step.access.sourceLabel ? ` via ${step.access.sourceLabel}` : ""}` : ""}</small></dd>
-        </div>}
-        {step.site?.hours && <div className="fact"><dt>Site hours</dt><dd>{step.site.hours}<small>local time{step.site.advanceNoticeMinutes ? ` · ${step.site.advanceNoticeMinutes} min advance notice` : ""}</small></dd></div>}
-        {step.site?.handoverMode && <div className="fact"><dt>Handover</dt><dd>{step.site.handoverMode}{step.site.contactEmail && <small>{step.site.contactEmail}</small>}</dd></div>}
-      </dl>
-      {step.access?.instruction && <p className="step-instruction"><b>{step.site?.accessNote === step.access.instruction ? "Order instruction, copied from the site profile." : "Order instruction."}</b> {step.access.instruction}</p>}
-      {step.site?.accessNote && step.site.accessNote !== step.access?.instruction && <p className="step-instruction"><b>Site procedure.</b> {step.site.accessNote}</p>}
-      {step.site?.releaseRule && <p className="step-instruction"><b>Release rule.</b> {step.site.releaseRule}</p>}
-      {step.claims.length > 0 && <div className="step-notes">{step.claims.map((claim) => <p key={claim.id}><Chip tone={claim.tone}>{claim.statusLabel}</Chip> Claim about the {claim.field.toLowerCase()}: {claim.claim}{claim.source ? ` (${claim.source}${claim.confidence ? `, ${claim.confidence}` : ""})` : ""}</p>)}</div>}
-      {step.notes.length > 0 && <div className="step-notes">{step.notes.map((note) => <p key={note}>{note}</p>)}</div>}
-      {step.proofs.length > 0 && <div className="step-proofs">{step.proofs.map((proof) => <Chip key={proof.id} tone={proof.tone} dot>{proof.kindLabel} · {proof.statusLabel.toLowerCase()}{proof.fileCount ? ` · ${proof.fileCount} files` : ""}</Chip>)}</div>}
+  return <div className={cn("relative flex flex-col gap-2 pb-4 pl-9", !last && "before:absolute before:top-7 before:bottom-1 before:left-3 before:w-px before:bg-border")}>
+    <Marker className={cn(step.recorded && "border-foreground/30 bg-muted text-foreground", live && "border-primary text-primary")}><KindIcon name={stepIcon(step)} className="size-3.5" /></Marker>
+    <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+      <span className="text-xs text-muted-foreground">{step.roleLabel}</span>
+      <span className="text-[13px] font-medium">{step.site ? <Link className={nameLink} href={`/sites/${step.site.id}`}>{step.place.name}</Link> : step.place.name}</span>
+      <span className="text-xs text-muted-foreground">{step.place.kindLabel}{step.site ? "" : " · no managed site profile"}</span>
     </div>
+    <p className="-mt-1 text-xs text-muted-foreground">{step.place.addressLine ?? <span className="text-warning">Street not supplied</span>}{step.place.city ? `, ${step.place.city}` : ""}{step.place.country ? `, ${step.place.country}` : ""}</p>
+    <dl className="grid gap-x-6 gap-y-3 sm:grid-cols-2">
+      {step.windows.map((window) => <StepFact key={window.purpose + window.start} label={window.label} hint={<>{window.sourceLabel}{window.deadline ? ` · outer limit ${fmtDateTime(window.deadline, window.zone)}` : ""}</>}>
+        <Range start={window.start} end={window.end} zone={window.zone} />
+      </StepFact>)}
+      {step.recorded && <StepFact label={step.recorded.label} hint={step.recorded.actor ? `reported by ${step.recorded.actor}` : "recorded event"}><When at={step.recorded.at} /></StepFact>}
+      {step.contact && <StepFact label="Contact" tone={TONE_TEXT[step.contact.tone]} hint={<>{step.contact.handle ?? "no handle recorded"}{step.contact.confirmedAt ? ` · confirmed ${fmtDateTime(step.contact.confirmedAt)}${step.contact.sourceLabel ? ` via ${step.contact.sourceLabel}` : ""}` : " · no confirmation recorded for this order"}</>}>
+        {step.contact.name ?? "Not supplied"}{step.contact.role ? ` (${step.contact.role})` : ""} · {step.contact.statusLabel.toLowerCase()}
+      </StepFact>}
+      {step.access && <StepFact label="Access" tone={TONE_TEXT[step.access.tone]} hint={<>{step.access.statedByLabel ? `stated by ${step.access.statedByLabel}` : ""}{step.access.confirmedAt ? ` · confirmed ${fmtDateTime(step.access.confirmedAt)}${step.access.sourceLabel ? ` via ${step.access.sourceLabel}` : ""}` : ""}</>}>
+        {step.access.statusLabel}
+      </StepFact>}
+      {step.site?.hours && <StepFact label="Site hours" hint={<>local time{step.site.advanceNoticeMinutes ? ` · ${step.site.advanceNoticeMinutes} min advance notice` : ""}</>}>{step.site.hours}</StepFact>}
+      {step.site?.handoverMode && <StepFact label="Handover" hint={step.site.contactEmail ?? undefined}>{step.site.handoverMode}</StepFact>}
+    </dl>
+    {step.access?.instruction && <RowText className="rounded-md bg-muted/40 px-3 py-2"><b>{step.site?.accessNote === step.access.instruction ? "Order instruction, copied from the site profile." : "Order instruction."}</b> {step.access.instruction}</RowText>}
+    {step.site?.accessNote && step.site.accessNote !== step.access?.instruction && <RowText className="rounded-md bg-muted/40 px-3 py-2"><b>Site procedure.</b> {step.site.accessNote}</RowText>}
+    {step.site?.releaseRule && <RowText className="rounded-md bg-muted/40 px-3 py-2"><b>Release rule.</b> {step.site.releaseRule}</RowText>}
+    {step.claims.length > 0 && <div className="flex flex-col gap-1">{step.claims.map((claim) => <RowText key={claim.id}><Chip tone={claim.tone}>{claim.statusLabel}</Chip> Claim about the {claim.field.toLowerCase()}: {claim.claim}{claim.source ? ` (${claim.source}${claim.confidence ? `, ${claim.confidence}` : ""})` : ""}</RowText>)}</div>}
+    {step.notes.length > 0 && <div className="flex flex-col gap-1">{step.notes.map((note) => <RowText key={note}>{note}</RowText>)}</div>}
+    {step.proofs.length > 0 && <div className="flex flex-wrap gap-1.5">{step.proofs.map((proof) => <Chip key={proof.id} tone={proof.tone} dot>{proof.kindLabel} · {proof.statusLabel.toLowerCase()}{proof.fileCount ? ` · ${proof.fileCount} files` : ""}</Chip>)}</div>}
   </div>
 }
 
@@ -305,62 +362,58 @@ function LegView({ leg, view }: { leg: JourneyLeg; view: RecordView }) {
   const assignment = leg.assignment
   const tracking = leg.tracking
   const age = tracking?.receivedAt ? relativeTo(tracking.receivedAt, view.snapshotAt) : null
-  return <div className="leg">
-    <span className="leg-marker"><Icon name="car" size={15} /></span>
-    <div className="leg-body">
-      <div className="leg-main">
-        {leg.distanceKm != null && <span><b>{leg.distanceKm} km</b> planned</span>}
-        <Chip tone={leg.tone}>{leg.statusLabel}</Chip>
-        {assignment
-          ? <span><b><ActorName actor={assignment.driver} /></b>{assignment.driverHome ? `, home base ${assignment.driverHome}` : ""} · {assignment.statusLabel.toLowerCase()}{assignment.fee ? ` · ${assignment.fee}` : ""}</span>
-          : <span>No driver booked for this leg</span>}
-      </div>
-      {assignment?.positioning && <p className="leg-track">{assignment.positioning}{assignment.priorOrder && <> (<OrderLink order={assignment.priorOrder} />)</>}. A home base or prior duty is not a current location.</p>}
-      {assignment && assignment.steps.length > 0 && <div className="leg-steps">{assignment.steps.map((step) => <span key={step.id}>
-        <Icon name={step.status === "COMPLETED" ? "check" : "chevron"} size={12} className={step.status === "COMPLETED" ? "tone-ok" : undefined} /> {step.title} · <span className={`tone-${step.tone}`}>{step.statusLabel.toLowerCase()}</span>{step.scheduledStart ? ` · ${fmtDateTime(step.scheduledStart)}` : ""}{step.note ? ` · ${step.note}` : ""}
-      </span>)}</div>}
-      {tracking && <p className="leg-track">Driver app: <b>ETA {fmtDateTime(tracking.eta)}</b>{tracking.remainingKm != null ? ` · ${tracking.remainingKm} km remaining` : ""}{tracking.progress != null ? ` · ${Math.round(tracking.progress * 100)}% of the leg` : ""} · {tracking.qualityLabel} signal{age ? `, received ${age.text}` : ""}. Unverified; no map position in this packet.</p>}
-      {leg.inference && <p className="leg-track">Monitor inference: {leg.inference.note ?? `ETA ${fmtDateTime(leg.inference.eta)}`}</p>}
+  return <div className="relative flex flex-col gap-1.5 pb-4 pl-9 before:absolute before:top-7 before:bottom-1 before:left-3 before:w-0 before:border-l before:border-dashed">
+    <Marker className="border-dashed"><CarIcon className="size-3.5" aria-hidden="true" /></Marker>
+    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px]">
+      {leg.distanceKm != null && <span><b className="font-medium tabular-nums">{leg.distanceKm} km</b> <span className="text-muted-foreground">planned</span></span>}
+      <Chip tone={leg.tone}>{leg.statusLabel}</Chip>
+      {assignment
+        ? <span><b className="font-medium"><ActorName actor={assignment.driver} /></b><span className="text-muted-foreground">{assignment.driverHome ? `, home base ${assignment.driverHome}` : ""} · {assignment.statusLabel.toLowerCase()}{assignment.fee ? ` · ${assignment.fee}` : ""}</span></span>
+        : <span className="text-muted-foreground">No driver booked for this leg</span>}
     </div>
+    {assignment?.positioning && <RowSub>{assignment.positioning}{assignment.priorOrder && <> (<OrderLink order={assignment.priorOrder} />)</>}. A home base or prior duty is not a current location.</RowSub>}
+    {assignment && assignment.steps.length > 0 && <ul className="flex flex-col gap-0.5">{assignment.steps.map((step) => <li className="flex items-start gap-1.5 text-xs text-muted-foreground" key={step.id}>
+      <KindIcon name={step.status === "COMPLETED" ? "check" : "chevron"} className={cn("mt-px size-3", step.status === "COMPLETED" && "text-foreground")} />
+      <span>{step.title} · <span className={TONE_TEXT[step.tone]}>{step.statusLabel.toLowerCase()}</span>{step.scheduledStart ? ` · ${fmtDateTime(step.scheduledStart)}` : ""}{step.note ? ` · ${step.note}` : ""}</span>
+    </li>)}</ul>}
+    {tracking && <RowSub>Driver app: <b className="font-medium text-foreground">ETA {fmtDateTime(tracking.eta)}</b>{tracking.remainingKm != null ? ` · ${tracking.remainingKm} km remaining` : ""}{tracking.progress != null ? ` · ${Math.round(tracking.progress * 100)}% of the leg` : ""} · {tracking.qualityLabel} signal{age ? `, received ${age.text}` : ""}. Unverified; no map position in this packet.</RowSub>}
+    {leg.inference && <RowSub>Monitor inference: {leg.inference.note ?? `ETA ${fmtDateTime(leg.inference.eta)}`}</RowSub>}
   </div>
 }
 
 export function EvidenceDetails({ view }: { view: RecordView }) {
   const { proofs, documents, custody, siteVisits } = view
   return <div>
-    {proofs.length > 0 && <><p className="sub">Proofs</p><div className="rows">{proofs.map((proof) => <div className="row" key={proof.id}>
-      <div className="row-main"><div className="row-title">{proof.kindLabel} <Chip tone={proof.tone}>{proof.statusLabel}</Chip></div>
-        <div className="row-sub">{proof.pointLabel ? `${proof.pointLabel} · ` : ""}{proof.required ? "required" : "optional"}{proof.fileCount ? ` · ${proof.fileCount} files` : " · no files"}{proof.submittedAt ? ` · submitted ${fmtDateTime(proof.submittedAt)}` : " · nothing submitted"}{proof.reviewedAt ? ` · reviewed ${fmtDateTime(proof.reviewedAt)}` : ""}{proof.note ? ` · ${proof.note}` : ""}</div></div>
-    </div>)}</div></>}
-    {documents.length > 0 && <><p className="sub">Documents</p><div className="rows">{documents.map((document) => <div className="row" key={document.id}>
-      <div className="row-main"><div className="row-title">{document.kindLabel}{document.medium ? ` (${document.medium})` : ""} <Chip tone={document.tone}>{document.statusLabel}</Chip></div>
-        <div className="row-sub">{document.required ? "required" : "optional"}{document.signatureScope ? ` · signatures: ${document.signatureScope}` : ""}{document.fileCount ? ` · ${document.fileCount} files` : " · no file"}{document.updatedAt ? ` · updated ${fmtDateTime(document.updatedAt)}` : ""}{document.note ? ` · ${document.note}` : ""}</div></div>
-    </div>)}</div></>}
-    {custody.assets.length > 0 && <><p className="sub">Keys and papers</p><div className="rows">{custody.assets.map((asset) => <div className="row" key={asset.id}>
-      <div className="row-main"><div className="row-title">{asset.label}</div>
-        <div className="row-sub">Holder {asset.holder} · basis {asset.basis}{asset.relatedOrder && <> · linked to <OrderLink order={asset.relatedOrder} /></>}{asset.owner ? ` · next check by ${asset.owner}` : ""}{asset.dueAt ? ` ${fmtDateTime(asset.dueAt)}` : ""}</div>
-        {asset.nextAction && <div className="row-preview">{asset.nextAction}</div>}
-        {asset.events.map((event) => <div className="row-sub" key={event.id}>{fmtDateTime(event.at)} · {event.kindLabel} · {event.verification}{event.note ? ` · ${event.note}` : ""}</div>)}
-      </div>
-    </div>)}</div></>}
-    {custody.reports.length > 0 && <><p className="sub">Custody reports</p><div className="rows">{custody.reports.map((report) => <div className="row" key={report.id}>
-      <div className="row-main"><div className="row-title"><ActorName actor={report.driver} /> reported the vehicle {report.security}</div><div className="row-sub">Continuity: {report.continuity} · location evidence: {report.location}{report.parking ? ` · ${report.parking}` : ""}</div></div>
-      <div className="row-side"><When at={report.at} /></div>
-    </div>)}</div></>}
-    {siteVisits.length > 0 && <><p className="sub">Site visits</p><div className="rows">{siteVisits.map((visit) => <div className="row" key={visit.id}>
-      <div className="row-main"><div className="row-title">{visit.site ?? "Site"}: {visit.outcome}</div><div className="row-sub">{visit.verifiedBySite ? "Verified by the site" : "Not verified by the site"}{visit.leftAt ? ` · left ${fmtClock(visit.leftAt)}` : ""}</div></div>
-      <div className="row-side"><When at={visit.at} /></div>
-    </div>)}</div></>}
-    {proofs.length + documents.length + custody.assets.length + custody.reports.length + siteVisits.length === 0 && <p className="empty">Nothing recorded.</p>}
+    {proofs.length > 0 && <><SubHead>Proofs</SubHead><Rows>{proofs.map((proof) => <Row key={proof.id}>
+      <RowTitle>{proof.kindLabel} <Chip tone={proof.tone}>{proof.statusLabel}</Chip></RowTitle>
+      <RowSub>{proof.pointLabel ? `${proof.pointLabel} · ` : ""}{proof.required ? "required" : "optional"}{proof.fileCount ? ` · ${proof.fileCount} files` : " · no files"}{proof.submittedAt ? ` · submitted ${fmtDateTime(proof.submittedAt)}` : " · nothing submitted"}{proof.reviewedAt ? ` · reviewed ${fmtDateTime(proof.reviewedAt)}` : ""}{proof.note ? ` · ${proof.note}` : ""}</RowSub>
+    </Row>)}</Rows></>}
+    {documents.length > 0 && <><SubHead>Documents</SubHead><Rows>{documents.map((document) => <Row key={document.id}>
+      <RowTitle>{document.kindLabel}{document.medium ? ` (${document.medium})` : ""} <Chip tone={document.tone}>{document.statusLabel}</Chip></RowTitle>
+      <RowSub>{document.required ? "required" : "optional"}{document.signatureScope ? ` · signatures: ${document.signatureScope}` : ""}{document.fileCount ? ` · ${document.fileCount} files` : " · no file"}{document.updatedAt ? ` · updated ${fmtDateTime(document.updatedAt)}` : ""}{document.note ? ` · ${document.note}` : ""}</RowSub>
+    </Row>)}</Rows></>}
+    {custody.assets.length > 0 && <><SubHead>Keys and papers</SubHead><Rows>{custody.assets.map((asset) => <Row key={asset.id}>
+      <RowTitle><KindIcon name="key" className="text-muted-foreground" />{asset.label}</RowTitle>
+      <RowSub>Holder {asset.holder} · basis {asset.basis}{asset.relatedOrder && <> · linked to <OrderLink order={asset.relatedOrder} /></>}{asset.owner ? ` · next check by ${asset.owner}` : ""}{asset.dueAt ? ` ${fmtDateTime(asset.dueAt)}` : ""}</RowSub>
+      {asset.nextAction && <RowText className="text-warning">{asset.nextAction}</RowText>}
+      {asset.events.map((event) => <RowSub key={event.id}>{fmtDateTime(event.at)} · {event.kindLabel} · {event.verification}{event.note ? ` · ${event.note}` : ""}</RowSub>)}
+    </Row>)}</Rows></>}
+    {custody.reports.length > 0 && <><SubHead>Custody reports</SubHead><Rows>{custody.reports.map((report) => <Row key={report.id} side={<When at={report.at} />}>
+      <RowTitle><span><ActorName actor={report.driver} /> reported the vehicle {report.security}</span></RowTitle>
+      <RowSub>Continuity: {report.continuity} · location evidence: {report.location}{report.parking ? ` · ${report.parking}` : ""}</RowSub>
+    </Row>)}</Rows></>}
+    {siteVisits.length > 0 && <><SubHead>Site visits</SubHead><Rows>{siteVisits.map((visit) => <Row key={visit.id} side={<When at={visit.at} />}>
+      <RowTitle>{visit.site ?? "Site"}: {visit.outcome}</RowTitle>
+      <RowSub>{visit.verifiedBySite ? "Verified by the site" : "Not verified by the site"}{visit.leftAt ? ` · left ${fmtClock(visit.leftAt)}` : ""}</RowSub>
+    </Row>)}</Rows></>}
+    {proofs.length + documents.length + custody.assets.length + custody.reports.length + siteVisits.length === 0 && <Empty>Nothing recorded.</Empty>}
   </div>
 }
 
 export function HistoryDays({ view }: { view: RecordView }) {
-  return <div>{view.history.map((day) => <div className="history-day" key={day.key}>
-    <h3>{day.label}</h3>
-    {day.events.map((event) => <div className="event" key={event.id}>
-      <time dateTime={event.at} title={fmtDateTime(event.at)}>{fmtClock(event.at)}</time>
-      <div className="event-text"><b>{event.text}</b>{event.actor && <span className="actor"> · {event.actor}</span>}{event.shared && <span className="actor"> · shared bundle</span>}{event.detail && <small>{event.detail}</small>}</div>
-    </div>)}
+  if (!view.history.length) return <Empty>No events recorded.</Empty>
+  return <div className="flex flex-col gap-4">{view.history.map((day) => <div key={day.key}>
+    <SubHead>{day.label}</SubHead>
+    <ol className="flex flex-col divide-y rounded-xl border bg-card">{day.events.map((event) => <EventLine key={event.id} event={event} time={fmtClock(event.at)} detail />)}</ol>
   </div>)}</div>
 }

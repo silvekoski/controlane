@@ -71,3 +71,24 @@ DATASET_DIR=/path/to/your/copy npm run db:seed
 The seed replaces the database in one transaction after checking every collection's row count against the manifest in that folder, so change values rather than the number of rows, or update the manifest as well. The running app reads the new rows on the next request. A reviewer can use this to check that a changed alert, window or thread moves the board and the record together.
 
 All names, messages and events in the bundled dataset are fictional. The starter uses Bahn's birch, asphalt and sand colours and loads Unbounded, Poppins and Reddit Mono from Google Fonts as the brand's published fallback faces, falling back to Arial without a network. It does not bundle licensed brand fonts or copy Portal screens.
+
+## Decisions, evals and labeling
+
+The **Decisions**, **Checks and evals** and **Labeling** screens, the clock and the **Events** feed in the top bar, and the driver chat on an order use the control room app in `../control-room`. Start it next to the starter:
+
+```sh
+cd ../control-room && npm ci && npm run dev   # port 3100
+```
+
+The starter calls `/api/control`, which passes each request to the control room's JSON API (`CONTROL_ROOM_URL`, default `http://localhost:3100`). The rules stay in one place: approve, edit, reject, "changed since approval", the approval limit and the checks all run in the control room. If it does not run, these screens say so and the rest of the starter works as before.
+
+### Clock, time travel and the event feed
+
+The clock in the top bar is the control room clock. By default it shows the real time.
+
+- Click **Time** to go to an earlier moment. The preset **Packet snapshot, 21 Oct 08:55 UTC** goes to just before the first event.
+- When you travel, the top bar shows "Viewing ... (time travel)". The clock then moves with real time from that moment.
+- The screens show the state at the clock time. Runs, cards and messages from later are hidden until the clock reaches them.
+- Click **Back to now** to return to the real time.
+
+The **Events** menu lists the monitoring events of 21 Oct 2026 (09:00 to 09:52 UTC). The control room starts the agent on an event when the clock passes its time. An event more than 2 hours old does not start. The feed shows it as missed. To replay the events, go to the packet snapshot time and wait.

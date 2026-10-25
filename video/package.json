@@ -1,0 +1,26 @@
+{
+  "name": "bahn-ideas-video",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "vo": "node scripts/generate-vo.mjs",
+    "render": "remotion render src/index.ts Ideas out/bahn-ideas.mp4"
+  },
+  "dependencies": {
+    "@fontsource/poppins": "^5.2.6",
+    "@fontsource/reddit-mono": "^5.2.5",
+    "@fontsource/unbounded": "^5.2.6",
+    "@remotion/cli": "4.0.350",
+    "@remotion/paths": "4.0.350",
+    "@remotion/transitions": "4.0.350",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "remotion": "4.0.350"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "typescript": "^5.8.0"
+  }
+}

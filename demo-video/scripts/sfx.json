@@ -1,0 +1,20 @@
+[
+  { "id": "01-sub-swell", "seconds": 2.5, "prompt": "Deep cinematic sub-bass swell rising from silence, clean, no music" },
+  { "id": "02-route-ticks", "seconds": 3, "prompt": "Soft rapid digital ticks, like data points appearing on a map, subtle premium UI" },
+  { "id": "03-alert-pings", "seconds": 1.5, "prompt": "Three soft notification pings, slightly uneven, calm not alarming" },
+  { "id": "04-logo-whoosh", "seconds": 1.8, "prompt": "Smooth airy whoosh ending in a soft low thud, premium logo reveal" },
+  { "id": "05-glass-click", "seconds": 0.5, "prompt": "Single crisp soft UI click, glassy, very short" },
+  { "id": "06-marbles-settle", "seconds": 2, "prompt": "Many tiny marbles rolling, then settling, soft and satisfying" },
+  { "id": "07-focus-ping", "seconds": 1, "prompt": "Single soft sonar ping, gentle and clean" },
+  { "id": "08-chip-pop", "seconds": 0.5, "prompt": "Tiny soft pop like a bubble, very short" },
+  { "id": "09-caution-chime", "seconds": 0.8, "prompt": "Soft two-note caution chime, warm, not alarming" },
+  { "id": "10-approve", "seconds": 0.8, "prompt": "Positive soft confirm chime with a light click, modern app" },
+  { "id": "11-card-flip", "seconds": 0.5, "prompt": "Quick soft card flip on a table" },
+  { "id": "12-engine-off", "seconds": 3, "prompt": "Car engine slowing and switching off at a quiet motorway rest area, distant traffic" },
+  { "id": "13-radar-sweep", "seconds": 2, "prompt": "Soft radar sweep with a gentle ping at the end, clean digital" },
+  { "id": "14-sort-ticks", "seconds": 1, "prompt": "Three quick ascending soft ticks, UI sorting" },
+  { "id": "15-message-out", "seconds": 0.6, "prompt": "Short soft message-sent swoosh, phone app" },
+  { "id": "16-gpu-hum", "seconds": 3, "prompt": "Low electronic server hum fading in and out" },
+  { "id": "17-counter-stop", "seconds": 1.5, "prompt": "Fast mechanical counter ticking, then stopping with a click" },
+  { "id": "18-final-hit", "seconds": 2, "prompt": "Warm cinematic low hit with a short airy tail" }
+]

@@ -612,3 +612,42 @@ export type InboxView = { snapshotAt: string | null; threads: InboxThreadView[];
 
 export type EntityListItem = { id: string; title: string; subtitle: string | null; count: number; href: string }
 export type EntityList = { kind: EntityKind; kindLabel: string; items: EntityListItem[] }
+
+/** One customer on the customer list: counts, driver fees and the last order, from the snapshot. */
+export type CustomerRow = {
+  id: string; name: string; tier: string; tierLabel: string; country: string; importBuyer: boolean
+  orders: number; open: number; delivered: number; cancelled: number; needPerson: number
+  feeCents: number; pricedOrders: number; lastOrderAt: string | null; href: string
+}
+export type CustomerList = {
+  snapshotAt: string | null; currency: string; rows: CustomerRow[]
+  /** New orders per day for the last 14 days of the snapshot, oldest first. */
+  ordersPerDay: number[]
+  /** Driver fees per day for the same days, in cents. */
+  feesPerDay: number[]
+}
+
+export type DriverState = "driving" | "traveling" | "off"
+/** One driver on the driver board: state, the current or next job, and work totals from the snapshot. */
+export type DriverRow = {
+  id: string; name: string; homeCity: string; homeCountry: string; href: string
+  state: DriverState
+  /** What the driver does now, in words: "Car collected, on the way to Lahti", "On the way to the pickup in Hamburg". */
+  doing: string | null
+  /** The job in progress, or for an off-duty driver the next accepted job. */
+  current: { orderId: string; reference: string; vehicle: string; from: string; to: string; startedAt: string | null; next: boolean } | null
+  orders: number; completed: number; feeCents: number; needPerson: number
+}
+export type DriverList = { snapshotAt: string | null; currency: string; rows: DriverRow[] }
+
+/** One managed site on the places map: where, what kind, whose, and how orders use it. */
+export type PlaceRow = {
+  id: string; name: string; kind: string; kindLabel: string; city: string; country: string; href: string
+  /** The street address from the dataset. It is fictional. */
+  address: string | null
+  customer: { id: string; name: string } | null
+  orders: number; pickups: number; deliveries: number; transfers: number; needPerson: number
+  /** Car models of the orders here, most common first. */
+  vehicles: string[]
+}
+export type PlaceList = { snapshotAt: string | null; rows: PlaceRow[] }

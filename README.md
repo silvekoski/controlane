@@ -1,5 +1,9 @@
 # The Car Delivery Control Room
 
+> **Our solution is in [`control-room/`](control-room/README.md).** Run it with
+> `cd control-room && npm ci && npm run dev`, then open http://localhost:3100.
+> The plan is in [`PRD.md`](PRD.md).
+
 This is Bahn's challenge for the Prompt Operations Hackathon, 24 to 25 October
 2026.
 

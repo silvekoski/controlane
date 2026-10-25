@@ -1,0 +1,27 @@
+name: Deploy to Verda
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+concurrency: deploy
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VERDA_SSH_KEY }}" > ~/.ssh/id_ed25519
+          echo "${{ secrets.VERDA_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_ed25519
+      - name: Sync code
+        # .env files and control-room/.data live only on the VM, so they are excluded (and kept).
+        run: >
+          rsync -az --delete
+          --exclude .git --exclude node_modules --exclude .next --exclude .env --exclude .data --exclude .seeded
+          --exclude /demo-video --exclude /video --exclude /deck --exclude /screenshots --exclude /mockups
+          --exclude '/*.pdf' --exclude '/*.pptx'
+          ./ root@${{ secrets.VERDA_HOST }}:/opt/app/
+      - name: Build and restart
+        run: ssh root@${{ secrets.VERDA_HOST }} bash /opt/app/deploy/remote.sh

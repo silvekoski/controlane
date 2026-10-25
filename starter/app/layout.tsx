@@ -2,26 +2,22 @@ import type { Metadata, Viewport } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Car Delivery Control Room starter",
-  description: "A fictional operations dataset and a simple read-only starting point.",
+  title: "Controlane",
+  description: "A control room where operators approve the decisions of an on-the-road car delivery agent. A Bahn hackathon project.",
 }
 
-export const viewport: Viewport = { themeColor: "#fffef7", width: "device-width", initialScale: 1 }
+export const viewport: Viewport = { themeColor: "#f9f9fa", width: "device-width", initialScale: 1 }
+
+const THEME_SCRIPT = `try{if(localStorage.getItem("theme")==="dark")document.documentElement.classList.add("dark")}catch(e){}`
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Brand fallback faces: Unbounded for titles, Poppins for reading, Reddit Mono for identifiers.
-            Loaded from Google Fonts; without a network the stack falls back to Arial. */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Reddit+Mono:wght@400;500&family=Unbounded:wght@500;600;700&display=swap"
-        />
+        {/* Apply the saved theme before the first paint. Light is the default. */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
-      <body>{children}</body>
+      <body className="min-h-svh antialiased">{children}</body>
     </html>
   )
 }

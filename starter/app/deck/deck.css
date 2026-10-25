@@ -1,0 +1,47 @@
+/* The pitch deck at /deck. It uses the app tokens from globals.css, so light and dark follow the app. */
+
+:root { --deck-good: var(--checker-laya-ft); --deck-grey: oklch(0.72 0.008 286); }
+.dark { --deck-grey: oklch(0.45 0.008 286); }
+
+.deck-screen { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: oklch(0.9 0.003 286); overflow: hidden; }
+.dark .deck-screen { background: oklch(0.13 0.003 286); }
+.deck-stage { width: 1920px; height: 1080px; flex: none; transform-origin: top left; box-shadow: 0 12px 48px -12px oklch(0 0 0 / 0.25); }
+.deck-notes { position: absolute; left: 0; right: 0; bottom: 0; max-height: 28vh; overflow: auto; padding: 16px 24px; font-size: 16px; line-height: 1.5; background: var(--card); color: var(--foreground); border-top: 1px solid var(--border); }
+
+.deck-print { background: var(--background); }
+.deck-print .slide { break-after: page; }
+.deck-print .slide:last-child { break-after: auto; }
+
+.slide { position: relative; width: 1920px; height: 1080px; overflow: hidden; padding: 72px 96px 0; background: var(--background); color: var(--foreground); display: flex; flex-direction: column; font-size: 24px; line-height: 1.4; }
+.slide h1 { margin-top: 18px; font-size: 64px; line-height: 1.1; font-weight: 600; letter-spacing: -0.025em; max-width: 1560px; text-wrap: balance; }
+.slide .sub { margin-top: 16px; font-size: 28px; color: var(--muted-foreground); max-width: 1500px; }
+.slide .body { flex: 1; min-height: 0; position: relative; margin-top: 48px; margin-bottom: 112px; }
+.slide .foot { position: absolute; left: 96px; right: 96px; bottom: 40px; display: flex; align-items: center; gap: 24px; font-size: 18px; color: var(--muted-foreground); }
+.slide .foot .num { margin-left: auto; font-family: var(--font-mono); }
+
+.d-chip { display: inline-flex; align-items: center; gap: 10px; height: 40px; padding: 0 18px; border-radius: 999px; border: 1px solid color-mix(in oklch, var(--primary), transparent 70%); background: color-mix(in oklch, var(--primary), transparent 92%); color: var(--primary); font-size: 20px; font-weight: 500; }
+.d-chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.d-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 1px 2px oklch(0 0 0 / 0.06); }
+.d-shot { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 2px 4px oklch(0 0 0 / 0.04), 0 24px 48px -16px oklch(0 0 0 / 0.18); position: relative; background: var(--card); }
+.d-shot img { position: absolute; max-width: none; }
+.d-caps { font-size: 18px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-foreground); }
+.d-src { font-size: 17px; color: var(--muted-foreground); }
+.d-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.d-placeholder { border: 2px dashed var(--warning) !important; color: var(--warning) !important; background: transparent !important; }
+.d-badge { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--primary); color: var(--primary-foreground); font-weight: 600; font-size: 22px; box-shadow: 0 0 0 4px var(--background); }
+
+/* Each element enters once, in reading order. Set --i on the element for its place in the order. */
+.in { animation: deck-in 420ms cubic-bezier(0.22, 1.25, 0.36, 1) both; animation-delay: calc(var(--i, 0) * 90ms + 80ms); }
+.grow-x { transform-origin: left center; animation: deck-grow-x 700ms cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: calc(var(--i, 0) * 90ms + 300ms); }
+.grow-y { transform-origin: center bottom; animation: deck-grow-y 700ms cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: calc(var(--i, 0) * 90ms + 300ms); }
+@keyframes deck-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes deck-grow-x { from { transform: scaleX(0); } to { transform: none; } }
+@keyframes deck-grow-y { from { transform: scaleY(0); } to { transform: none; } }
+.deck-print .in, .deck-print .grow-x, .deck-print .grow-y { animation: none; }
+@media (prefers-reduced-motion: reduce) { .in, .grow-x, .grow-y { animation: none; } }
+
+@page { size: 1920px 1080px; margin: 0; }
+@media print {
+  html, body { margin: 0; }
+  .in, .grow-x, .grow-y { animation: none !important; }
+}

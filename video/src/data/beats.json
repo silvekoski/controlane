@@ -1,0 +1,302 @@
+[
+ {
+  "id": "01-04",
+  "text": "Eight agent ideas. One control room."
+ },
+ {
+  "id": "01-05",
+  "text": "Help us pick one."
+ },
+ {
+  "id": "02-01",
+  "text": "One pattern."
+ },
+ {
+  "id": "02-02",
+  "text": "A signal fires."
+ },
+ {
+  "id": "02-03",
+  "text": "Cheap tool calls first."
+ },
+ {
+  "id": "02-04",
+  "text": "Facts consistent: close quietly."
+ },
+ {
+  "id": "02-05",
+  "text": "Otherwise, a decision card."
+ },
+ {
+  "id": "02-06",
+  "text": "Money, dates, customer messages: gated."
+ },
+ {
+  "id": "03-01",
+  "text": "One delivery, five stages."
+ },
+ {
+  "id": "03-02",
+  "text": "Seven ideas on the path."
+ },
+ {
+  "id": "03-03",
+  "text": "The eighth is an eval layer."
+ },
+ {
+  "id": "04-01",
+  "text": "One. Driver carpooling."
+ },
+ {
+  "id": "04-02",
+  "text": "Drivers price in their own travel."
+ },
+ {
+  "id": "04-03",
+  "text": "They already pool rides."
+ },
+ {
+  "id": "04-04",
+  "text": "The agent matches overlapping routes."
+ },
+ {
+  "id": "04-05",
+  "text": "Only with a safe time buffer."
+ },
+ {
+  "id": "04-06",
+  "text": "Both accept, fee drops."
+ },
+ {
+  "id": "04-07",
+  "text": null
+ },
+ {
+  "id": "05-01",
+  "text": "Two. Rail strike watch."
+ },
+ {
+  "id": "05-02",
+  "text": "Landing, then a train leg."
+ },
+ {
+  "id": "05-03",
+  "text": "Today, the strike is found late."
+ },
+ {
+  "id": "05-04",
+  "text": "The agent parses notices, joins trips."
+ },
+ {
+  "id": "05-05",
+  "text": "It ranks four alternatives."
+ },
+ {
+  "id": "05-06",
+  "text": "Driver notified, no approval."
+ },
+ {
+  "id": "05-07",
+  "text": "Over the limit, a person approves."
+ },
+ {
+  "id": "05-08",
+  "text": null
+ },
+ {
+  "id": "06-01",
+  "text": "Three. Scooters, last kilometer."
+ },
+ {
+  "id": "06-02",
+  "text": "Three and a half kilometers."
+ },
+ {
+  "id": "06-03",
+  "text": "Routing API knows bus and taxi."
+ },
+ {
+  "id": "06-04",
+  "text": "The agent adds scooter, after three checks."
+ },
+ {
+  "id": "06-05",
+  "text": "Fourteen minutes, six euros."
+ },
+ {
+  "id": "06-06",
+  "text": "No approval needed."
+ },
+ {
+  "id": "06-07",
+  "text": null
+ },
+ {
+  "id": "07-01",
+  "text": "Four. GPS stop check."
+ },
+ {
+  "id": "07-02",
+  "text": "Position unchanged, forty-two minutes."
+ },
+ {
+  "id": "07-03",
+  "text": "Coffee, or fault?"
+ },
+ {
+  "id": "07-04",
+  "text": "Probe place, signal, last message."
+ },
+ {
+  "id": "07-05",
+  "text": "Fuel stop, ETA safe: log, stay silent."
+ },
+ {
+  "id": "07-06",
+  "text": "Stale signal: ask the driver."
+ },
+ {
+  "id": "07-07",
+  "text": "Warning light: one card, evidence attached."
+ },
+ {
+  "id": "07-08",
+  "text": "Accept, change, or reject with reason."
+ },
+ {
+  "id": "07-09",
+  "text": "Customer messages wait for the yes."
+ },
+ {
+  "id": "07-10",
+  "text": null
+ },
+ {
+  "id": "08-01",
+  "text": "Five. Check-in before GPS."
+ },
+ {
+  "id": "08-02",
+  "text": "Tracking opens one hour before pickup."
+ },
+ {
+  "id": "08-03",
+  "text": "Before that, no signal."
+ },
+ {
+  "id": "08-04",
+  "text": "The agent schedules check-ins."
+ },
+ {
+  "id": "08-05",
+  "text": "Known state: no prompt."
+ },
+ {
+  "id": "08-06",
+  "text": "Otherwise, one tap."
+ },
+ {
+  "id": "08-07",
+  "text": "No answer: a person decides."
+ },
+ {
+  "id": "08-08",
+  "text": null
+ },
+ {
+  "id": "09-01",
+  "text": "Six. OBD data stick."
+ },
+ {
+  "id": "09-02",
+  "text": "Today, a photo."
+ },
+ {
+  "id": "09-03",
+  "text": "Manufacturer APIs cost a hundred euros per car."
+ },
+ {
+  "id": "09-04",
+  "text": "The stick streams through the driver app."
+ },
+ {
+  "id": "09-05",
+  "text": "The card carries the fault code."
+ },
+ {
+  "id": "09-06",
+  "text": "Open question: is plugging in allowed?"
+ },
+ {
+  "id": "09-07",
+  "text": null
+ },
+ {
+  "id": "10-01",
+  "text": "Seven. Voice agent for travel desks."
+ },
+ {
+  "id": "10-02",
+  "text": "Some changes need a call."
+ },
+ {
+  "id": "10-03",
+  "text": "The agent calls, structures answers."
+ },
+ {
+  "id": "10-04",
+  "text": "A person picks. The agent confirms."
+ },
+ {
+  "id": "10-05",
+  "text": "Bahn rates the need low."
+ },
+ {
+  "id": "10-06",
+  "text": null
+ },
+ {
+  "id": "11-01",
+  "text": "Eight. Jev judges every run."
+ },
+ {
+  "id": "11-02",
+  "text": "Context lives in heads. Hand labels do not scale."
+ },
+ {
+  "id": "11-03",
+  "text": "Typed checks run on every trace."
+ },
+ {
+  "id": "11-04",
+  "text": "A failed check becomes an eval candidate."
+ },
+ {
+  "id": "11-05",
+  "text": "A model drafts it. Experts review the unclear."
+ },
+ {
+  "id": "11-06",
+  "text": "A rejection reason becomes a new check."
+ },
+ {
+  "id": "11-07",
+  "text": "Every decision tightens every agent."
+ },
+ {
+  "id": "11-08",
+  "text": null
+ },
+ {
+  "id": "12-01",
+  "text": "Eight ideas. One build."
+ },
+ {
+  "id": "12-02",
+  "text": "Which one should we build?"
+ },
+ {
+  "id": "12-03",
+  "text": null
+ }
+]

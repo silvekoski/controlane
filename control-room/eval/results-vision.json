@@ -1,0 +1,371 @@
+{
+  "set": "vision",
+  "ranAt": "2026-10-25T09:39:20.794Z",
+  "rows": [
+    {
+      "model": "jev",
+      "label": "Jev (typesafe/jev-1.14)",
+      "status": "measured",
+      "perQuestion": {
+        "photo_vehicle_main": {
+          "n": 14,
+          "correct": 14,
+          "caught": 2,
+          "traps": 2,
+          "falseAlarms": 0,
+          "negatives": 12
+        },
+        "photo_damage_visible": {
+          "n": 11,
+          "correct": 11,
+          "caught": 1,
+          "traps": 1,
+          "falseAlarms": 0,
+          "negatives": 10
+        },
+        "photo_keys_visible": {
+          "n": 16,
+          "correct": 16,
+          "caught": 0,
+          "traps": 0,
+          "falseAlarms": 0,
+          "negatives": 16
+        },
+        "photo_matches_car": {
+          "n": 29,
+          "correct": 29,
+          "caught": 16,
+          "traps": 16,
+          "falseAlarms": 0,
+          "negatives": 13
+        },
+        "doc_type": {
+          "n": 42,
+          "correct": 42,
+          "caught": 0,
+          "traps": 0,
+          "falseAlarms": 0,
+          "negatives": 42
+        },
+        "doc_vin_matches": {
+          "n": 60,
+          "correct": 60,
+          "caught": 30,
+          "traps": 30,
+          "falseAlarms": 0,
+          "negatives": 30
+        },
+        "doc_receiver_signed": {
+          "n": 12,
+          "correct": 12,
+          "caught": 12,
+          "traps": 12,
+          "falseAlarms": 0,
+          "negatives": 0
+        },
+        "receipt_kind": {
+          "n": 12,
+          "correct": 12,
+          "caught": 0,
+          "traps": 0,
+          "falseAlarms": 0,
+          "negatives": 12
+        },
+        "receipt_total_matches": {
+          "n": 24,
+          "correct": 24,
+          "caught": 12,
+          "traps": 12,
+          "falseAlarms": 0,
+          "negatives": 12
+        }
+      },
+      "catchRate": 1,
+      "falseAlarmRate": 0,
+      "calibrationError": 0.03704545454545387,
+      "msPerCheck": 399.50666778636355,
+      "costPer1000": 0.19178135454545459,
+      "ranAt": "2026-10-25T09:39:20.792Z"
+    },
+    {
+      "model": "d1",
+      "label": "Liquid d1-3B, as released",
+      "status": "measured",
+      "perQuestion": {
+        "photo_vehicle_main": {
+          "n": 14,
+          "correct": 12,
+          "caught": 0,
+          "traps": 2,
+          "falseAlarms": 0,
+          "negatives": 12
+        },
+        "photo_damage_visible": {
+          "n": 11,
+          "correct": 11,
+          "caught": 1,
+          "traps": 1,
+          "falseAlarms": 0,
+          "negatives": 10
+        },
+        "photo_keys_visible": {
+          "n": 16,
+          "correct": 16,
+          "caught": 0,
+          "traps": 0,
+          "falseAlarms": 0,
+          "negatives": 16
+        },
+        "photo_matches_car": {
+          "n": 29,
+          "correct": 21,
+          "caught": 16,
+          "traps": 16,
+          "falseAlarms": 8,
+          "negatives": 13
+        },
+        "doc_type": {
+          "n": 42,
+          "correct": 42,
+          "caught": 0,
+          "traps": 0,
+          "falseAlarms": 0,
+          "negatives": 42
+        },
+        "doc_vin_matches": {
+          "n": 60,
+          "correct": 60,
+          "caught": 30,
+          "traps": 30,
+          "falseAlarms": 0,
+          "negatives": 30
+        },
+        "doc_receiver_signed": {
+          "n": 12,
+          "correct": 12,
+          "caught": 12,
+          "traps": 12,
+          "falseAlarms": 0,
+          "negatives": 0
+        },
+        "receipt_kind": {
+          "n": 12,
+          "correct": 12,
+          "caught": 0,
+          "traps": 0,
+          "falseAlarms": 0,
+          "negatives": 12
+        },
+        "receipt_total_matches": {
+          "n": 24,
+          "correct": 24,
+          "caught": 12,
+          "traps": 12,
+          "falseAlarms": 0,
+          "negatives": 12
+        }
+      },
+      "catchRate": 0.9726027397260274,
+      "falseAlarmRate": 0.05442176870748299,
+      "calibrationError": 0.06545454545454561,
+      "msPerCheck": 170.20409090909095,
+      "costPer1000": 0.0673724526515152,
+      "ranAt": "2026-10-25T09:39:20.793Z",
+      "note": "Run on 1× RTX 6000 Ada (Verda). Cost is GPU time at $1.425/h."
+    },
+    {
+      "model": "d1_omni",
+      "label": "Liquid d1-omni-600M, as released",
+      "status": "measured",
+      "perQuestion": {
+        "photo_vehicle_main": {
+          "n": 14,
+          "correct": 12,
+          "caught": 0,
+          "traps": 2,
+          "falseAlarms": 0,
+          "negatives": 12
+        },
+        "photo_damage_visible": {
+          "n": 11,
+          "correct": 9,
+          "caught": 1,
+          "traps": 1,
+          "falseAlarms": 2,
+          "negatives": 10
+        },
+        "photo_keys_visible": {
+          "n": 16,
+          "correct": 16,
+          "caught": 0,
+          "traps": 0,
+          "falseAlarms": 0,
+          "negatives": 16
+        },
+        "photo_matches_car": {
+          "n": 29,
+          "correct": 16,
+          "caught": 6,
+          "traps": 16,
+          "falseAlarms": 3,
+          "negatives": 13
+        },
+        "doc_type": {
+          "n": 42,
+          "correct": 8,
+          "caught": 0,
+          "traps": 0,
+          "falseAlarms": 0,
+          "negatives": 42
+        },
+        "doc_vin_matches": {
+          "n": 60,
+          "correct": 30,
+          "caught": 30,
+          "traps": 30,
+          "falseAlarms": 30,
+          "negatives": 30
+        },
+        "doc_receiver_signed": {
+          "n": 12,
+          "correct": 12,
+          "caught": 12,
+          "traps": 12,
+          "falseAlarms": 0,
+          "negatives": 0
+        },
+        "receipt_kind": {
+          "n": 12,
+          "correct": 0,
+          "caught": 0,
+          "traps": 0,
+          "falseAlarms": 0,
+          "negatives": 12
+        },
+        "receipt_total_matches": {
+          "n": 24,
+          "correct": 12,
+          "caught": 12,
+          "traps": 12,
+          "falseAlarms": 12,
+          "negatives": 12
+        }
+      },
+      "catchRate": 0.8356164383561644,
+      "falseAlarmRate": 0.3197278911564626,
+      "calibrationError": 0.33658499999999997,
+      "msPerCheck": 63.20345454545454,
+      "costPer1000": 0.025018034090909087,
+      "ranAt": "2026-10-25T09:39:20.794Z",
+      "note": "Run on 1× RTX 6000 Ada (Verda). Cost is GPU time at $1.425/h."
+    },
+    {
+      "model": "d1_ft",
+      "label": "Liquid d1-3B, fine-tuned (LoRA, synthetic train split)",
+      "status": "measured",
+      "perQuestion": {
+        "photo_vehicle_main": {
+          "n": 14,
+          "correct": 14,
+          "caught": 2,
+          "traps": 2,
+          "falseAlarms": 0,
+          "negatives": 12
+        },
+        "photo_damage_visible": {
+          "n": 11,
+          "correct": 11,
+          "caught": 1,
+          "traps": 1,
+          "falseAlarms": 0,
+          "negatives": 10
+        },
+        "photo_keys_visible": {
+          "n": 16,
+          "correct": 16,
+          "caught": 0,
+          "traps": 0,
+          "falseAlarms": 0,
+          "negatives": 16
+        },
+        "photo_matches_car": {
+          "n": 29,
+          "correct": 25,
+          "caught": 15,
+          "traps": 16,
+          "falseAlarms": 3,
+          "negatives": 13
+        },
+        "doc_type": {
+          "n": 42,
+          "correct": 42,
+          "caught": 0,
+          "traps": 0,
+          "falseAlarms": 0,
+          "negatives": 42
+        },
+        "doc_vin_matches": {
+          "n": 60,
+          "correct": 59,
+          "caught": 29,
+          "traps": 30,
+          "falseAlarms": 0,
+          "negatives": 30
+        },
+        "doc_receiver_signed": {
+          "n": 12,
+          "correct": 12,
+          "caught": 12,
+          "traps": 12,
+          "falseAlarms": 0,
+          "negatives": 0
+        },
+        "receipt_kind": {
+          "n": 12,
+          "correct": 12,
+          "caught": 0,
+          "traps": 0,
+          "falseAlarms": 0,
+          "negatives": 12
+        },
+        "receipt_total_matches": {
+          "n": 24,
+          "correct": 24,
+          "caught": 12,
+          "traps": 12,
+          "falseAlarms": 0,
+          "negatives": 12
+        }
+      },
+      "catchRate": 0.9726027397260274,
+      "falseAlarmRate": 0.02040816326530612,
+      "calibrationError": 0.08144863636363624,
+      "msPerCheck": 164.15409090909088,
+      "costPer1000": 0.06497766098484847,
+      "ranAt": "2026-10-25T09:39:20.794Z",
+      "note": "Run on 1× RTX 6000 Ada (Verda). Cost is GPU time at $1.425/h."
+    },
+    {
+      "model": "laya",
+      "label": "Laya, as released",
+      "status": "not_configured",
+      "note": "Set LAYA_URL",
+      "perQuestion": {}
+    },
+    {
+      "model": "laya_ft",
+      "label": "Laya, fine-tuned",
+      "status": "not_configured",
+      "note": "Set LAYA_FT_URL",
+      "perQuestion": {}
+    },
+    {
+      "model": "llm_judge",
+      "label": "Large LLM judge",
+      "status": "not_configured",
+      "note": "Set ANTHROPIC_API_KEY",
+      "perQuestion": {}
+    }
+  ],
+  "testCases": 220
+}

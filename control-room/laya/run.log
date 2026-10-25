@@ -1,0 +1,277 @@
+laya 0.4.15 torch 2.14.1+cu130 cuda True
+Fetching 39 files:   0%|          | 0/39 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 39 files:   3%|▎         | 1/39 [00:00<00:07,  5.04it/s]Fetching 39 files:  13%|█▎        | 5/39 [00:00<00:02, 13.70it/s]Fetching 39 files:  23%|██▎       | 9/39 [00:00<00:01, 16.51it/s]Fetching 39 files:  33%|███▎      | 13/39 [00:00<00:01, 17.87it/s]Fetching 39 files:  41%|████      | 16/39 [00:01<00:01, 16.82it/s]Fetching 39 files:  49%|████▊     | 19/39 [00:01<00:01, 18.16it/s]Fetching 39 files:  59%|█████▉    | 23/39 [00:01<00:00, 21.33it/s]Fetching 39 files:  67%|██████▋   | 26/39 [00:01<00:00, 22.03it/s]Fetching 39 files:  74%|███████▍  | 29/39 [00:01<00:00, 19.52it/s]Fetching 39 files:  85%|████████▍ | 33/39 [00:01<00:00, 20.48it/s]Fetching 39 files:  92%|█████████▏| 36/39 [00:04<00:00,  3.28it/s]Fetching 39 files:  97%|█████████▋| 38/39 [00:08<00:00,  1.70it/s]Fetching 39 files: 100%|██████████| 39/39 [00:09<00:00,  4.22it/s]
+10605 rows -> 10605 training items ({} skipped)
+Training on 10205 items, 400 held out for calibration, 10 epochs
+  epoch 1/10 step 50 loss 0.5061
+  epoch 1/10 step 100 loss 1.1788
+  epoch 1/10 step 150 loss 0.8977
+  epoch 1/10 step 200 loss 0.3532
+  epoch 1/10 step 250 loss 0.8792
+  epoch 1/10 step 300 loss 0.9015
+  epoch 1/10 step 350 loss 0.7385
+  epoch 1/10 step 400 loss 0.6384
+  epoch 1/10 step 450 loss 0.0966
+  epoch 1/10 step 500 loss 0.5119
+  epoch 1/10 step 550 loss 0.3981
+  epoch 1/10 step 600 loss 0.4619
+  epoch 1/10 step 650 loss 0.2383
+  epoch 1/10 step 700 loss -0.0532
+  epoch 1/10 step 750 loss 0.9871
+  epoch 1/10 step 800 loss -0.1821
+  epoch 1/10 step 850 loss -0.1190
+  epoch 1/10 step 900 loss 0.1784
+  epoch 1/10 step 950 loss 0.1203
+  epoch 1/10 step 1000 loss 0.0579
+  epoch 1/10 step 1050 loss 0.4162
+  epoch 1/10 step 1100 loss -0.2998
+  epoch 1/10 step 1150 loss -0.2854
+  epoch 1/10 step 1200 loss -0.3981
+  epoch 1/10 step 1250 loss -0.1820
+=== epoch 1/10 done in 94s, avg loss 0.3079
+  epoch 2/10 step 50 loss 0.2468
+  epoch 2/10 step 100 loss 1.3109
+  epoch 2/10 step 150 loss -0.0493
+  epoch 2/10 step 200 loss -0.0360
+  epoch 2/10 step 250 loss -0.3820
+  epoch 2/10 step 300 loss 0.1042
+  epoch 2/10 step 350 loss -0.2456
+  epoch 2/10 step 400 loss -0.3374
+  epoch 2/10 step 450 loss -0.8256
+  epoch 2/10 step 500 loss -0.1354
+  epoch 2/10 step 550 loss -0.4349
+  epoch 2/10 step 600 loss -0.4561
+  epoch 2/10 step 650 loss 0.4691
+  epoch 2/10 step 700 loss -0.1965
+  epoch 2/10 step 750 loss 0.4073
+  epoch 2/10 step 800 loss 0.5261
+  epoch 2/10 step 850 loss -0.4530
+  epoch 2/10 step 900 loss -0.1926
+  epoch 2/10 step 950 loss -0.3764
+  epoch 2/10 step 1000 loss -0.4379
+  epoch 2/10 step 1050 loss -0.6466
+  epoch 2/10 step 1100 loss 0.1205
+  epoch 2/10 step 1150 loss -0.2602
+  epoch 2/10 step 1200 loss -0.5904
+  epoch 2/10 step 1250 loss -0.0919
+=== epoch 2/10 done in 187s, avg loss -0.1607
+  epoch 3/10 step 50 loss 0.5130
+  epoch 3/10 step 100 loss -0.1459
+  epoch 3/10 step 150 loss 0.4247
+  epoch 3/10 step 200 loss -0.0481
+  epoch 3/10 step 250 loss -0.1603
+  epoch 3/10 step 300 loss -0.4044
+  epoch 3/10 step 350 loss -0.2982
+  epoch 3/10 step 400 loss 0.2112
+  epoch 3/10 step 450 loss -0.3468
+  epoch 3/10 step 500 loss -0.4939
+  epoch 3/10 step 550 loss -0.3154
+  epoch 3/10 step 600 loss -0.5131
+  epoch 3/10 step 650 loss -0.3538
+  epoch 3/10 step 700 loss -0.5625
+  epoch 3/10 step 750 loss -0.1233
+  epoch 3/10 step 800 loss -0.4681
+  epoch 3/10 step 850 loss -0.6297
+  epoch 3/10 step 900 loss -0.2688
+  epoch 3/10 step 950 loss -0.3354
+  epoch 3/10 step 1000 loss -0.4302
+  epoch 3/10 step 1050 loss -0.4758
+  epoch 3/10 step 1100 loss -0.2873
+  epoch 3/10 step 1150 loss -0.1851
+  epoch 3/10 step 1200 loss -0.2804
+  epoch 3/10 step 1250 loss 0.5567
+=== epoch 3/10 done in 282s, avg loss -0.2230
+  epoch 4/10 step 50 loss -0.4141
+  epoch 4/10 step 100 loss -0.1486
+  epoch 4/10 step 150 loss -0.4773
+  epoch 4/10 step 200 loss -0.5298
+  epoch 4/10 step 250 loss -0.1449
+  epoch 4/10 step 300 loss 0.3863
+  epoch 4/10 step 350 loss 0.1227
+  epoch 4/10 step 400 loss -0.2030
+  epoch 4/10 step 450 loss -0.4154
+  epoch 4/10 step 500 loss -0.6490
+  epoch 4/10 step 550 loss -0.2613
+  epoch 4/10 step 600 loss -0.2651
+  epoch 4/10 step 650 loss -0.3464
+  epoch 4/10 step 700 loss -0.3921
+  epoch 4/10 step 750 loss 0.1837
+  epoch 4/10 step 800 loss -0.8489
+  epoch 4/10 step 850 loss -0.1997
+  epoch 4/10 step 900 loss 0.5379
+  epoch 4/10 step 950 loss 0.5898
+  epoch 4/10 step 1000 loss -0.1732
+  epoch 4/10 step 1050 loss -0.2367
+  epoch 4/10 step 1100 loss -0.2637
+  epoch 4/10 step 1150 loss -0.0203
+  epoch 4/10 step 1200 loss -0.4464
+  epoch 4/10 step 1250 loss -0.4203
+=== epoch 4/10 done in 376s, avg loss -0.2727
+  epoch 5/10 step 50 loss -0.4646
+  epoch 5/10 step 100 loss -0.5022
+  epoch 5/10 step 150 loss -0.3083
+  epoch 5/10 step 200 loss -0.2629
+  epoch 5/10 step 250 loss -0.3073
+  epoch 5/10 step 300 loss -0.3038
+  epoch 5/10 step 350 loss -0.2117
+  epoch 5/10 step 400 loss -0.5532
+  epoch 5/10 step 450 loss -0.4972
+  epoch 5/10 step 500 loss -0.4000
+  epoch 5/10 step 550 loss -1.0370
+  epoch 5/10 step 600 loss -0.4225
+  epoch 5/10 step 650 loss -0.2639
+  epoch 5/10 step 700 loss -0.1086
+  epoch 5/10 step 750 loss -0.5813
+  epoch 5/10 step 800 loss -0.1880
+  epoch 5/10 step 850 loss -0.7508
+  epoch 5/10 step 900 loss -0.4547
+  epoch 5/10 step 950 loss -0.3665
+  epoch 5/10 step 1000 loss -0.5038
+  epoch 5/10 step 1050 loss -0.4887
+  epoch 5/10 step 1100 loss -0.1637
+  epoch 5/10 step 1150 loss -0.1966
+  epoch 5/10 step 1200 loss -0.3107
+  epoch 5/10 step 1250 loss -0.3030
+=== epoch 5/10 done in 471s, avg loss -0.3080
+  epoch 6/10 step 50 loss -0.2874
+  epoch 6/10 step 100 loss -0.4506
+  epoch 6/10 step 150 loss -0.2767
+  epoch 6/10 step 200 loss -0.3678
+  epoch 6/10 step 250 loss -0.4977
+  epoch 6/10 step 300 loss -0.3703
+  epoch 6/10 step 350 loss -0.8904
+  epoch 6/10 step 400 loss -0.3832
+  epoch 6/10 step 450 loss -0.2229
+  epoch 6/10 step 500 loss -0.1692
+  epoch 6/10 step 550 loss -0.3129
+  epoch 6/10 step 600 loss -0.2114
+  epoch 6/10 step 650 loss -0.2395
+  epoch 6/10 step 700 loss -0.2294
+  epoch 6/10 step 750 loss -0.1009
+  epoch 6/10 step 800 loss -0.2421
+  epoch 6/10 step 850 loss -0.5866
+  epoch 6/10 step 900 loss -0.1812
+  epoch 6/10 step 950 loss -0.3554
+  epoch 6/10 step 1000 loss -0.2399
+  epoch 6/10 step 1050 loss -0.6774
+  epoch 6/10 step 1100 loss -0.0871
+  epoch 6/10 step 1150 loss -0.2976
+  epoch 6/10 step 1200 loss -0.1475
+  epoch 6/10 step 1250 loss -0.6289
+=== epoch 6/10 done in 565s, avg loss -0.3296
+  epoch 7/10 step 50 loss -0.3339
+  epoch 7/10 step 100 loss -0.4559
+  epoch 7/10 step 150 loss -0.5193
+  epoch 7/10 step 200 loss -0.2395
+  epoch 7/10 step 250 loss 0.1024
+  epoch 7/10 step 300 loss -0.1843
+  epoch 7/10 step 350 loss -0.6206
+  epoch 7/10 step 400 loss -0.2731
+  epoch 7/10 step 450 loss -0.2931
+  epoch 7/10 step 500 loss -0.2618
+  epoch 7/10 step 550 loss -0.7618
+  epoch 7/10 step 600 loss -0.1848
+  epoch 7/10 step 650 loss -1.0336
+  epoch 7/10 step 700 loss -0.2679
+  epoch 7/10 step 750 loss -0.1536
+  epoch 7/10 step 800 loss -0.4628
+  epoch 7/10 step 850 loss -0.3059
+  epoch 7/10 step 900 loss -0.3092
+  epoch 7/10 step 950 loss -0.3803
+  epoch 7/10 step 1000 loss -0.3535
+  epoch 7/10 step 1050 loss -0.3192
+  epoch 7/10 step 1100 loss -0.6434
+  epoch 7/10 step 1150 loss -0.1877
+  epoch 7/10 step 1200 loss -0.2923
+  epoch 7/10 step 1250 loss -0.4098
+=== epoch 7/10 done in 660s, avg loss -0.3289
+  epoch 8/10 step 50 loss -0.3583
+  epoch 8/10 step 100 loss -0.4797
+  epoch 8/10 step 150 loss -0.2210
+  epoch 8/10 step 200 loss -0.2855
+  epoch 8/10 step 250 loss -0.6324
+  epoch 8/10 step 300 loss -0.3008
+  epoch 8/10 step 350 loss -0.6608
+  epoch 8/10 step 400 loss -0.2307
+  epoch 8/10 step 450 loss -0.1809
+  epoch 8/10 step 500 loss -0.4302
+  epoch 8/10 step 550 loss -0.3718
+  epoch 8/10 step 600 loss -0.2876
+  epoch 8/10 step 650 loss -0.9680
+  epoch 8/10 step 700 loss -0.6038
+  epoch 8/10 step 750 loss -0.2941
+  epoch 8/10 step 800 loss -0.8091
+  epoch 8/10 step 850 loss -0.2467
+  epoch 8/10 step 900 loss -0.5108
+  epoch 8/10 step 950 loss -0.1779
+  epoch 8/10 step 1000 loss -0.3536
+  epoch 8/10 step 1050 loss -0.1892
+  epoch 8/10 step 1100 loss -0.1562
+  epoch 8/10 step 1150 loss -0.2662
+  epoch 8/10 step 1200 loss -0.1998
+  epoch 8/10 step 1250 loss -0.5289
+=== epoch 8/10 done in 755s, avg loss -0.3389
+  epoch 9/10 step 50 loss -0.1598
+  epoch 9/10 step 100 loss -0.6784
+  epoch 9/10 step 150 loss -0.3678
+  epoch 9/10 step 200 loss -0.1263
+  epoch 9/10 step 250 loss -0.2559
+  epoch 9/10 step 300 loss -0.0460
+  epoch 9/10 step 350 loss -0.3369
+  epoch 9/10 step 400 loss -0.2483
+  epoch 9/10 step 450 loss -0.4829
+  epoch 9/10 step 500 loss -0.4846
+  epoch 9/10 step 550 loss -0.1987
+  epoch 9/10 step 600 loss -0.4285
+  epoch 9/10 step 650 loss -0.5109
+  epoch 9/10 step 700 loss -0.4218
+  epoch 9/10 step 750 loss -0.1322
+  epoch 9/10 step 800 loss -0.0539
+  epoch 9/10 step 850 loss -0.4192
+  epoch 9/10 step 900 loss -1.0019
+  epoch 9/10 step 950 loss -0.2942
+  epoch 9/10 step 1000 loss -0.0082
+  epoch 9/10 step 1050 loss -0.3358
+  epoch 9/10 step 1100 loss -0.2238
+  epoch 9/10 step 1150 loss -0.0176
+  epoch 9/10 step 1200 loss -0.2991
+  epoch 9/10 step 1250 loss -0.2064
+=== epoch 9/10 done in 850s, avg loss -0.3380
+  epoch 10/10 step 50 loss -0.3696
+  epoch 10/10 step 100 loss -0.3134
+  epoch 10/10 step 150 loss -0.0743
+  epoch 10/10 step 200 loss -0.0464
+  epoch 10/10 step 250 loss -0.2034
+  epoch 10/10 step 300 loss -0.2345
+  epoch 10/10 step 350 loss -0.5382
+  epoch 10/10 step 400 loss -0.2741
+  epoch 10/10 step 450 loss -0.4856
+  epoch 10/10 step 500 loss -0.5753
+  epoch 10/10 step 550 loss -0.3103
+  epoch 10/10 step 600 loss -0.4722
+  epoch 10/10 step 650 loss -0.7957
+  epoch 10/10 step 700 loss -0.6356
+  epoch 10/10 step 750 loss -0.5043
+  epoch 10/10 step 800 loss -0.4749
+  epoch 10/10 step 850 loss -0.3951
+  epoch 10/10 step 900 loss -0.7962
+  epoch 10/10 step 950 loss 0.0718
+  epoch 10/10 step 1000 loss -0.4330
+  epoch 10/10 step 1050 loss -0.2873
+  epoch 10/10 step 1100 loss -0.6338
+  epoch 10/10 step 1150 loss -0.2472
+  epoch 10/10 step 1200 loss -0.4106
+  epoch 10/10 step 1250 loss -0.3850
+=== epoch 10/10 done in 945s, avg loss -0.3245
+Calibration temperatures: [1.036, 1.0, 1.083]
+Saved to out/laya-ft after 947s
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 2657.31it/s]
+/root/laya/.venv/lib/python3.12/site-packages/laya/agent.py:2157: RuntimeWarning: laya: this checkpoint ships invalid temperatures or values outside [0.5, 5]; using choice:11+=0.10058280825614929 -> 0.5. Treat confidence from the affected entries as uncalibrated.
+  return Agent(model_id_or_path, device=device, token=token, subfolder=subfolder, fast=fast,
+laya hand: 34 predictions
+laya synthetic: 3187 predictions
+laya synthetic_ood: 4395 predictions
+laya_ft hand: 34 predictions
+laya_ft synthetic: 3187 predictions
+laya_ft synthetic_ood: 4395 predictions
+DONE
