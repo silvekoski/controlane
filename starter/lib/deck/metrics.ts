@@ -66,8 +66,7 @@ export const STOP = {
 export const LINKS = {
   site: "controlane.bobs.build",
   siteUrl: "https://controlane.bobs.build",
-  // Placeholders: replace with the real addresses before you present.
-  github: "[GitHub repo URL]",
-  bahnator: "[bahnator weights on Hugging Face]",
-  laya: "[Laya v6 weights on Hugging Face]",
+  github: "github.com/silvekoski/controlane",
+  bahnator: "huggingface.co/silvekoski/bahnator-1.1-pro-preview",
+  laya: "huggingface.co/silvekoski/laya-v6-bahn",
 } as const

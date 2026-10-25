@@ -38,7 +38,8 @@ one person holds that chain in their head.
   LoRA fine-tune of Liquid d1-3B. On 203 template families it never saw in
   training, it scores 93.5% against 89.3% for the commercial checker, with
   fewer false alarms and about ten times the speed. The winning run cost
-  $1.33 on Verda.
+  $1.33 on Verda. Weights: [bahnator-1.1-pro-preview](https://huggingface.co/silvekoski/bahnator-1.1-pro-preview)
+  and [laya-v6-bahn](https://huggingface.co/silvekoski/laya-v6-bahn).
 
 ## What is in here
 
