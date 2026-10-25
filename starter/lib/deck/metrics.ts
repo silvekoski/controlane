@@ -66,7 +66,7 @@ export const STOP = {
 export const LINKS = {
   site: "controlane.bobs.build",
   siteUrl: "https://controlane.bobs.build",
-  github: "github.com/silvekoski/controlane",
-  bahnator: "huggingface.co/silvekoski/bahnator-1.1-pro-preview",
-  laya: "huggingface.co/silvekoski/laya-v6-bahn",
+  github: "silvekoski/controlane",
+  bahnator: "silvekoski/bahnator-1.1-pro-preview",
+  laya: "silvekoski/laya-v6-bahn",
 } as const

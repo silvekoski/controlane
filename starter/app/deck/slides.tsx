@@ -285,8 +285,8 @@ function Model() {
       </In>
       <In n={9} style={{ marginLeft: "auto", display: "flex", gap: 16, alignItems: "center", fontSize: 20 }}>
         <img src="/deck/huggingface.svg" alt="Hugging Face" style={{ width: 32, height: 32 }} />
-        <span className="d-card d-placeholder" style={{ padding: "8px 14px" }}>{LINKS.bahnator}</span>
-        <span className="d-card d-placeholder" style={{ padding: "8px 14px" }}>{LINKS.laya}</span>
+        <span className="d-card d-mono" style={{ padding: "8px 14px", whiteSpace: "nowrap" }}>{LINKS.bahnator}</span>
+        <span className="d-card d-mono" style={{ padding: "8px 14px", whiteSpace: "nowrap" }}>{LINKS.laya}</span>
       </In>
     </div>
   </Slide>
@@ -355,7 +355,7 @@ function Built() {
 
 // 10. Try it
 function Close({ qr }: { qr: string }) {
-  const links: [string, string][] = [["GitHub", LINKS.github], ["bahnator weights", LINKS.bahnator], ["Laya v6 weights", LINKS.laya]]
+  const links: [string, string][] = [["GitHub", LINKS.github], ["bahnator weights, Hugging Face", LINKS.bahnator], ["Laya v6 weights, Hugging Face", LINKS.laya]]
   const next = ["A real places lookup behind the mock", "More eval families from rejected cards", "More freedom per action as approval rates prove out"]
   return <Slide n={10} chip="Try it" title={`Try it at ${LINKS.site}`}
     foot={<>
@@ -374,7 +374,7 @@ function Close({ qr }: { qr: string }) {
         <In n={3} style={{ display: "flex", gap: 16, marginTop: 44 }}>
           {links.map(([l, v]) => <div key={l} className="d-card" style={{ padding: "14px 20px" }}>
             <div style={{ fontSize: 18, color: "var(--muted-foreground)" }}>{l}</div>
-            <div className="d-mono d-placeholder" style={{ fontSize: 18, padding: "2px 8px", marginTop: 4, borderRadius: 6 }}>{v}</div>
+            <div className="d-mono" style={{ fontSize: 18, marginTop: 4, whiteSpace: "nowrap" }}>{v}</div>
           </div>)}
         </In>
       </div>
