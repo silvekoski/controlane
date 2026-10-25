@@ -1,8 +1,4 @@
 {$DOMAIN} {
-	redir /slides /slides/
-	handle_path /slides/* {
-		root * /srv/slides
-		file_server
-	}
+	redir /slides* /deck
 	reverse_proxy 127.0.0.1:3000
 }

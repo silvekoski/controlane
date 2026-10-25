@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Runs on the Verda VM from /opt/app after each push to main (see .github/workflows/deploy.yml).
 # Idempotent: installs what is missing, rebuilds both apps and restarts them.
-# Caddy serves https://$DOMAIN on 80/443 in front of the starter (127.0.0.1:3000), and the deck at /slides;
+# Caddy serves https://$DOMAIN on 80/443 in front of the starter (127.0.0.1:3000), and /slides redirects to the pitch deck at /deck;
 # the control room stays on 127.0.0.1:3100 behind the starter.
 set -euo pipefail
 cd /opt/app
@@ -40,4 +40,4 @@ systemctl restart control-room starter
 
 docker rm -f caddy >/dev/null 2>&1 || true
 docker run -d --name caddy --restart always --network host -v caddy_data:/data \
-  -v /opt/app/deploy/Caddyfile:/etc/caddy/Caddyfile:ro -v /opt/app/deck/dist:/srv/slides:ro -e DOMAIN="$DOMAIN" caddy:2.10
+  -v /opt/app/deploy/Caddyfile:/etc/caddy/Caddyfile:ro -e DOMAIN="$DOMAIN" caddy:2.10
