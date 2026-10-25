@@ -13,8 +13,6 @@ Live at **https://controlane.bobs.build**. Built solo by Veikka Silvekoski
 (bob the builder) for Bahn's challenge at the Prompt Operations Hackathon,
 24 to 25 October 2026.
 
-All data is fictional. Every action is simulated.
-
 ## The problem
 
 Bahn delivered over 25,000 cars this year with about 50 people in operations.
